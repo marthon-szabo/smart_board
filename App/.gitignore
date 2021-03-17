@@ -516,5 +516,4 @@ MigrationBackup/
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,dotnetcore,aspnetcore,visualstudio,react
 
-# VS Code config
-.vscode
+
