@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Models.Entities
 {
-    public struct Users
+    [Table("Users")]
+    public class User
     {
         [Key]
         [Column("user_id")]
