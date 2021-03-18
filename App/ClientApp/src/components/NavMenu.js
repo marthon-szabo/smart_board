@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Register } from "./Register";
 import { Login } from "./Login";
-import Modal from 'react-awesome-modal';
-
+import { ModalStateContext } from "./ModalStateContext";
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -75,8 +73,10 @@ export class NavMenu extends Component {
                     </div>
                 </div>
             </div>
-            <Register visible={this.state.registrationVisible} />
-            <Login visible={this.state.loginVisible} />
+            <ModalStateContext>
+                <Register visible={this.state.registrationVisible} />
+                <Login visible={this.state.loginVisible} />
+            </ModalStateContext>
       </header>
     );
   }
