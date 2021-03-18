@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Register } from "./Register";
 import { Login } from "./Login";
-import { ModalStateContext } from "./ModalStateContext";
+import { LoginStateProvider } from "./LoginStateContext";
+import { RegisterStateProvider } from "./RegisterStateContext";
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -59,8 +60,12 @@ export class NavMenu extends Component {
     }
 
 
+
+    
     render() {
-    return (
+        
+        return (
+            
         <header>
             <div className="container-fluid main">
                 <div className="text-center main-text">
@@ -72,12 +77,18 @@ export class NavMenu extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
-            <ModalStateContext>
+                </div>
+                <RegisterStateProvider>
+                <LoginStateProvider>
                 <Register visible={this.state.registrationVisible} />
                 <Login visible={this.state.loginVisible} />
-            </ModalStateContext>
-      </header>
+                    </LoginStateProvider>
+                    </RegisterStateProvider>
+                </header>
+            
     );
+       
   }
+
 }
+        
