@@ -6,7 +6,7 @@ namespace App.Services.Repositories.Interfaces
         void CreateEntity(T entity);
         T GetEntityById(string id);
         void DeleteEntityById(string id);
-        void UpdateEntityById(string id);
+        void UpdateEntityById(T updatableEntity);
         IEnumerable<T> GetAllEntities();
 
     }

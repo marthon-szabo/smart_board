@@ -1,4 +1,6 @@
 using App.Models.Entities;
+using App.Services.Repositories;
+using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,7 @@ namespace App
 
             var connectionString = Configuration["AppDb:ConnectionStrings:DefaultConnection"];
             services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
+            services.AddScoped<IUserRepository, SQLUserRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
