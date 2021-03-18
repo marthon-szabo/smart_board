@@ -1,14 +1,19 @@
 ﻿import React, { Component, useState, useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import { LoginStateContext } from "./LoginStateContext";
+import { RegisterStateContext } from "./RegisterStateContext";
 
 function Login() {
     const [loginState, setLoginState] = useContext(LoginStateContext);
+    const [registerState, setRegisterState] = useContext(RegisterStateContext);
 
     const closeLoginWindow = () => {
-        console.log(loginState)
         setLoginState(false);
-        console.log(loginState)
+    }
+
+    const changeToRegistrationWindow = () => {
+        setLoginState(false);
+        setRegisterState(true);
     }
         
     return (
@@ -30,7 +35,7 @@ function Login() {
 
                         <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                         <p className="forgot-password text-right">
-                            Don't have a  <a href="#">registration</a> yet?
+                        Don't have a  <a href="#" onClick={() => changeToRegistrationWindow()}>registration</a> yet?
                         </p>
                     </form>
                 </Modal>

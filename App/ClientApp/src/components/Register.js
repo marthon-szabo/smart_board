@@ -1,11 +1,18 @@
 import React, { Component, useState, useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import { RegisterStateContext } from "./RegisterStateContext";
+import { LoginStateContext } from "./LoginStateContext";
 
 function Register() {
     const [registerState, setRegisterState] = useContext(RegisterStateContext);
+    const [loginState, setLoginState] = useContext(LoginStateContext);
 
     const closeRegisterWindow = () => {
+        setRegisterState(false);
+    }
+
+    const changeToLoginWindow = () => {
+        setLoginState(true);
         setRegisterState(false);
     }
 
@@ -41,7 +48,7 @@ function Register() {
                         </div>
                             <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                             <p className="forgot-password text-right">
-                                Already registered <a href="#">sign in?</a>
+                            Already registered? <a href="#" onClick={() => changeToLoginWindow() }>sign in</a>!
                             </p>
                     </form>
                 </Modal>
