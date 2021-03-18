@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using App.Models.Entities;
+using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +10,8 @@ using NUnit.Framework;
 
 namespace Tests.ServiceTests.Repositories
 
-{
+{   
+    [TestFixture]
     public class SQLUserRepositoryTests : AppDbContext
     {
 
@@ -17,11 +19,11 @@ namespace Tests.ServiceTests.Repositories
 
         private IUserRepository _userRepo;
 
+
         public SQLUserRepositoryTests() : base(new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlite(GetConnection())
                 .Options)
         {
-            
         }
 
         private static string GetConnection()
@@ -35,17 +37,21 @@ namespace Tests.ServiceTests.Repositories
 
         }
 
+        
+
         [SetUp]
-        public void SetUp(IUserRepository userRepo)
+        public void SetUp()
         {
-            _userRepo = userRepo;
+            AppDbContext context = this;
+            IUserRepository repository = new SQLUserRepository(context);
             CreateTable();
         }
 
         [Test]
-        public void Add_UserEntity_ShouldPasteIntoDb()
+        public void Get_UserEntity_ReturnsEntity()
         {
-            
+            var result = _userRepo.GetEntityById("First");
+            Assert.AreEqual("Márton Szabó", result.UserName);
         }
 
         [TearDown]

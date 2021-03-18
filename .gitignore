@@ -1,2 +1,3 @@
 # Vs Code config files
 .vscode
+/node_modules
