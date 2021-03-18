@@ -2,7 +2,7 @@
 
 export const ModalStateContext = createContext();
 
-export const ModalStateProvider = () => {
+export const ModalStateProvider = props => {
     const [loginState, setLoginState] = useState([false]);
     const [registrationState, setRegistrationState] = useState([false]);
     return (
