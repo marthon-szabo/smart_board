@@ -1,34 +1,20 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, useState, useContext } from 'react';
 import Modal from 'react-awesome-modal';
+import { LoginStateContext } from "./LoginStateContext";
 
-export class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loginVisible: this.props.visible
-        }
+function Login() {
+    const [loginState, setLoginState] = useContext(LoginStateContext);
+
+    const closeLoginWindow = () => {
+        console.log(loginState)
+        setLoginState(false);
+        console.log(loginState)
     }
-
-    componentWillReceiveProps() {
-        this.setState({ loginVisible: this.props.visible });
-    }
-
-    openModal() {
-        this.setState({
-            loginVisible: true
-        });
-    }
-
-    closeModal() {
-        this.setState({
-            loginVisible: false
-        });
-    }
-
-    render() {
-        return (
+        
+    return (
+        
             <section>
-                <Modal className="login-modal" visible={this.state.loginVisible} style={{ background: "#fcd281" }} width="400" height="600" effect="fadeInLeft" onClickAway={() => this.closeModal()}>
+                <Modal className="login-modal" visible={loginState} style={{ background: "#fcd281" }} width="400" height="600" effect="fadeInLeft" onClickAway={() => closeLoginWindow()}>
                     <form style={{ padding: '5%' }}>
                         <h3>Sign In</h3>
                         <div className="form-group">
@@ -50,5 +36,6 @@ export class Login extends Component {
                 </Modal>
             </section>
         );
-    }
 }
+export default Login;
+

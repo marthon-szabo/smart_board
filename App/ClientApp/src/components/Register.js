@@ -1,35 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useContext } from 'react';
 import Modal from 'react-awesome-modal';
+import { RegisterStateContext } from "./RegisterStateContext";
 
-export class Register extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            registrationVisible: this.props.visible
-        }
+function Register() {
+    const [registerState, setRegisterState] = useContext(RegisterStateContext);
+
+    const closeRegisterWindow = () => {
+        setRegisterState(false);
     }
 
-    componentWillReceiveProps() {
-    this.setState({ registrationVisible: this.props.visible });
-    }
 
-    openModal() {
-        this.setState({
-            registrationVisible: true
-        });
-    }
-
-    closeModal() {
-        this.setState({
-            registrationVisible: false
-        });
-    }
-
-    render() {
-        console.log(this.state.registrationVisible);
         return (
             <section>
-                <Modal className="register-modal" visible={this.state.registrationVisible} style={{ background: "#fcd281" }} width="400" height="600" effect="fadeInLeft" onClickAway={() => this.closeModal()}>
+                <Modal className="register-modal" visible={registerState} style={{ background: "#fcd281" }} width="400" height="600" effect="fadeInLeft" onClickAway={() => closeRegisterWindow()}>
                     <form style={{ padding: '5%'}}>
                         <h3>Sign Up</h3>
                         <div className="form-group">
@@ -65,4 +48,4 @@ export class Register extends Component {
             </section>
         );
     }
-}
+export default Register;

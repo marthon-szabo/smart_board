@@ -3,8 +3,8 @@
 export const LoginStateContext = createContext();
 
 export const LoginStateProvider = props => {
-    const [loginState, setLoginState] = useState([false]);
-    const [registrationState, setRegistrationState] = useState([false]);
+    const [loginState, setLoginState] = useState(false);
+
     return (
         <LoginStateContext.Provider value={[loginState, setLoginState]}>
             {props.children}

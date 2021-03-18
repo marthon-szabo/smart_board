@@ -3,7 +3,7 @@
 export const RegisterStateContext = createContext();
 
 export const RegisterStateProvider = props => {
-    const [registrationState, setRegistrationState] = useState([false]);
+    const [registrationState, setRegistrationState] = useState(false);
     return (
         <RegisterStateContext.Provider value={[registrationState, setRegistrationState]}>
             {props.children}

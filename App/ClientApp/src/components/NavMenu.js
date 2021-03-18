@@ -1,94 +1,49 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useContext } from 'react';
+import { LoginStateContext } from "./LoginStateContext";
+import { RegisterStateContext } from "./RegisterStateContext";
 import { Link } from 'react-router-dom';
-import { Register } from "./Register";
-import { Login } from "./Login";
-import { LoginStateProvider } from "./LoginStateContext";
-import { RegisterStateProvider } from "./RegisterStateContext";
+import Register from "./Register";
+import Login from "./Login";
 import './NavMenu.css';
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
 
-  constructor (props) {
-    super(props);
-      this.state = {
-          registrationVisible: false,
-          loginVisible: false,
-          collapsed: true
-      }
-      this.toggleNavbar = this.toggleNavbar.bind(this);
-      this.closeModalRegistration = this.closeModalRegistration.bind(this);
-      this.openModalRegistration = this.openModalRegistration.bind(this);
-      this.closeModalLogin = this.closeModalLogin.bind(this);
-      this.openModalLogin = this.openModalLogin.bind(this);
-  }
+function NavMenu() {
+    const [loginState, setLoginState] = useContext(LoginStateContext);
+    const [registrationState, setRegistrationState] = useContext(RegisterStateContext);
 
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    const openRegistrationWindow = () => {
+        setRegistrationState(true);
     }
 
-    openModalRegistration() {
-        this.setState({
-            registrationVisible: true
-        })
-        this.setState({
-            loginVisible: false
-        });
+    const openLoginWindow = () => {
+        setLoginState(true);
     }
 
-    closeModalRegistration() {
-        this.setState({
-            registrationVisible: false
-        });
-    }
-
-    openModalLogin() {
-        this.setState({
-            loginVisible: true
-        })
-        this.setState({
-            registrationVisible: false
-        });
-    }
-
-    closeModalLogin() {
-        this.setState({
-            loginVisible: false
-        });
-    }
-
-
-
-    
-    render() {
-        
         return (
             
         <header>
             <div className="container-fluid main">
                 <div className="text-center main-text">
                     <div className="c2a-btn footer-c2a-btn">
-                        <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
-                            <a type="button" class="btn btn-default btn-lg" onClick={() => this.openModalRegistration()}>Sign up</a>
+                            <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
+                                <a type="button" class="btn btn-default btn-lg" onClick={() => openRegistrationWindow()}>Sign up</a>
                             <span className="btn-circle btn-or">or</span>
-                            <a type="button" class="btn btn-default btn-lg" onClick={() => this.openModalLogin()}>Sign in</a>
+                                <a type="button" class="btn btn-default btn-lg" onClick={() => openLoginWindow()}>Sign in</a>
                         </div>
                     </div>
                 </div>
                 </div>
-                <RegisterStateProvider>
-                <LoginStateProvider>
-                <Register visible={this.state.registrationVisible} />
-                <Login visible={this.state.loginVisible} />
-                    </LoginStateProvider>
-                    </RegisterStateProvider>
+
+                <Register/>
+                <Login/>
+
                 </header>
             
     );
        
-  }
-
 }
+
+export default NavMenu;
+
+
         
