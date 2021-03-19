@@ -26,9 +26,9 @@ function NavMenu() {
                 <div className="text-center main-text">
                     <div className="c2a-btn footer-c2a-btn">
                             <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
-                                <a type="button" class="btn btn-default btn-lg" onClick={() => openRegistrationWindow()}>Sign up</a>
+                                <a type="button" class="btn btn-default btn-lg" href="#" onClick={() => openRegistrationWindow()}>Sign up</a>
                             <span className="btn-circle btn-or">or</span>
-                                <a type="button" class="btn btn-default btn-lg" onClick={() => openLoginWindow()}>Sign in</a>
+                                <a type="button" class="btn btn-default btn-lg" href="#" onClick={() => openLoginWindow()}>Sign in</a>
                         </div>
                     </div>
                 </div>

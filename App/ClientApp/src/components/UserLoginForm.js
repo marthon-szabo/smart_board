@@ -1,11 +1,9 @@
 ﻿import { useState, useEffect } from 'react';
 
-const UseRegistrationForm = (callback, validate) => {
+const UserLoginForm = (callback, validate) => {
     const [values, setValues] = useState({
         username: '',
-        email: '',
-        password: '',
-        password2: ''
+        password: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +25,7 @@ const UseRegistrationForm = (callback, validate) => {
     useEffect(
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
-                alert('successful registration')
+                alert('successful login');
             }
         },
         [errors]
@@ -36,4 +34,4 @@ const UseRegistrationForm = (callback, validate) => {
     return { handleChange, handleSubmit, values, errors };
 };
 
-export default UseRegistrationForm;
+export default UserLoginForm;
