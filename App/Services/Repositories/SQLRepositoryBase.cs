@@ -45,7 +45,7 @@ namespace App.Services.Repositories
             this.Update(updatableEntity);
         }
 
-        protected virtual void Save()
+        public virtual void Save()
         {
             _context.SaveChanges();
         }
