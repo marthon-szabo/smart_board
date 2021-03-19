@@ -19,7 +19,7 @@ function Login() {
     return (
         
             <section>
-                <Modal className="login-modal" visible={loginState} style={{ background: "#fcd281" }} width="400" height="600" effect="fadeInLeft" onClickAway={() => closeLoginWindow()}>
+                <Modal className="login-modal" visible={loginState} style={{ background: "#fcd281" }} width="400" height="350" effect="fadeInRight" onClickAway={() => closeLoginWindow()}>
                     <form style={{ padding: '5%' }}>
                         <h3>Sign In</h3>
                         <div className="form-group">
@@ -33,7 +33,7 @@ function Login() {
                             <input type="password" className="form-control" placeholder="Enter password" />
                         </div>
 
-                        <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                        <button type="submit" className="btn btn-primary btn-block">Sign In</button>
                         <p className="forgot-password text-right">
                         Don't have a  <a href="#" onClick={() => changeToRegistrationWindow()}>registration</a> yet?
                         </p>

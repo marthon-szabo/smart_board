@@ -19,17 +19,13 @@ function Register() {
 
         return (
             <section>
-                <Modal className="register-modal" visible={registerState} style={{ background: "#fcd281" }} width="400" height="600" effect="fadeInLeft" onClickAway={() => closeRegisterWindow()}>
+                <Modal className="register-modal" visible={registerState} style={{ background: "#fcd281" }} width="400" height="500" effect="fadeInLeft" onClickAway={() => closeRegisterWindow()}>
                     <form style={{ padding: '5%'}}>
                         <h3>Sign Up</h3>
-                        <div className="form-group">
-                            <label>First name</label>
-                            <input type="text" className="form-control" placeholder="First name" />
-                        </div>
 
                         <div className="form-group">
-                            <label>Last name</label>
-                            <input type="text" className="form-control" placeholder="Last name" />
+                            <label>Username</label>
+                            <input type="text" className="form-control" placeholder="Enter username" />
                         </div>
 
                         <div className="form-group">
