@@ -9,5 +9,7 @@ namespace App.Services.Repositories.Interfaces
         void UpdateEntityById(T updatableEntity);
         IEnumerable<T> GetAllEntities();
 
+        void Save();
+
     }
 }
