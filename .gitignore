@@ -361,3 +361,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio
+
+#VS Code config files
+.vscode
