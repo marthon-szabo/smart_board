@@ -12,6 +12,21 @@ This work is still in progress.
 - Entity Framework (Database connection)
 - SQLite (database)
 
+## Dependencies
+```
+npm install
+```
+Install the dependencies in the local node_modules folder.
+```
+npm install react-awesome-modal
+```
+This command installs React modal component elements.
+```
+npm start 
+```
+Run this to run frontend.
+
+
 ## Database structure
 ![ERD](https://github.com/marthon-szabo/smart_board/blob/development/SmartBoardsERD.jpg)
 
