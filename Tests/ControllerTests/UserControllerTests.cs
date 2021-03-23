@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using App.Controllers;
 using App.Models.Entities;
 using App.Models.ViewModels;
@@ -13,7 +14,8 @@ namespace Tests.ControllerTests
     {
         private readonly IDbIntegrationTester _Tester;
         private SQLUserRepository _userRepo;
-
+        private const string _newDummy = "Zsanett Horváth";
+        private const string _existingDummy = "Márton Szabó";
         private readonly UserController _Controller;  
 
         public UserControllerTests() : base(new DbContextOptionsBuilder<AppDbContext>()
@@ -31,19 +33,39 @@ namespace Tests.ControllerTests
             _Tester.CreateTable();
         }
 
-        [TestCase("Márton Szabó", true)]
-        [TestCase("Zsanett Horváth", false)]
-        public void Register_RegisterVM_ReturnsBool(string dummyUserName, bool expectation)
+        [TestCase(_existingDummy, "123", true)]
+        [TestCase(_newDummy, "456", false)]
+        public void Register_RegisterVM_ReturnsBool(string dummyUserName, string password, bool expectation)
         {
             // Arrange
             RegisterVM registerDummy = new RegisterVM();
             registerDummy.UserName = dummyUserName;
+            registerDummy.Password = password;
+
             
             // Act
             bool result = _Controller.Register(registerDummy);
 
             // Assert
             Assert.AreEqual(expectation, result);
+        }
+
+        [Test]
+        public void Register_ShouldCreateEntity()
+        {
+            // Arrange
+            RegisterVM registerDummy = new RegisterVM();
+            registerDummy.UserName = _newDummy;
+            registerDummy.Password = "456";
+
+            // Act
+            _Controller.Register(registerDummy);
+
+            // Assert
+            IEnumerable<User> users = _userRepo.GetAllEntities();
+            User userMock = users.Select(user => user).Where(user => user.UserName.Equals(_newDummy)).ToArray()[0];
+
+            Assert.AreEqual(_newDummy, userMock.UserName);
         }
 
         [TearDown]
