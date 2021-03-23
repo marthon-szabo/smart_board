@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using App.Models.Entities;
 using App.Models.ViewModels;
 using App.Services.Repositories.Interfaces;
+using App.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
@@ -28,6 +28,20 @@ namespace App.Controllers
                 {
                     isExistent = true;
                 }
+            }
+
+            if(!isExistent)
+            {
+                string hashedPassword = PasswordOperator.HashMe(regVM.Password);
+
+                User newUser = new User
+                {
+                    UserName = regVM.UserName,
+                    Email = regVM.Email,
+                    Password = hashedPassword
+                };
+
+                _UserRepo.CreateEntity(newUser);
             }
 
             return isExistent;
