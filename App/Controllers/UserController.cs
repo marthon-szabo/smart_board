@@ -33,9 +33,11 @@ namespace App.Controllers
             if(!isExistent)
             {
                 string hashedPassword = PasswordOperator.HashMe(regVM.Password);
+                string id = IdGenerator.GenerateId();
 
                 User newUser = new User
                 {
+                    UserId = id,
                     UserName = regVM.UserName,
                     Email = regVM.Email,
                     Password = hashedPassword
