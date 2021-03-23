@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using NSubstitute;
 using NUnit.Framework;
 using System.Linq;
+using Tests.DbIntegrationTest;
 
 namespace Tests.ServiceTests.Repositories
 
@@ -18,35 +19,23 @@ namespace Tests.ServiceTests.Repositories
 
         private readonly DbConnection _connectionString;
 
+        private IDbIntegrationTester _Tester;
         private IUserRepository _userRepo;
 
 
         public SQLUserRepositoryTests() : base(new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(GetConnection())
+                .UseSqlite(DbIntegrationTester.GetConnection())
                 .Options)
         {
             
         }
 
-        private static string GetConnection()
-        {
-            IConfiguration configurationStub = Substitute.For<IConfiguration>();
-            configurationStub["AppDb:ConnectionStrings:TestDbConnection"] = "Filename=/home/mrthn_sz4bo/Documents/repos/SmartBoard/Tests/sm_test_db.db";
-            
-            string connection = configurationStub["AppDb:ConnectionStrings:TestDbConnection"];
-
-            return connection;
-
-        }
-
-        
-
         [SetUp]
         public void SetUp()
         {
-            AppDbContext context = this;
-            _userRepo = new SQLUserRepository(context);
-            CreateTable();
+            _userRepo = new SQLUserRepository(this);
+            _Tester = new DbIntegrationTester(_userRepo);
+            _Tester.CreateTable();
         }
 
         [Test]
@@ -72,28 +61,29 @@ namespace Tests.ServiceTests.Repositories
         public void TearDown()
         {
             var entities = _userRepo.GetAllEntities();
-            this.DropTable(entities);
+            _Tester.DropTable(this, entities);
             
             _userRepo = null;
+            _Tester = null;
         }
 
-        private void CreateTable()
-        {
-            _userRepo.CreateEntity(
-                 new User
-                {
-                    UserId = "Test1",
-                    UserName = "Márton Szabó",
-                    Password = "12345",
-                    Email = "stub@stub.com",
-                }
-            );
-        }
+        // private void CreateTable()
+        // {
+        //     _userRepo.CreateEntity(
+        //          new User
+        //         {
+        //             UserId = "Test1",
+        //             UserName = "Márton Szabó",
+        //             Password = "12345",
+        //             Email = "stub@stub.com",
+        //         }
+        //     );
+        // }
 
-        private void DropTable(IEnumerable<User> users)
-        {
-            base.Users.RemoveRange(users.ToArray());
-            _userRepo.Save();
-        }
+        // private void DropTable(IEnumerable<User> users)
+        // {
+        //     base.Users.RemoveRange(users.ToArray());
+        //     _userRepo.Save();
+        // }
     }
 }
