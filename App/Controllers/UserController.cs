@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using App.Models.Entities;
+using App.Models.ViewModels;
 using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +11,26 @@ namespace App.Controllers
     {
         private readonly IUserRepository _UserRepo;
 
-        public User(IUserRepository repo)
+        public UserController(IUserRepository repo)
         {
             _UserRepo = repo;
         }
 
-        public bool Register(User )
+        public bool Register(RegisterVM regVM)
         {
             IEnumerable<User> users = _UserRepo.GetAllEntities();
 
-            User? 
+            bool isExistent = false;
+
+            foreach (User user in users)
+            {
+                if(user.UserName.Equals(regVM.UserName))
+                {
+                    isExistent = true;
+                }
+            }
+
+            return isExistent;
         }
     }
 }
