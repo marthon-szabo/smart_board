@@ -518,3 +518,6 @@ MigrationBackup/
 
 # VS Code config
 .vscode
+
+# Node modules
+node_modules/
