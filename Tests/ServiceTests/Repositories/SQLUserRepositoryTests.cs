@@ -1,11 +1,8 @@
-using System.Collections.Generic;
 using System.Data.Common;
 using App.Models.Entities;
 using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using NSubstitute;
 using NUnit.Framework;
 using System.Linq;
 using Tests.DbIntegrationTest;
@@ -66,24 +63,5 @@ namespace Tests.ServiceTests.Repositories
             _userRepo = null;
             _Tester = null;
         }
-
-        // private void CreateTable()
-        // {
-        //     _userRepo.CreateEntity(
-        //          new User
-        //         {
-        //             UserId = "Test1",
-        //             UserName = "Márton Szabó",
-        //             Password = "12345",
-        //             Email = "stub@stub.com",
-        //         }
-        //     );
-        // }
-
-        // private void DropTable(IEnumerable<User> users)
-        // {
-        //     base.Users.RemoveRange(users.ToArray());
-        //     _userRepo.Save();
-        // }
     }
 }
