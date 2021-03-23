@@ -1,5 +1,7 @@
 # Smart board
 
+![App](https://github.com/marthon-szabo/smart_board/blob/development/smart_boards_screenshot)
+
 ## Description
 This project is made to help people organize their daily tasks with tables and boards. In the future it will also provide an interactive chat with users on the same project or tasks.
 This work is still in progress.
