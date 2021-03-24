@@ -23,7 +23,7 @@ namespace App.Controllers
         {
             Stream stream = Request.Body;
                 
-            RegisterVM regVM = this.ReadRegisterRequestBody(stream);
+            RegisterVM regVM = this.ReadRequestBody<RegisterVM>(stream);
 
             IEnumerable<User> users = _UserRepo.GetAllEntities();
 
@@ -56,12 +56,12 @@ namespace App.Controllers
             return isExistent;
         }
 
-        private RegisterVM ReadRegisterRequestBody(Stream stream)
+        private T ReadRequestBody<T>(Stream stream)
         {
             StreamReader sr = new StreamReader(stream);
             string requestJson = sr.ReadToEndAsync().Result;
             
-            RegisterVM requestVM = JsonConvert.DeserializeObject<RegisterVM>(requestJson);
+            T requestVM = JsonConvert.DeserializeObject<T>(requestJson);
 
             return requestVM;
         }
@@ -71,5 +71,11 @@ namespace App.Controllers
         {
             return IdGenerator.GenerateId();
         }
+
+        // [HttpPost("user/login")]
+        // public bool Login()
+        // {
+        //     Stream stream = Request.Body;
+        // }
     }
 }
