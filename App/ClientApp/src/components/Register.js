@@ -4,6 +4,7 @@ import validate from './ValidateRegistrationInformation';
 import useForm from './UserRegistrationForm';
 import { RegisterStateContext } from "./RegisterStateContext";
 import { LoginStateContext } from "./LoginStateContext";
+import { CSRFTokenContext } from "./CSRFTokenContext";
 import './Error.css';
 
 function Register({ submitForm }) {

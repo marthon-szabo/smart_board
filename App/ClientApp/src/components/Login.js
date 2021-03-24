@@ -4,6 +4,7 @@ import validate from './ValidateLoginInformation';
 import useForm from './UserLoginForm';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
+import { CSRFTokenContext } from "./CSRFTokenContext";
 import './Error.css';
 
 function Login({ submitForm }) {

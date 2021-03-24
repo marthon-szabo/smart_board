@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
+import { CSRFTokenContext } from "./CSRFTokenContext";
 import { Link } from 'react-router-dom';
 import Register from "./Register";
 import Login from "./Login";
