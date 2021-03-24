@@ -22,7 +22,6 @@ function Register({ submitForm }) {
         fetch('/user/token')
             .then(res => res.json())
             .then(data => setToken(data))
-        console.log(token);
     }
 
     const { handleChange, handleSubmit, values, errors } = useForm(

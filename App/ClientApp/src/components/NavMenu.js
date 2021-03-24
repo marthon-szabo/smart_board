@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
 import { CSRFTokenContext } from "./CSRFTokenContext";
@@ -21,7 +21,6 @@ function NavMenu() {
         fetch('/user/token')
             .then(res => res.json())
             .then(data => setToken(data))
-        console.log(token);
     }
 
         return (

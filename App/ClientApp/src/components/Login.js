@@ -16,7 +16,6 @@ function Login({ submitForm }) {
     const closeLoginWindow = () => {
         setLoginState(false);
         setToken("");
-        console.log(token);
     }
 
     const changeToRegistrationWindow = () => {
