@@ -16,6 +16,7 @@ namespace App.Controllers
             _UserRepo = repo;
         }
 
+        [HttpPost("user/register")]
         public bool Register(RegisterVM regVM)
         {
             IEnumerable<User> users = _UserRepo.GetAllEntities();
@@ -47,6 +48,18 @@ namespace App.Controllers
             }
 
             return isExistent;
+        }
+
+        [HttpGet("user/token")]
+        public string CreateToken()
+        {
+            return IdGenerator.GenerateId();
+        }
+
+        [HttpPost("user/login")]
+        public bool Login()
+        {
+            
         }
     }
 }
