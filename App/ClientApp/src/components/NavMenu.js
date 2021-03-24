@@ -17,9 +17,7 @@ function NavMenu() {
     }
 
     const openLoginWindow = () => {
-        axios.get('/user/token')
-            .then(resp => setLoginState(resp.data))
-            .catch(error => console.log(error));
+        setLoginState(true);
     }
 
         return (
