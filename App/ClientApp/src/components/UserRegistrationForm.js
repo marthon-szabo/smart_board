@@ -1,5 +1,4 @@
 ﻿import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -10,6 +9,7 @@ const UseRegistrationForm = (callback, validate) => {
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [responseData, setResponseData] = useState([]);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -23,6 +23,7 @@ const UseRegistrationForm = (callback, validate) => {
         e.preventDefault();
         setErrors(validate(values));
         setIsSubmitting(true);
+        
     };
 
     useEffect(
@@ -38,7 +39,8 @@ const UseRegistrationForm = (callback, validate) => {
                     body: data,
                     headers: { 'Content-Type': 'application/json' },
                 })
-                    .then(res => console.log(res))
+                    .then(res => res.json())
+                    .then(data => data ? alert('Username is taken. Please try it again.') : alert('Successful registration!'))
             }
            
         },

@@ -19,7 +19,7 @@ namespace App.Controllers
         }
 
         [HttpPost("user/register")]
-        public bool Register()
+        public JsonResult Register()
         {
             Stream stream = Request.Body;
                 
@@ -47,7 +47,7 @@ namespace App.Controllers
                 _UserRepo.CreateEntity(newUser);
             }
 
-            return isExistent;
+            return Json(isExistent);
         }
 
         private T ReadRequestBody<T>(Stream stream)
@@ -61,9 +61,9 @@ namespace App.Controllers
         }
 
         [HttpGet("user/token")]
-        public string CreateToken()
+        public JsonResult CreateToken()
         {
-            return IdGenerator.GenerateId();
+            return Json(IdGenerator.GenerateId());
         }
 
         [HttpPost("user/login")]

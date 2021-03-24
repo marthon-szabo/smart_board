@@ -1,17 +1,21 @@
-﻿import React, { Component, useState, useContext, useEffect } from 'react';
+﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import validate from './ValidateLoginInformation';
 import useForm from './UserLoginForm';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
+import { CSRFTokenContext } from "./CSRFTokenContext";
+
 import './Error.css';
 
 function Login({ submitForm }) {
     const [loginState, setLoginState] = useContext(LoginStateContext);
     const [registerState, setRegisterState] = useContext(RegisterStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
 
     const closeLoginWindow = () => {
         setLoginState(false);
+        setToken("");
     }
 
     const changeToRegistrationWindow = () => {
