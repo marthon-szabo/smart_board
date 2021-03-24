@@ -1,6 +1,6 @@
 namespace App.Models.ViewModels
 {
-    public struct RegisterVM
+    public class RegisterVM
     {
         public string UserName { get; set; }
 

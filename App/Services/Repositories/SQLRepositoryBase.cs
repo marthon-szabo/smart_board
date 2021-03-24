@@ -31,7 +31,7 @@ namespace App.Services.Repositories
 
         public IEnumerable<T> GetAllEntities()
         {
-            return _context.Set<T>().ToList();
+            return _context.Set<T>();
         }
 
         public T GetEntityById(string id)
