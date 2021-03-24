@@ -13,5 +13,19 @@ namespace App.Services.Repositories
             
         }
 
+        public User? GetUserByUsername(string username)
+        {
+            IEnumerable<User> users = this.GetAllEntities();
+
+            foreach (User user in users)
+            {
+                if(user.UserName.Equals(username))
+                {
+                    return user;
+                }
+            }
+
+            return null;
+        }
     }
 }
