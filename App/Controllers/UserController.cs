@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
 {
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
         private readonly IUserRepository _UserRepo;
 
@@ -16,6 +16,7 @@ namespace App.Controllers
             _UserRepo = repo;
         }
 
+        [HttpPost("user/register")]
         public bool Register(RegisterVM regVM)
         {
             IEnumerable<User> users = _UserRepo.GetAllEntities();
