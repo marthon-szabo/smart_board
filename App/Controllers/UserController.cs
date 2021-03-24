@@ -25,20 +25,14 @@ namespace App.Controllers
                 
             RegisterVM regVM = this.ReadRequestBody<RegisterVM>(stream);
 
-            IEnumerable<User> users = _UserRepo.GetAllEntities();
+            User? existing = _UserRepo.GetUserByUsername(regVM.UserName);
 
-            bool isExistent = false;
+            bool isExistent = true;
 
-            foreach (User user in users)
+            if(existing == null)
             {
-                if(user.UserName.Equals(regVM.UserName))
-                {
-                    isExistent = true;
-                }
-            }
+                isExistent = false;
 
-            if(!isExistent)
-            {
                 string hashedPassword = PasswordOperator.HashMe(regVM.Password);
                 string id = IdGenerator.GenerateId();
 
@@ -72,10 +66,14 @@ namespace App.Controllers
             return IdGenerator.GenerateId();
         }
 
-        // [HttpPost("user/login")]
-        // public bool Login()
-        // {
-        //     Stream stream = Request.Body;
-        // }
+        [HttpPost("user/login")]
+        public bool Login()
+        {
+            Stream stream = Request.Body;
+
+            LoginVM loginVM = this.ReadRequestBody<LoginVM>(stream);
+
+            
+        }
     }
 }
