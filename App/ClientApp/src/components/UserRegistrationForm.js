@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -27,8 +28,19 @@ const UseRegistrationForm = (callback, validate) => {
     useEffect(
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
-                alert('successful registration')
+                const data = JSON.stringify({
+                    Username: values.username,
+                    Email: values.email,
+                    Password: values.password
+                })
+                fetch('/user/register', {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                    .then(res => console.log(res))
             }
+           
         },
         [errors]
     );
