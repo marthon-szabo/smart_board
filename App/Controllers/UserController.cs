@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.IO;
 using App.Models.Entities;
 using App.Models.ViewModels;
 using App.Services.Repositories.Interfaces;
 using App.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace App.Controllers
 {
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
         private readonly IUserRepository _UserRepo;
 
@@ -17,8 +19,12 @@ namespace App.Controllers
         }
 
         [HttpPost("user/register")]
-        public bool Register(RegisterVM regVM)
+        public bool Register()
         {
+            Stream stream = Request.Body;
+                
+            RegisterVM regVM = this.ReadRegisterRequestBody(stream);
+
             IEnumerable<User> users = _UserRepo.GetAllEntities();
 
             bool isExistent = false;
@@ -48,6 +54,16 @@ namespace App.Controllers
             }
 
             return isExistent;
+        }
+
+        private RegisterVM ReadRegisterRequestBody(Stream stream)
+        {
+            StreamReader sr = new StreamReader(stream);
+            string requestJson = sr.ReadToEndAsync().Result;
+            
+            RegisterVM requestVM = JsonConvert.DeserializeObject<RegisterVM>(requestJson);
+
+            return requestVM;
         }
 
         [HttpGet("user/token")]
