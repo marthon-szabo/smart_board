@@ -12,6 +12,7 @@ function NavMenu() {
     const axios = require('axios').default;
     const [loginState, setLoginState] = useContext(LoginStateContext);
     const [registrationState, setRegistrationState] = useContext(RegisterStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
 
     const openRegistrationWindow = () => {
         setRegistrationState(true);
@@ -19,6 +20,10 @@ function NavMenu() {
 
     const openLoginWindow = () => {
         setLoginState(true);
+        fetch('/user/token')
+            .then(res => res.json())
+            .then(data => setToken(data))
+        console.log(token);
     }
 
         return (

@@ -67,9 +67,9 @@ namespace App.Controllers
         }
 
         [HttpGet("user/token")]
-        public string CreateToken()
+        public JsonResult CreateToken()
         {
-            return IdGenerator.GenerateId();
+            return Json(IdGenerator.GenerateId());
         }
     }
 }

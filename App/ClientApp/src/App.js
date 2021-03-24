@@ -4,7 +4,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { LoginStateProvider } from "./components/LoginStateContext";
 import { RegisterStateProvider } from "./components/RegisterStateContext";
-import { CSRFTokenProvider } from "./components/CSRFTokenContext";
+import { CSRFTokenContextProvider } from "./components/CSRFTokenContext";
 
 import './custom.css'
 
@@ -15,11 +15,11 @@ export default class App extends Component {
       return (
       <RegisterStateProvider>
       <LoginStateProvider>
-      <CSRFTokenProvider>
+      <CSRFTokenContextProvider>
       <Layout>
         <Route exact path='/' component={Home} />
       </Layout>
-      </CSRFTokenProvider>
+      </CSRFTokenContextProvider>
       </LoginStateProvider>
       </RegisterStateProvider>
     );
