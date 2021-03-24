@@ -8,6 +8,7 @@ import './NavMenu.css';
 
 
 function NavMenu() {
+    const axios = require('axios').default;
     const [loginState, setLoginState] = useContext(LoginStateContext);
     const [registrationState, setRegistrationState] = useContext(RegisterStateContext);
 
@@ -16,7 +17,9 @@ function NavMenu() {
     }
 
     const openLoginWindow = () => {
-        setLoginState(true);
+        axios.get('/user/token')
+            .then(resp => setLoginState(resp.data))
+            .catch(error => console.log(error));
     }
 
         return (
