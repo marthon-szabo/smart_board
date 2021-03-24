@@ -71,11 +71,5 @@ namespace App.Controllers
         {
             return IdGenerator.GenerateId();
         }
-
-        [HttpPost("user/login")]
-        public bool Login()
-        {
-            
-        }
     }
 }
