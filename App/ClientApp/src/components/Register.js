@@ -10,6 +10,7 @@ import './Error.css';
 function Register({ submitForm }) {
     const [registerState, setRegisterState] = useContext(RegisterStateContext);
     const [loginState, setLoginState] = useContext(LoginStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
 
     const closeRegisterWindow = () => {
         setRegisterState(false);
@@ -18,6 +19,10 @@ function Register({ submitForm }) {
     const changeToLoginWindow = () => {
         setLoginState(true);
         setRegisterState(false);
+        fetch('/user/token')
+            .then(res => res.json())
+            .then(data => setToken(data))
+        console.log(token);
     }
 
     const { handleChange, handleSubmit, values, errors } = useForm(

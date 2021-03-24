@@ -1,5 +1,4 @@
 ﻿import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
