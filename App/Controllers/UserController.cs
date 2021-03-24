@@ -19,7 +19,7 @@ namespace App.Controllers
         }
 
         [HttpPost("user/register")]
-        public bool Register()
+        public JsonResult Register()
         {
             Stream stream = Request.Body;
                 
@@ -53,7 +53,7 @@ namespace App.Controllers
                 _UserRepo.CreateEntity(newUser);
             }
 
-            return isExistent;
+            return Json(isExistent);
         }
 
         private RegisterVM ReadRegisterRequestBody(Stream stream)
