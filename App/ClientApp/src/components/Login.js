@@ -1,17 +1,21 @@
-﻿import React, { Component, useState, useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import validate from './ValidateLoginInformation';
 import useForm from './UserLoginForm';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
+import { CSRFTokenContext } from "./CSRFTokenContext";
+
 import './Error.css';
 
 function Login({ submitForm }) {
     const [loginState, setLoginState] = useContext(LoginStateContext);
     const [registerState, setRegisterState] = useContext(RegisterStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
 
     const closeLoginWindow = () => {
         setLoginState(false);
+        setToken("");
     }
 
     const changeToRegistrationWindow = () => {
@@ -29,6 +33,7 @@ function Login({ submitForm }) {
             <section>
                 <Modal className="login-modal" visible={loginState} style={{ background: "#fcd281" }} width="400" height="350" effect="fadeInRight" onClickAway={() => closeLoginWindow()}>
                 <form style={{ padding: '5%' }} onSubmit={handleSubmit}>
+                        <input type="hidden" name="csrf-token" value={loginState}></input>
                         <h3>Sign In</h3>
                         <div className="form-group">
                             <label>Username</label>

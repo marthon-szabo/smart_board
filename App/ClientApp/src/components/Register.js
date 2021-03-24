@@ -4,11 +4,13 @@ import validate from './ValidateRegistrationInformation';
 import useForm from './UserRegistrationForm';
 import { RegisterStateContext } from "./RegisterStateContext";
 import { LoginStateContext } from "./LoginStateContext";
+import { CSRFTokenContext } from "./CSRFTokenContext";
 import './Error.css';
 
 function Register({ submitForm }) {
     const [registerState, setRegisterState] = useContext(RegisterStateContext);
     const [loginState, setLoginState] = useContext(LoginStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
 
     const closeRegisterWindow = () => {
         setRegisterState(false);
@@ -17,6 +19,9 @@ function Register({ submitForm }) {
     const changeToLoginWindow = () => {
         setLoginState(true);
         setRegisterState(false);
+        fetch('/user/token')
+            .then(res => res.json())
+            .then(data => setToken(data))
     }
 
     const { handleChange, handleSubmit, values, errors } = useForm(

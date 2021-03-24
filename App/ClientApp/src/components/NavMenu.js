@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
-import { Link } from 'react-router-dom';
+import { CSRFTokenContext } from "./CSRFTokenContext";
 import Register from "./Register";
 import Login from "./Login";
 import './NavMenu.css';
@@ -10,6 +10,7 @@ import './NavMenu.css';
 function NavMenu() {
     const [loginState, setLoginState] = useContext(LoginStateContext);
     const [registrationState, setRegistrationState] = useContext(RegisterStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
 
     const openRegistrationWindow = () => {
         setRegistrationState(true);
@@ -17,6 +18,9 @@ function NavMenu() {
 
     const openLoginWindow = () => {
         setLoginState(true);
+        fetch('/user/token')
+            .then(res => res.json())
+            .then(data => setToken(data))
     }
 
         return (
