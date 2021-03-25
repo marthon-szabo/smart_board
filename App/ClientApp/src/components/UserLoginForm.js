@@ -25,12 +25,12 @@ const UserLoginForm = (callback, validate) => {
 
 
         setIsSubmitting(true);
-        setIsLoggedIn(true);
+        
     };
 
     const checkLogin = (data, button, buttonText) => {
-        data ? alert('Successful login!') : alert('Invalid username or password! Please try it again.');
-        removeSpinner(button, buttonText);
+        data ? setIsLoggedIn(true) : alert('Invalid username or password! Please try it again.');
+        
 
     }
 
