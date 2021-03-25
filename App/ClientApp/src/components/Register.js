@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import validate from './ValidateRegistrationInformation';
 import useForm from './UserRegistrationForm';
 import { RegisterStateContext } from "./RegisterStateContext";
 import { LoginStateContext } from "./LoginStateContext";
 import { CSRFTokenContext } from "./CSRFTokenContext";
+
 import './Error.css';
 
 function Register({ submitForm }) {
@@ -14,6 +15,7 @@ function Register({ submitForm }) {
 
     const closeRegisterWindow = () => {
         setRegisterState(false);
+        document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
     const changeToLoginWindow = () => {
@@ -22,6 +24,7 @@ function Register({ submitForm }) {
         fetch('/user/token')
             .then(res => res.json())
             .then(data => setToken(data))
+        document.querySelector(".container").classList.add("blurred-box");
     }
 
     const { handleChange, handleSubmit, values, errors } = useForm(

@@ -16,11 +16,13 @@ function Login({ submitForm }) {
     const closeLoginWindow = () => {
         setLoginState(false);
         setToken("");
+        document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
     const changeToRegistrationWindow = () => {
         setLoginState(false);
         setRegisterState(true);
+        document.querySelector(".container").classList.add("blurred-box");
     }
 
     const { handleChange, handleSubmit, values, errors } = useForm(
