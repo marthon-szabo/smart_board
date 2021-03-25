@@ -1,9 +1,9 @@
+using System;
 using App.Models.Entities;
 using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +27,11 @@ namespace App
 
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var connectionString = Configuration["AppDb:ConnectionStrings:DefaultConnection"];
             services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
@@ -58,6 +63,8 @@ namespace App
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
