@@ -30,7 +30,7 @@ namespace App.Utilities
             return hashedPassword;
         }
 
-        public bool ValidateMe(string hashedPassword, string password)
+        public static bool ValidateMe(string hashedPassword, string password)
         {
             byte[] hashBytes = Convert.FromBase64String(hashedPassword);
 
