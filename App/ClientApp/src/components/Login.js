@@ -5,6 +5,7 @@ import useForm from './UserLoginForm';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
 import { CSRFTokenContext } from "./CSRFTokenContext";
+import check_mark from "../images/check_mark.png";
 
 import './Error.css';
 
@@ -64,7 +65,9 @@ function Login({ submitForm }) {
                         {errors.password && <p>{errors.password}</p>}
                         </div>
 
-                        <button id="login-btn" type="submit" className="btn btn-primary btn-block">Sign In</button>
+                        <button id="login-btn" type="submit" className="btn btn-primary btn-block">
+                            <img src={check_mark} className="check-mark"></img>
+                        </button>
                         <p className="forgot-password text-right">
                         Don't have a  <a href="#" onClick={() => changeToRegistrationWindow()}>registration</a> yet?
                         </p>
