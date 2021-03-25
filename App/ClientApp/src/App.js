@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Layout } from './components/Layout';
-import { LoginStateProvider } from "./components/LoginStateContext";
-import { RegisterStateProvider } from "./components/RegisterStateContext";
-import { CSRFTokenContextProvider } from "./components/CSRFTokenContext";
+import { LoginStateProvider } from "./components/contexts/LoginStateContext";
+import { RegisterStateProvider } from "./components/contexts/RegisterStateContext";
+import { CSRFTokenContextProvider } from "./components/contexts/CSRFTokenContext";
 
 import './custom.css'
 

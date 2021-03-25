@@ -2,9 +2,9 @@
 import Modal from 'react-awesome-modal';
 import validate from './ValidateLoginInformation';
 import useForm from './UserLoginForm';
-import { LoginStateContext } from "./LoginStateContext";
-import { RegisterStateContext } from "./RegisterStateContext";
-import { CSRFTokenContext } from "./CSRFTokenContext";
+import { LoginStateContext } from "./contexts/LoginStateContext";
+import { RegisterStateContext } from "./contexts/RegisterStateContext";
+import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
 
 import './Error.css';
 
@@ -32,9 +32,11 @@ function Login({ submitForm }) {
         
     return (
         
-            <section>
-                <Modal className="login-modal" visible={loginState} style={{ background: "#fcd281" }} width="400" height="350" effect="fadeInRight" onClickAway={() => closeLoginWindow()}>
-                <form style={{ padding: '5%' }} onSubmit={handleSubmit}>
+        <section>
+            <Modal className="login-modal" visible={loginState} width="400" height="350" effect="fadeInRight" onClickAway={() => closeLoginWindow()}>
+                
+                <form style={{ padding: '5%' }} onSubmit={handleSubmit} >
+                    <div className="container" style={{ backgroundColor: "red" }}>
                         <input type="hidden" name="csrf-token" value={loginState}></input>
                         <h3>Sign In</h3>
                         <div className="form-group">
@@ -68,7 +70,9 @@ function Login({ submitForm }) {
                         <p className="forgot-password text-right">
                         Don't have a  <a href="#" onClick={() => changeToRegistrationWindow()}>registration</a> yet?
                         </p>
+                    </div>
                     </form>
+                    
                 </Modal>
             </section>
         );

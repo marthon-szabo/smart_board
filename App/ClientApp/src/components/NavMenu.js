@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { LoginStateContext } from "./LoginStateContext";
-import { RegisterStateContext } from "./RegisterStateContext";
-import { CSRFTokenContext } from "./CSRFTokenContext";
+import { LoginStateContext } from "./contexts/LoginStateContext";
+import { RegisterStateContext } from "./contexts/RegisterStateContext";
+import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
 import Register from "./Register";
 import Login from "./Login";
 import { Home } from "./Home";
