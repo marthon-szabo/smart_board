@@ -66,7 +66,8 @@ function Login({ submitForm }) {
                         </div>
 
                         <button id="login-btn" type="submit" className="btn btn-primary btn-block">
-                            <img src={check_mark} className="check-mark"></img>
+                            {/* <img src={check_mark} className="check-mark"></img> */}
+                            Sign in!
                         </button>
                         <p className="forgot-password text-right">
                         Don't have a  <a href="#" onClick={() => changeToRegistrationWindow()}>registration</a> yet?
