@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
+import { addSpinner, removeSpinner } from '../Utilities/Spinner'; 
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -26,8 +27,17 @@ const UseRegistrationForm = (callback, validate) => {
         
     };
 
+    const checkRegistration = (data, button, buttonText) => {
+        data ? alert('Username is taken. Please try it again.') : alert('Successful registration!');
+        removeSpinner(button, buttonText);
+    }
+
     useEffect(
         () => {
+            
+            const button = document.querySelector("#register-btn");
+            const buttonText = button.innerHTML;
+
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
                     Username: values.username,
@@ -40,7 +50,9 @@ const UseRegistrationForm = (callback, validate) => {
                     headers: { 'Content-Type': 'application/json' },
                 })
                     .then(res => res.json())
-                    .then(data => data ? alert('Username is taken. Please try it again.') : alert('Successful registration!'))
+                    .then(data => checkRegistration(data, button, buttonText));
+
+                addSpinner(button);
             }
            
         },
