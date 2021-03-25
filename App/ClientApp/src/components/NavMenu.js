@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { LoginStateContext } from "./LoginStateContext";
 import { RegisterStateContext } from "./RegisterStateContext";
 import { CSRFTokenContext } from "./CSRFTokenContext";
+import { BlurStyleContext } from "./BlurStyleContext";
 import Register from "./Register";
 import Login from "./Login";
+
 import './NavMenu.css';
 
 
@@ -11,7 +13,7 @@ function NavMenu() {
     const [loginState, setLoginState] = useContext(LoginStateContext);
     const [registrationState, setRegistrationState] = useContext(RegisterStateContext);
     const [token, setToken] = useContext(CSRFTokenContext);
-    const [className, setClassName] = useState("container");
+    const [className, setClassName] = useContext(BlurStyleContext);
 
     const openRegistrationWindow = () => {
         setRegistrationState(true);
