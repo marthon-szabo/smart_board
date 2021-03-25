@@ -36,7 +36,7 @@ function Login({ submitForm }) {
             <Modal className="login-modal" visible={loginState} width="400" height="350" effect="fadeInRight" onClickAway={() => closeLoginWindow()}>
                 
                 <form style={{ padding: '5%' }} onSubmit={handleSubmit} >
-                    <div className="container" style={{ backgroundColor: "red" }}>
+                    <div className="container">
                         <input type="hidden" name="csrf-token" value={loginState}></input>
                         <h3>Sign In</h3>
                         <div className="form-group">
