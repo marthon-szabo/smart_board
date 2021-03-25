@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
 using App.Models.ViewModels;
 using App.Services.Repositories.Interfaces;
 using App.Utilities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -67,12 +67,25 @@ namespace App.Controllers
         }
 
         [HttpPost("user/login")]
+        [RequireHttps]
         public bool Login()
         {
             Stream stream = Request.Body;
 
             LoginVM loginVM = this.ReadRequestBody<LoginVM>(stream);
 
+            User? existingUser = _UserRepo.GetUserByUsername(loginVM.Username);
+
+            if(existingUser == null || PasswordOperator.ValidateMe(existingUser.Password, loginVM.Password))
+            {
+                return false;
+            }
+            else
+            {
+                HttpContext.Session.SetString("sessionId", IdGenerator.GenerateId());
+                
+                return true;
+            }
             
         }
     }
