@@ -28,7 +28,7 @@ namespace App
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromDays(5);
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
