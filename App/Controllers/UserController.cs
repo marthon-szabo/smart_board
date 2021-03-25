@@ -76,7 +76,7 @@ namespace App.Controllers
 
             User? existingUser = _UserRepo.GetUserByUsername(loginVM.Username);
 
-            if(existingUser == null || PasswordOperator.ValidateMe(existingUser.Password, loginVM.Password))
+            if(existingUser == null || !PasswordOperator.ValidateMe(existingUser.Password, loginVM.Password))
             {
                 return false;
             }
