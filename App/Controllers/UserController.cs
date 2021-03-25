@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
 using App.Models.ViewModels;
 using App.Services.Repositories.Interfaces;
 using App.Utilities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -23,22 +23,16 @@ namespace App.Controllers
         {
             Stream stream = Request.Body;
                 
-            RegisterVM regVM = this.ReadRegisterRequestBody(stream);
+            RegisterVM regVM = this.ReadRequestBody<RegisterVM>(stream);
 
-            IEnumerable<User> users = _UserRepo.GetAllEntities();
+            User? existing = _UserRepo.GetUserByUsername(regVM.UserName);
 
-            bool isExistent = false;
+            bool isExistent = true;
 
-            foreach (User user in users)
+            if(existing == null)
             {
-                if(user.UserName.Equals(regVM.UserName))
-                {
-                    isExistent = true;
-                }
-            }
+                isExistent = false;
 
-            if(!isExistent)
-            {
                 string hashedPassword = PasswordOperator.HashMe(regVM.Password);
                 string id = IdGenerator.GenerateId();
 
@@ -56,12 +50,12 @@ namespace App.Controllers
             return Json(isExistent);
         }
 
-        private RegisterVM ReadRegisterRequestBody(Stream stream)
+        private T ReadRequestBody<T>(Stream stream)
         {
             StreamReader sr = new StreamReader(stream);
             string requestJson = sr.ReadToEndAsync().Result;
             
-            RegisterVM requestVM = JsonConvert.DeserializeObject<RegisterVM>(requestJson);
+            T requestVM = JsonConvert.DeserializeObject<T>(requestJson);
 
             return requestVM;
         }
@@ -70,6 +64,29 @@ namespace App.Controllers
         public JsonResult CreateToken()
         {
             return Json(IdGenerator.GenerateId());
+        }
+
+        [HttpPost("user/login")]
+        [RequireHttps]
+        public bool Login()
+        {
+            Stream stream = Request.Body;
+
+            LoginVM loginVM = this.ReadRequestBody<LoginVM>(stream);
+
+            User? existingUser = _UserRepo.GetUserByUsername(loginVM.Username);
+
+            if(existingUser == null || !PasswordOperator.ValidateMe(existingUser.Password, loginVM.Password))
+            {
+                return false;
+            }
+            else
+            {
+                HttpContext.Session.SetString("sessionId", IdGenerator.GenerateId());
+                
+                return true;
+            }
+            
         }
     }
 }
