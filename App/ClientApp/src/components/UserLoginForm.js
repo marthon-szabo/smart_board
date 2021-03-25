@@ -1,5 +1,6 @@
-﻿import { useState, useEffect } from 'react';
+﻿import { useState, useEffect, useContext } from 'react';
 import { addSpinner, removeSpinner } from '../Utilities/Spinner'; 
+import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
 
 const UserLoginForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -8,6 +9,7 @@ const UserLoginForm = (callback, validate) => {
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInUserContext);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -23,11 +25,13 @@ const UserLoginForm = (callback, validate) => {
 
 
         setIsSubmitting(true);
+        setIsLoggedIn(true);
     };
 
     const checkLogin = (data, button, buttonText) => {
         data ? alert('Successful login!') : alert('Invalid username or password! Please try it again.');
         removeSpinner(button, buttonText);
+
     }
 
     useEffect(

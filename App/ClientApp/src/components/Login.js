@@ -2,9 +2,9 @@
 import Modal from 'react-awesome-modal';
 import validate from './ValidateLoginInformation';
 import useForm from './UserLoginForm';
-import { LoginStateContext } from "./LoginStateContext";
-import { RegisterStateContext } from "./RegisterStateContext";
-import { CSRFTokenContext } from "./CSRFTokenContext";
+import { LoginStateContext } from "./contexts/LoginStateContext";
+import { RegisterStateContext } from "./contexts/RegisterStateContext";
+import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
 import check_mark from "../images/check_mark.png";
 
 import './Error.css';
