@@ -99,15 +99,6 @@ html {
 }
 
 .blurred-box {
-    background: blue;
-    color: white;
-    -webkit-filter: blur(5px) grayscale(90%);
-    filter: blur(5px) grayscale(90%);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: 90;
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
 }
