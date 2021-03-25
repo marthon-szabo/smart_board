@@ -64,7 +64,7 @@ function Login({ submitForm }) {
                         {errors.password && <p>{errors.password}</p>}
                         </div>
 
-                        <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+                        <button id="login-btn" type="submit" className="btn btn-primary btn-block">Sign In</button>
                         <p className="forgot-password text-right">
                         Don't have a  <a href="#" onClick={() => changeToRegistrationWindow()}>registration</a> yet?
                         </p>
