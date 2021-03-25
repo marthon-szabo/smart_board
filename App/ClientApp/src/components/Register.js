@@ -90,10 +90,10 @@ function Register({ submitForm }) {
                             />
                             {errors.password2 && <p>{errors.password2}</p>}
                         </div>
-                            <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-                            <p className="forgot-password text-right">
-                            Already registered? <a href="#" onClick={() => changeToLoginWindow() }>sign in</a>!
-                            </p>
+                        <button id="register-btn" type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                        <p className="forgot-password text-right">
+                        Already registered? <a href="#" onClick={() => changeToLoginWindow() }>sign in</a>!
+                        </p>
                     </form>
                 </Modal>
             </section>
