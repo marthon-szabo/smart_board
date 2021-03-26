@@ -4,8 +4,7 @@ import { LoginStateProvider } from "./components/LoginStateContext";
 import { RegisterStateProvider } from "./components/RegisterStateContext";
 import { CSRFTokenContextProvider } from "./components/CSRFTokenContext";
 
-import './custom.css';
-import './App.scss';
+import './custom.css'
 
 export default class App extends Component {
   static displayName = App.name;
