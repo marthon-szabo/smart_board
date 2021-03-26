@@ -1,0 +1,19 @@
+﻿.main-header {
+    height: 50px;
+    background-color: #ed6c7b;
+    display: flex;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.welcome-sign {
+    width: 90%;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+.date {
+    align-self:auto;
+    text-align: right;
+    margin-top: 10px;
+}
