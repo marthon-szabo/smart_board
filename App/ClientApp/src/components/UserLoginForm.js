@@ -1,8 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
-import { addSpinner, removeSpinner, removeSpinnerTextless } from '../Utilities/Spinner'; 
-import addCheckMark from '../Utilities/CheckMark';
-import check_mark from "../images/check_mark.png";
-import x_mark from "../images/x_mark.png";
+import { addSpinner } from '../Utilities/Spinner'; 
+import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
 
 const UserLoginForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -27,24 +25,6 @@ const UserLoginForm = (callback, validate) => {
 
         setIsSubmitting(true);
     };
-
-    const enableLogin = (button) => {
-        removeSpinnerTextless(button);
-        addCheckMark(button, check_mark);
-        setTimeout(() => {
-            window.location.href = "https://localhost:5001/profile";
-        }, 1000);
-
-    };
-
-    const disableLogin = (button, buttonText) => {
-        removeSpinnerTextless(button);
-        addCheckMark(button, x_mark)
-        alert('Invalid username or password! Please try it again.');
-        setTimeout(() => {
-            button.innerHTML = buttonText;
-        }, 2000);
-    }
 
     const checkLogin = (data, button, buttonText) => {
         data ? enableLogin(button) : disableLogin(button, buttonText);
