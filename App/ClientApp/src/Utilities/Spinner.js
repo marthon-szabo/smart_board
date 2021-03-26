@@ -8,9 +8,13 @@ export const addSpinner = (element) => {
     element.appendChild(spinnerDiv);
 }
 
-export const removeSpinner = (element, originalText) => {
+export const removeSpinnerTextless = (element) => {
     const spinner = document.querySelector(".spinner-border");
     element.removeChild(spinner);
+}
+
+export const removeSpinner = (element, originalText) => {
+    removeSpinnerTextless(element);
 
     element.innerHTML = originalText;
 }
