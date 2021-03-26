@@ -1,0 +1,11 @@
+@import '../mixins/_breakpoints.scss';
+
+$width: 2rem;
+$height: $width;
+
+.check-mark {
+    @include lg {
+        width: $width;
+        height: $height;
+    }
+}
