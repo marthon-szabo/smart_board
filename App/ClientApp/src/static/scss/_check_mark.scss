@@ -4,6 +4,7 @@ $width: 2rem;
 $height: $width;
 
 .check-mark {
+
     @include lg {
         width: $width;
         height: $height;
