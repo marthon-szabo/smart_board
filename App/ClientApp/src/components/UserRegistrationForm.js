@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
 import { addSpinner, removeSpinner } from '../Utilities/Spinner'; 
+import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -27,8 +28,13 @@ const UseRegistrationForm = (callback, validate) => {
         
     };
 
+    const proceedRegistration = (button) => {
+        alert('Successful registration!');
+        enableLogin(button);
+    };
+
     const checkRegistration = (data, button, buttonText) => {
-        data ? alert('Username is taken. Please try it again.') : alert('Successful registration!');
+        data ? disableLogin(button, buttonText, 'Username is taken. Please try it again.') : proceedRegistration();
         removeSpinner(button, buttonText);
     }
 
