@@ -29,13 +29,12 @@ const UseRegistrationForm = (callback, validate) => {
     };
 
     const proceedRegistration = (button) => {
-        alert('Successful registration!');
         enableLogin(button);
     };
 
     const checkRegistration = (data, button, buttonText) => {
-        data ? disableLogin(button, buttonText, 'Username is taken. Please try it again.') : proceedRegistration();
-        removeSpinner(button, buttonText);
+        data ? disableLogin(button, buttonText, 'Username is taken. Please try it again.') : proceedRegistration(button);
+        
     }
 
     useEffect(
