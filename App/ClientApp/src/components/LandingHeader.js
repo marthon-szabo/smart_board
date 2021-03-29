@@ -1,6 +1,8 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
+import { UserDataContext } from "./contexts/UserDataContext";
 import QuestContainer from "./quests/QuestContainer";
 import Profile from "./Profile";
+import News from "./News";
 import {
     BrowserRouter as Router,
     Switch,
@@ -11,16 +13,23 @@ import {
 import "./LandingHeader.css"
 
 function LandingHeader() {
+    const [userData, setUserData] = useContext(UserDataContext);
+    const username = userData.username;
     return (
         <Router>
         <div className="main-header">
             <div className="welcome-sign">
-                <h3>Welcome</h3>
+                    <h3>Welcome { username }</h3>
             </div>
             <div>
                 <div>
                     <nav>
-                        <ul>
+                            <ul>
+                                <div className="News">
+                                    <li>
+                                        <Link to="/">News</Link>
+                                    </li>
+                                </div>
                             <div className="Quests">
                                 <li>
                                     <Link to="/quests">Quests</Link>
@@ -31,6 +40,7 @@ function LandingHeader() {
                                         <Link to="/profile">My profile</Link>
                                     </li>
                                 </div>
+                                
                         </ul>
                     </nav>
 
@@ -47,6 +57,9 @@ function LandingHeader() {
                 </Route>
                 <Route path="/profile">
                     <Profile />
+                </Route>
+                <Route path="/">
+                    <News />
                 </Route>
 
         </Switch>
