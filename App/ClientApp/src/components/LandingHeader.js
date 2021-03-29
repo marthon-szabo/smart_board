@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import QuestContainer from "./quests/QuestContainer";
 import Profile from "./Profile";
+import News from "./News";
 import {
     BrowserRouter as Router,
     Switch,
@@ -20,7 +21,12 @@ function LandingHeader() {
             <div>
                 <div>
                     <nav>
-                        <ul>
+                            <ul>
+                                <div className="News">
+                                    <li>
+                                        <Link to="/">News</Link>
+                                    </li>
+                                </div>
                             <div className="Quests">
                                 <li>
                                     <Link to="/quests">Quests</Link>
@@ -31,6 +37,7 @@ function LandingHeader() {
                                         <Link to="/profile">My profile</Link>
                                     </li>
                                 </div>
+                                
                         </ul>
                     </nav>
 
@@ -47,6 +54,9 @@ function LandingHeader() {
                 </Route>
                 <Route path="/profile">
                     <Profile />
+                </Route>
+                <Route path="/">
+                    <News />
                 </Route>
 
         </Switch>
