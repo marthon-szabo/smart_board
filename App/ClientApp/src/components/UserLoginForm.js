@@ -28,8 +28,9 @@ const UserLoginForm = (callback, validate) => {
     };
 
     const checkLogin = (data, button, box, buttonText) => {
+        console.log(data)
 
-        if(data) {
+        if(data.username != null) {
             enableLogin(button);
 
             setTimeout(() => {
