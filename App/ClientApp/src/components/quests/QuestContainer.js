@@ -21,8 +21,6 @@ function QuestContainer() {
                 </div>
             </div>
         </div>
-
-
     )
 }
 export default QuestContainer;
