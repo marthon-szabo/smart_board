@@ -35,7 +35,7 @@ const UseRegistrationForm = (callback, validate) => {
     };
 
     const checkRegistration = (data, button, box, buttonText) => {
-        if(data) {
+        if(!data) {
             enableLogin(button);
 
             setTimeout(() => {
