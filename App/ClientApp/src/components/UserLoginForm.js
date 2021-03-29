@@ -40,7 +40,6 @@ const UserLoginForm = (callback, validate) => {
             badges: data.badges
 
         }
-        const currentUser = Object.create(userDataFromResponse);
         if(data.username != null) {
             enableLogin(button);
             setUserDataState(userDataFromResponse);
