@@ -49,6 +49,8 @@ namespace App.Controllers
                 newProfile = this.GetProfile(newUser);
 
                 _UserRepo.CreateEntity(newUser);
+
+                HttpContext.Session.SetString("sessionId", IdGenerator.GenerateId());
             }
 
             return newProfile;
