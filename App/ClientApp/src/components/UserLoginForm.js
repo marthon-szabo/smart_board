@@ -24,19 +24,27 @@ const UserLoginForm = (callback, validate) => {
         e.preventDefault();
         setErrors(validate(values));
 
-
         setIsSubmitting(true);
-        
     };
 
-    const checkLogin = (data, button, buttonText) => {
-        data ? enableLogin(button) : disableLogin(button, buttonText);
+    const checkLogin = (data, button, box, buttonText) => {
+
+        if(data) {
+            enableLogin(button);
+
+            setTimeout(() => {
+                setIsLoggedIn(true);
+            }, 1000);
+        } else {
+            disableLogin(button, buttonText, box, "Invalid username or password!");
+        }
     }
 
     useEffect(
         () => {
             const button = document.querySelector("#login-btn");
             const buttonText = button.innerHTML;
+            const box = document.querySelector(".login-head");
 
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
@@ -49,7 +57,7 @@ const UserLoginForm = (callback, validate) => {
                     headers: { 'Content-Type': 'application/json' },
                 })
                     .then(res => res.json())
-                    .then(data => checkLogin(data, button, buttonText));
+                    .then(data => checkLogin(data, button, box, buttonText));
                 
                 addSpinner(button);
             }

@@ -33,8 +33,15 @@ const UseRegistrationForm = (callback, validate) => {
     };
 
     const checkRegistration = (data, button, box, buttonText) => {
-        data ? disableLogin(button, buttonText, box, 'Username is taken. Please try it again.') : proceedRegistration(button);
-        
+        if(data) {
+            enableLogin(button);
+
+            setTimeout(() => {
+                setIsLoggedIn(true);
+            }, 1000);
+        } else {
+            disableLogin(button, buttonText, box, 'Username is taken. Please try it again.');
+        }
     }
 
     useEffect(
