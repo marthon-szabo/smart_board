@@ -1,4 +1,5 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
+import { UserDataContext } from "./contexts/UserDataContext";
 import QuestContainer from "./quests/QuestContainer";
 import Profile from "./Profile";
 import News from "./News";
@@ -12,11 +13,13 @@ import {
 import "./LandingHeader.css"
 
 function LandingHeader() {
+    const [userData, setUserData] = useContext(UserDataContext);
+    const username = userData.username;
     return (
         <Router>
         <div className="main-header">
             <div className="welcome-sign">
-                <h3>Welcome</h3>
+                    <h3>Welcome { username }</h3>
             </div>
             <div>
                 <div>

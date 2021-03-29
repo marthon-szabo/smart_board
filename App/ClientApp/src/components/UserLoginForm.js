@@ -1,7 +1,9 @@
 import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
+import { UserDataContext } from "./contexts/UserDataContext";
 import { addSpinner } from '../Utilities/Spinner'; 
 import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
-﻿import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
 
 const UserLoginForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -11,6 +13,7 @@ const UserLoginForm = (callback, validate) => {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInUserContext);
+    const [userDataState, setUserDataState] = useContext(UserDataContext);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -29,10 +32,18 @@ const UserLoginForm = (callback, validate) => {
 
     const checkLogin = (data, button, box, buttonText) => {
         console.log(data)
+        const userDataFromResponse = {
+            username: data.username,
+            email: data.email,
+            doneQuests: data.doneQuests,
+            takenQuests: data.takenQuests,
+            badges: data.badges
 
+        }
+        const currentUser = Object.create(userDataFromResponse);
         if(data.username != null) {
             enableLogin(button);
-
+            setUserDataState(userDataFromResponse);
             setTimeout(() => {
                 setIsLoggedIn(true);
             }, 1000);

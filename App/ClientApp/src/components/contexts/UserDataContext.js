@@ -3,10 +3,10 @@
 export const UserDataContext = createContext();
 
 export const UserDataProvider = props => {
-    const [UserDataState, setUserDaraState] = useState([]);
+    const [userDataState, setUserDataState] = useState([]);
 
     return (
-        <UserDataContext.Provider value={[UserDataState, setUserDataState]}>
+        <UserDataContext.Provider value={[userDataState, setUserDataState]}>
             {props.children}
         </UserDataContext.Provider>
     )
