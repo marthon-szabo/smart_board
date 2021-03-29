@@ -1,5 +1,8 @@
+using System.IO;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using App.Controllers;
 using App.Models.Entities;
 using App.Models.ViewModels;
@@ -7,6 +10,7 @@ using App.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Tests.DbIntegrationTest;
+using System.Net.Http.Json;
 
 namespace Tests.ControllerTests
 {
@@ -16,7 +20,8 @@ namespace Tests.ControllerTests
         private SQLUserRepository _userRepo;
         private const string _newDummy = "Zsanett Horváth";
         private const string _existingDummy = "Márton Szabó";
-        private readonly UserController _Controller;  
+        private readonly UserController _Controller;
+        private HttpClient _Client; 
 
         public UserControllerTests() : base(new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlite(DbIntegrationTester.GetConnection())
@@ -31,6 +36,7 @@ namespace Tests.ControllerTests
         public void SetUp()
         {
             _Tester.CreateTable();
+            _Client = new HttpClient();
         }
 
         [TestCase(_existingDummy, "123", true)]
@@ -42,12 +48,29 @@ namespace Tests.ControllerTests
             registerDummy.UserName = dummyUserName;
             registerDummy.Password = password;
 
-            
             // Act
-            bool result = _Controller.Register(registerDummy);
+            UserProfileVM result = _Client.PostAsync("https://calhost:5001/user/register", registerDummy);
 
             // Assert
             Assert.AreEqual(expectation, result);
+        }
+
+        private WebRequest createRequest<T>(T content, string endpoint, string httpMethod)
+        {
+            WebRequest request = WebRequest.Create(endpoint);
+            request.Method = httpMethod;
+            request.ContentType = "application/json";
+
+            using(StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+            {
+                string jsonContent = JsonContent.Create(content).ToString();
+
+                writer.Write(jsonContent);
+                writer.Flush();
+                writer.Close();
+            }
+
+            return request;
         }
 
         [Test]
@@ -73,6 +96,7 @@ namespace Tests.ControllerTests
         {
             var entities = _userRepo.GetAllEntities();
             _Tester.DropTable(this, entities);
+            _Client = null;
         }
 
     }
