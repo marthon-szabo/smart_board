@@ -38,7 +38,10 @@ function Login({ submitForm }) {
                 <form style={{ padding: '5%' }} onSubmit={handleSubmit} >
                     <div className="container">
                         <input type="hidden" name="csrf-token" value={loginState}></input>
-                        <h3>Sign In</h3>
+
+                        <div className="login-head">
+                            <h3>Sign In</h3>
+                        </div>
                         <div className="form-group">
                             <label>Username</label>
                         <input

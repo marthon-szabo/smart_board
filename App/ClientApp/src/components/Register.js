@@ -37,7 +37,9 @@ function Register({ submitForm }) {
             <section>
                 <Modal className="register-modal" visible={registerState} style={{ background: "#fcd281" }} width="400" height="550" effect="fadeInLeft" onClickAway={() => closeRegisterWindow()}>
                     <form style={{ padding: '5%' }} onSubmit={handleSubmit}>
-                        <h3>Sign Up</h3>
+                        <div className="register-head">
+                            <h3>Sign Up</h3>
+                        </div>
 
                         <div className="form-group">
                             <label>Username</label>
