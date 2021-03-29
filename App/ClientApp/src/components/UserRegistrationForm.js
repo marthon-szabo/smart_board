@@ -32,16 +32,16 @@ const UseRegistrationForm = (callback, validate) => {
         enableLogin(button);
     };
 
-    const checkRegistration = (data, button, buttonText) => {
-        data ? disableLogin(button, buttonText, 'Username is taken. Please try it again.') : proceedRegistration(button);
+    const checkRegistration = (data, button, box, buttonText) => {
+        data ? disableLogin(button, buttonText, box, 'Username is taken. Please try it again.') : proceedRegistration(button);
         
     }
 
     useEffect(
         () => {
-            
             const button = document.querySelector("#register-btn");
             const buttonText = button.innerHTML;
+            const box = document.querySelector(".register-head");
 
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
@@ -55,7 +55,7 @@ const UseRegistrationForm = (callback, validate) => {
                     headers: { 'Content-Type': 'application/json' },
                 })
                     .then(res => res.json())
-                    .then(data => checkRegistration(data, button, buttonText));
+                    .then(data => checkRegistration(data, button, box, buttonText));
 
                 addSpinner(button);
             }
