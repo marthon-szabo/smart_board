@@ -19,7 +19,7 @@ export default class App extends Component {
       <CSRFTokenContextProvider>
       <LoggedInUserProvider>
       <Layout>
-            <Route path='/landingpage' component={LandingPage} />
+            
       </Layout>
       </LoggedInUserProvider>
       </CSRFTokenContextProvider>
