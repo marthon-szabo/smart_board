@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { LoginStateProvider } from "./components/LoginStateContext";
-import { RegisterStateProvider } from "./components/RegisterStateContext";
-import { CSRFTokenContextProvider } from "./components/CSRFTokenContext";
+import { LoginStateProvider } from "./components/contexts/LoginStateContext";
+import { RegisterStateProvider } from "./components/contexts/RegisterStateContext";
+import { CSRFTokenContextProvider } from "./components/contexts/CSRFTokenContext";
+import { LoggedInUserProvider } from "./components/contexts/LoggedInUserContext";
+import LandingPage from "./components/LandingPage";
 
-import './custom.css'
-
+import './custom.css';
+import './App.scss';
 export default class App extends Component {
   static displayName = App.name;
 
@@ -14,9 +17,11 @@ export default class App extends Component {
       <RegisterStateProvider>
       <LoginStateProvider>
       <CSRFTokenContextProvider>
+      <LoggedInUserProvider>
       <Layout>
-        
+            <Route path='/landingpage' component={LandingPage} />
       </Layout>
+      </LoggedInUserProvider>
       </CSRFTokenContextProvider>
       </LoginStateProvider>
       </RegisterStateProvider>

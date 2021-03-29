@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import validate from './ValidateRegistrationInformation';
 import useForm from './UserRegistrationForm';
-import { RegisterStateContext } from "./RegisterStateContext";
-import { LoginStateContext } from "./LoginStateContext";
-import { CSRFTokenContext } from "./CSRFTokenContext";
+import { RegisterStateContext } from "./contexts/RegisterStateContext";
+import { LoginStateContext } from "./contexts/LoginStateContext";
+import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
 
 import './Error.css';
 
@@ -37,7 +37,9 @@ function Register({ submitForm }) {
             <section>
                 <Modal className="register-modal" visible={registerState} style={{ background: "#fcd281" }} width="400" height="550" effect="fadeInLeft" onClickAway={() => closeRegisterWindow()}>
                     <form style={{ padding: '5%' }} onSubmit={handleSubmit}>
-                        <h3>Sign Up</h3>
+                        <div className="register-head">
+                            <h3>Sign Up</h3>
+                        </div>
 
                         <div className="form-group">
                             <label>Username</label>
@@ -90,10 +92,10 @@ function Register({ submitForm }) {
                             />
                             {errors.password2 && <p>{errors.password2}</p>}
                         </div>
-                            <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-                            <p className="forgot-password text-right">
-                            Already registered? <a href="#" onClick={() => changeToLoginWindow() }>sign in</a>!
-                            </p>
+                        <button id="register-btn" type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                        <p className="forgot-password text-right">
+                        Already registered? <a href="#" onClick={() => changeToLoginWindow() }>sign in</a>!
+                        </p>
                     </form>
                 </Modal>
             </section>

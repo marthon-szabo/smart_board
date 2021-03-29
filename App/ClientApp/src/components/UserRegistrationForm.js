@@ -1,4 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
+import { addSpinner, removeSpinner } from '../Utilities/Spinner'; 
+import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -26,8 +28,28 @@ const UseRegistrationForm = (callback, validate) => {
         
     };
 
+    const proceedRegistration = (button) => {
+        enableLogin(button);
+    };
+
+    const checkRegistration = (data, button, box, buttonText) => {
+        if(data) {
+            enableLogin(button);
+
+            setTimeout(() => {
+                setIsLoggedIn(true);
+            }, 1000);
+        } else {
+            disableLogin(button, buttonText, box, 'Username is taken. Please try it again.');
+        }
+    }
+
     useEffect(
         () => {
+            const button = document.querySelector("#register-btn");
+            const buttonText = button.innerHTML;
+            const box = document.querySelector(".register-head");
+
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
                     Username: values.username,
@@ -40,7 +62,9 @@ const UseRegistrationForm = (callback, validate) => {
                     headers: { 'Content-Type': 'application/json' },
                 })
                     .then(res => res.json())
-                    .then(data => data ? alert('Username is taken. Please try it again.') : alert('Successful registration!'))
+                    .then(data => checkRegistration(data, button, box, buttonText));
+
+                addSpinner(button);
             }
            
         },
