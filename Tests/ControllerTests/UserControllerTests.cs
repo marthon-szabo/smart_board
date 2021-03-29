@@ -48,17 +48,19 @@ namespace Tests.ControllerTests
             registerDummy.UserName = dummyUserName;
             registerDummy.Password = password;
 
+            WebRequest request = this.CreateRequest<RegisterVM>(registerDummy, "https://calhost:5001/user/register", "POST");
+
             // Act
-            UserProfileVM result = _Client.PostAsync("https://calhost:5001/user/register", registerDummy);
+            UserProfileVM result = _Client.PostAsync(, registerDummy);
 
             // Assert
             Assert.AreEqual(expectation, result);
         }
 
-        private WebRequest createRequest<T>(T content, string endpoint, string httpMethod)
+        private WebRequest CreateRequest<T>(T content, string endpoint, string httpMethod)
         {
             WebRequest request = WebRequest.Create(endpoint);
-            request.Method = httpMethod;
+            request.Method = httpMethod.ToUpper();
             request.ContentType = "application/json";
 
             using(StreamWriter writer = new StreamWriter(request.GetRequestStream()))
