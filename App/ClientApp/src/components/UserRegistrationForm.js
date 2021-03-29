@@ -1,6 +1,7 @@
-﻿import { useState, useEffect } from 'react';
+﻿import { useState, useEffect, useContext } from 'react';
 import { addSpinner, removeSpinner } from '../Utilities/Spinner'; 
 import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
+import { LoggedInUserContext } from './contexts/LoggedInUserContext';
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -12,6 +13,7 @@ const UseRegistrationForm = (callback, validate) => {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [responseData, setResponseData] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInUserContext)
 
     const handleChange = e => {
         const { name, value } = e.target;
