@@ -12,12 +12,12 @@ import "./LandingHeader.css"
 
 function LandingHeader() {
     return (
+        <Router>
         <div className="main-header">
             <div className="welcome-sign">
                 <h3>Welcome</h3>
             </div>
             <div>
-            <Router>
                 <div>
                     <nav>
                         <ul>
@@ -34,23 +34,23 @@ function LandingHeader() {
                         </ul>
                     </nav>
 
-                    <Switch>
-
-                        <Route path="/quests">
-                            <QuestContainer />
-                            </Route>
-                            <Route path="/profile">
-                                <Profile />
-                            </Route>
-
-                    </Switch>
+                    
                 </div>
-                </Router>
                 </div>
             <div className="date-container">
                 <p className="date">{new Date().toLocaleDateString()}</p>
             </div>
         </div>
+        <Switch>
+            <Route path="/quests">
+                <QuestContainer />
+                </Route>
+                <Route path="/profile">
+                    <Profile />
+                </Route>
+
+        </Switch>
+        </Router>
         )
 }
 
