@@ -19,7 +19,7 @@ namespace App.Controllers
         }
 
         [HttpPost("user/register")]
-        public JsonResult Register()
+        public UserProfileVM Register()
         {
             Stream stream = Request.Body;
                 
@@ -27,12 +27,14 @@ namespace App.Controllers
 
             User? existing = _UserRepo.GetUserByUsername(regVM.UserName);
 
-            bool isExistent = true;
+            UserProfileVM newProfile;
 
-            if(existing == null)
+            if(existing != null)
             {
-                isExistent = false;
-
+                newProfile = new UserProfileVM();
+            }
+            else
+            {
                 string hashedPassword = PasswordOperator.HashMe(regVM.Password);
                 string id = IdGenerator.GenerateId();
 
@@ -44,10 +46,14 @@ namespace App.Controllers
                     Password = hashedPassword
                 };
 
+                newProfile = this.GetProfile(newUser);
+
                 _UserRepo.CreateEntity(newUser);
+
+                HttpContext.Session.SetString("sessionId", IdGenerator.GenerateId());
             }
 
-            return Json(isExistent);
+            return newProfile;
         }
 
         private T ReadRequestBody<T>(Stream stream)
@@ -68,7 +74,7 @@ namespace App.Controllers
 
         [HttpPost("user/login")]
         [RequireHttps]
-        public bool Login()
+        public UserProfileVM Login()
         {
             Stream stream = Request.Body;
 
@@ -78,15 +84,28 @@ namespace App.Controllers
 
             if(existingUser == null || !PasswordOperator.ValidateMe(existingUser.Password, loginVM.Password))
             {
-                return false;
+                return new UserProfileVM();
             }
             else
             {
                 HttpContext.Session.SetString("sessionId", IdGenerator.GenerateId());
                 
-                return true;
+                return this.GetProfile(existingUser);
             }
             
+        }
+
+        
+        private UserProfileVM GetProfile(User user)
+        {
+            return new UserProfileVM
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                Badges = user.Badges,
+                TakenQuests = user.TakenQuests,
+                DoneQuests = user.DoneQuests
+            };
         }
     }
 }
