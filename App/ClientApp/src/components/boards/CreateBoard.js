@@ -7,8 +7,7 @@ function CreateBoard() {
     return (
         <div class="card-container center">
             <div class="card">
-                <img src={PlusIcon} alt="Plus icon" style={{ width: "80px", marginLeft: "auto", marginRight: "auto" }}></img>
-
+                <img src={PlusIcon} alt="Plus icon" style={{ width: "80px", marginLeft: "auto", marginRight: "auto", marginTop: "15px", marginBottom:"15px" }}></img>
                 <hr />
                 <p>Click the button to create a new board!</p>
                 <button>Create</button>
