@@ -44,22 +44,16 @@ function LandingHeader() {
                         <nav>
                             <ul>
                                 <li style={SeparatedButtonStyle}>
-                                    
                                     <Link to="/" className="button-link"><img src={NewsIcon} alt="News" style={IconStyle}></img>News</Link>
                                     </li>
                                 <li style={SeparatedButtonStyle}>
-                                    
                                     <Link to="/quests" className="button-link"><img src={QuestsIcon} alt="Quests" style={IconStyle}></img>Quests</Link>
                                 </li>
                                 <li style={SeparatedButtonStyle}>
-                                    
                                     <Link to="/profile" className="button-link"><img src={ProfileIcon} alt="Profile" style={IconStyle}></img>My profile</Link>
                                 </li>
-                                
                         </ul>
                     </nav>
-
-                    
                 </div>
                 </div>
             <div className="date-container">
@@ -76,7 +70,6 @@ function LandingHeader() {
                 <Route path="/">
                     <News />
                 </Route>
-
         </Switch>
         </Router>
         )
