@@ -1,8 +1,12 @@
 ﻿import React from 'react';
 
+import "./BoardCollection.css";
+
 function BoardCollection() {
     return (
-        <p>Board listing will come here</p>
+        <div className="boards-header">
+            <h1> My boards </h1>
+        </div>
         )
 }
 
