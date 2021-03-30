@@ -22,15 +22,17 @@
     width: 550px;
 }
 
-a:link, a:visited {
-    background-color: #f44336;
+a:link.button-link, a:visited.button-link {
+    background-color: #66c7b9;
+    border-radius: 5px;
+    border-style: solid;
     color: white;
-    padding: 14px 25px;
     text-align: center;
+    width: 150px;
     text-decoration: none;
     display: inline-block;
 }
 
-a:hover, a:active {
-    background-color: red;
+a:hover.button-link, a:active.button-link {
+    background-color: #726aa7;
 }

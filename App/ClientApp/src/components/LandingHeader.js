@@ -23,7 +23,6 @@ const SeparatedButtonStyle = {
     marginLeft: "5px",
     marginRight: "5px",
     textDecoration: "none",
-    opacity: "0.6",
     height: "35px",
 };
 
@@ -45,16 +44,16 @@ function LandingHeader() {
                         <nav>
                             <ul>
                                 <li style={SeparatedButtonStyle}>
-                                    <img src={NewsIcon} alt="News" style={IconStyle}></img>
-                                    <Link to="/">News</Link>
+                                    
+                                    <Link to="/" className="button-link"><img src={NewsIcon} alt="News" style={IconStyle}></img>News</Link>
                                     </li>
                                 <li style={SeparatedButtonStyle}>
-                                    <img src={QuestsIcon} alt="Quests" style={IconStyle}></img>
-                                    <Link to="/quests">Quests</Link>
+                                    
+                                    <Link to="/quests" className="button-link"><img src={QuestsIcon} alt="Quests" style={IconStyle}></img>Quests</Link>
                                 </li>
                                 <li style={SeparatedButtonStyle}>
-                                    <img src={ProfileIcon} alt="Profile" style={ IconStyle }></img>
-                                    <Link to="/profile">My profile</Link>
+                                    
+                                    <Link to="/profile" className="button-link"><img src={ProfileIcon} alt="Profile" style={IconStyle}></img>My profile</Link>
                                 </li>
                                 
                         </ul>
