@@ -11,21 +11,24 @@ import {
 } from "react-router-dom";
 
 import "./LandingHeader.css";
-import ProfileIcon from "../images/profile.png"
+import ProfileIcon from "../images/profile.png";
+import NewsIcon from "../images/news.png";
+import QuestsIcon from "../images/quests.png";
+import BoardsIcon from "../images/boards.png";
 
 const SeparatedButtonStyle = {
     fontSize: 20,
     display: "inline-block",
-    margin: "5px",
     padding: "3px",
-    borderRadius: "15px",
+    marginLeft: "5px",
+    marginRight: "5px",
     textDecoration: "none",
     opacity: "0.6",
-    height: "40px",
+    height: "35px",
 };
 
 const IconStyle = {
-    height: "40px"
+    height: "35px"
 };
 
 function LandingHeader() {
@@ -42,10 +45,11 @@ function LandingHeader() {
                         <nav>
                             <ul>
                                 <li style={SeparatedButtonStyle}>
-                                        
-                                        <Link to="/">News</Link>
+                                    <img src={NewsIcon} alt="News" style={IconStyle}></img>
+                                    <Link to="/">News</Link>
                                     </li>
-                                    <li style={SeparatedButtonStyle}>
+                                <li style={SeparatedButtonStyle}>
+                                    <img src={QuestsIcon} alt="Quests" style={IconStyle}></img>
                                     <Link to="/quests">Quests</Link>
                                 </li>
                                 <li style={SeparatedButtonStyle}>
