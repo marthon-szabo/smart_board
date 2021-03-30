@@ -7,7 +7,7 @@
 }
 
 .welcome-sign {
-    width: 90%;
+    width: 50%;
     margin-left: 5px;
     margin-top: 7px;
 }
@@ -16,4 +16,8 @@
     align-self:auto;
     text-align: right;
     margin-top: 10px;
+}
+
+.nav-menu-elements {
+    width: 400px;
 }

@@ -10,7 +10,23 @@ import {
     Link
 } from "react-router-dom";
 
-import "./LandingHeader.css"
+import "./LandingHeader.css";
+import ProfileIcon from "../images/profile.png"
+
+const SeparatedButtonStyle = {
+    fontSize: 20,
+    display: "inline-block",
+    margin: "5px",
+    padding: "3px",
+    borderRadius: "15px",
+    textDecoration: "none",
+    opacity: "0.6",
+    height: "40px",
+};
+
+const IconStyle = {
+    height: "40px"
+};
 
 function LandingHeader() {
     const [userData, setUserData] = useContext(UserDataContext);
@@ -21,25 +37,21 @@ function LandingHeader() {
             <div className="welcome-sign">
                     <h3>Welcome { username }</h3>
             </div>
-            <div>
+            <div className="nav-menu-elements">
                 <div>
-                    <nav>
+                        <nav>
                             <ul>
-                                <div className="News">
-                                    <li>
+                                <li style={SeparatedButtonStyle}>
+                                        
                                         <Link to="/">News</Link>
                                     </li>
-                                </div>
-                            <div className="Quests">
-                                <li>
+                                    <li style={SeparatedButtonStyle}>
                                     <Link to="/quests">Quests</Link>
                                 </li>
-                                </div>
-                                <div className="Profile">
-                                    <li>
-                                        <Link to="/profile">My profile</Link>
-                                    </li>
-                                </div>
+                                <li style={SeparatedButtonStyle}>
+                                    <img src={ProfileIcon} alt="Profile" style={ IconStyle }></img>
+                                    <Link to="/profile">My profile</Link>
+                                </li>
                                 
                         </ul>
                     </nav>
