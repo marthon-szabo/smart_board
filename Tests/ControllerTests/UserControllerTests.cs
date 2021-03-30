@@ -43,9 +43,9 @@ namespace Tests.ControllerTests
             _Client = new HttpClient();
         }
 
-        [TestCase(_existingDummy, "123", null)]
-        [TestCase(_newDummy, "456", "Zsanett Horváth")]
-        public void Register_RegisterVM_ReturnsBool(string dummyUserName, string password, string? expectation)
+        [TestCase(_existingDummy, "123", true)]
+        [TestCase(_newDummy, "456", false)]
+        public void Register_RegisterVM_ReturnsBool(string dummyUserName, string password, bool expectation)
         {
             // Arrange
             RegisterVM registerDummy = new RegisterVM();
@@ -63,7 +63,7 @@ namespace Tests.ControllerTests
             UserProfileVM result = _Controller.Register();
 
             // Assert
-            Assert.AreEqual(expectation, result.Username);
+            Assert.AreEqual(expectation, result);
         }
 
         private DefaultHttpContext CreateHttpContext<T>(T content)
