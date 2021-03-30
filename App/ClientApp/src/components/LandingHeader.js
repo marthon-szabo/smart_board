@@ -3,6 +3,7 @@ import { UserDataContext } from "./contexts/UserDataContext";
 import QuestContainer from "./quests/QuestContainer";
 import Profile from "./Profile";
 import News from "./News";
+import BoardCollection from "./boards/BoardCollection";
 import {
     BrowserRouter as Router,
     Switch,
@@ -52,6 +53,9 @@ function LandingHeader() {
                                 <li style={SeparatedButtonStyle}>
                                     <Link to="/profile" className="button-link"><img src={ProfileIcon} alt="Profile" style={IconStyle}></img>My profile</Link>
                                 </li>
+                                <li style={SeparatedButtonStyle}>
+                                    <Link to="/boards" className="button-link"><img src={BoardsIcon} alt="Profile" style={IconStyle}></img>My boards</Link>
+                                </li>
                         </ul>
                     </nav>
                 </div>
@@ -66,6 +70,9 @@ function LandingHeader() {
                 </Route>
                 <Route path="/profile">
                     <Profile />
+                </Route>
+                <Route path="/boards">
+                    <BoardCollection />
                 </Route>
                 <Route path="/">
                     <News />
