@@ -56,22 +56,20 @@ namespace Tests.ControllerTests
             Assert.AreEqual(expectation, result.Username);
         }
 
-        [Test]
-        public void Register_ShouldCreateEntity()
+        [TestCase("Albert Einstein", "456")]
+        public void Register_ShouldCreateEntity(string dummyUserName, string password)
         {
             // Arrange
-            RegisterVM registerDummy = new RegisterVM();
-            registerDummy.UserName = _newDummy;
-            registerDummy.Password = "456";
+            this.TestRegistration(dummyUserName, password);
 
             // Act
             _Controller.Register();
 
             // Assert
             IEnumerable<User> users = _userRepo.GetAllEntities();
-            User userMock = users.Select(user => user).Where(user => user.UserName.Equals(_newDummy)).ToArray()[0];
+            User userMock = users.Select(user => user).Where(user => user.UserName.Equals(dummyUserName)).ToArray()[0];
 
-            Assert.AreEqual(_newDummy, userMock.UserName);
+            Assert.AreEqual(dummyUserName, userMock.UserName);
         }
 
         private void TestRegistration(string dummyUserName, string password)
