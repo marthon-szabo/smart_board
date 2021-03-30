@@ -1,5 +1,4 @@
 using System.IO;
-using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,11 +9,11 @@ using App.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Tests.DbIntegrationTest;
-using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NSubstitute;
 
 namespace Tests.ControllerTests
 {
@@ -51,7 +50,7 @@ namespace Tests.ControllerTests
             RegisterVM registerDummy = new RegisterVM();
             registerDummy.UserName = dummyUserName;
             registerDummy.Password = password;
-
+            
             var controllerContext = new ControllerContext()
             {
                 HttpContext = this.CreateHttpContext<RegisterVM>(registerDummy)
@@ -66,50 +65,38 @@ namespace Tests.ControllerTests
             Assert.AreEqual(expectation, result.Username);
         }
 
-        private DefaultHttpContext CreateHttpContext<T>(T content)
+        [Test]
+        public void Register_ShouldCreateEntity()
         {
-            DefaultHttpContext httpContext = new DefaultHttpContext();
+            // Arrange
+            RegisterVM registerDummy = new RegisterVM();
+            registerDummy.UserName = _newDummy;
+            registerDummy.Password = "456";
+
+            // Act
+            _Controller.Register();
+
+            // Assert
+            IEnumerable<User> users = _userRepo.GetAllEntities();
+            User userMock = users.Select(user => user).Where(user => user.UserName.Equals(_newDummy)).ToArray()[0];
+
+            Assert.AreEqual(_newDummy, userMock.UserName);
+        }
+        private HttpContext CreateHttpContext<T>(T content)
+        {
+            HttpContext stubHttpContext = Substitute.For<HttpContext>();
+            StubHttpSession stubSession = new StubHttpSession();
+            
+            stubSession["sessionId"] = "test";
+            stubHttpContext.Session.Returns(stubSession);
 
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(content)));
 
-            httpContext.Request.Body = stream;
-            httpContext.Request.ContentLength = stream.Length;
+            stubHttpContext.Request.Body.Returns(stream);
+            stubHttpContext.Request.ContentLength.Returns(stream.Length);
 
-            return httpContext;
-
-            // WebRequest request = WebRequest.Create(endpoint);
-            // request.Method = httpMethod.ToUpper();
-            // request.ContentType = "application/json";
-
-            // using(StreamWriter writer = new StreamWriter(request.GetRequestStream()))
-            // {
-            //     string jsonContent = JsonContent.Create(content).ToString();
-
-            //     writer.Write(jsonContent);
-            //     writer.Flush();
-            //     writer.Close();
-            // }
-
-            // return request;
+            return stubHttpContext;
         }
-
-        // [Test]
-        // public void Register_ShouldCreateEntity()
-        // {
-        //     // Arrange
-        //     RegisterVM registerDummy = new RegisterVM();
-        //     registerDummy.UserName = _newDummy;
-        //     registerDummy.Password = "456";
-
-        //     // Act
-        //     _Controller.Register(registerDummy);
-
-        //     // Assert
-        //     IEnumerable<User> users = _userRepo.GetAllEntities();
-        //     User userMock = users.Select(user => user).Where(user => user.UserName.Equals(_newDummy)).ToArray()[0];
-
-        //     Assert.AreEqual(_newDummy, userMock.UserName);
-        // }
 
         [TearDown]
         public void TearDown()
