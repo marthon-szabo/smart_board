@@ -47,17 +47,8 @@ namespace Tests.ControllerTests
         public void Register_RegisterVM_ReturnsBool(string dummyUserName, string password, string? expectation)
         {
             // Arrange
-            RegisterVM registerDummy = new RegisterVM();
-            registerDummy.UserName = dummyUserName;
-            registerDummy.Password = password;
+            this.TestRegistration(dummyUserName, password);
             
-            var controllerContext = new ControllerContext()
-            {
-                HttpContext = this.CreateHttpContext<RegisterVM>(registerDummy)
-            };
-
-            _Controller.ControllerContext = controllerContext;
-
             // Act
             UserProfileVM result = _Controller.Register();
 
@@ -82,6 +73,21 @@ namespace Tests.ControllerTests
 
             Assert.AreEqual(_newDummy, userMock.UserName);
         }
+
+        private void TestRegistration(string dummyUserName, string password)
+        {
+            RegisterVM registerDummy = new RegisterVM();
+            registerDummy.UserName = dummyUserName;
+            registerDummy.Password = password;
+            
+            var controllerContext = new ControllerContext()
+            {
+                HttpContext = this.CreateHttpContext<RegisterVM>(registerDummy)
+            };
+
+            _Controller.ControllerContext = controllerContext;
+        }
+
         private HttpContext CreateHttpContext<T>(T content)
         {
             HttpContext stubHttpContext = Substitute.For<HttpContext>();
