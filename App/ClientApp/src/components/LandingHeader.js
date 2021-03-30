@@ -10,7 +10,25 @@ import {
     Link
 } from "react-router-dom";
 
-import "./LandingHeader.css"
+import "./LandingHeader.css";
+import ProfileIcon from "../images/profile.png";
+import NewsIcon from "../images/news.png";
+import QuestsIcon from "../images/quests.png";
+import BoardsIcon from "../images/boards.png";
+
+const SeparatedButtonStyle = {
+    fontSize: 20,
+    display: "inline-block",
+    padding: "3px",
+    marginLeft: "5px",
+    marginRight: "5px",
+    textDecoration: "none",
+    height: "35px",
+};
+
+const IconStyle = {
+    height: "35px"
+};
 
 function LandingHeader() {
     const [userData, setUserData] = useContext(UserDataContext);
@@ -21,25 +39,22 @@ function LandingHeader() {
             <div className="welcome-sign">
                     <h3>Welcome { username }</h3>
             </div>
-            <div>
+            <div className="nav-menu-elements">
                 <div>
-                    <nav>
+                        <nav>
                             <ul>
-                                <div className="News">
-                                    <li>
-                                        <Link to="/">News</Link>
+                                <li style={SeparatedButtonStyle}>
+                                    
+                                    <Link to="/" className="button-link"><img src={NewsIcon} alt="News" style={IconStyle}></img>News</Link>
                                     </li>
-                                </div>
-                            <div className="Quests">
-                                <li>
-                                    <Link to="/quests">Quests</Link>
+                                <li style={SeparatedButtonStyle}>
+                                    
+                                    <Link to="/quests" className="button-link"><img src={QuestsIcon} alt="Quests" style={IconStyle}></img>Quests</Link>
                                 </li>
-                                </div>
-                                <div className="Profile">
-                                    <li>
-                                        <Link to="/profile">My profile</Link>
-                                    </li>
-                                </div>
+                                <li style={SeparatedButtonStyle}>
+                                    
+                                    <Link to="/profile" className="button-link"><img src={ProfileIcon} alt="Profile" style={IconStyle}></img>My profile</Link>
+                                </li>
                                 
                         </ul>
                     </nav>
