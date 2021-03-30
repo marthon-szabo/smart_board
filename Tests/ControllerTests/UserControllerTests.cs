@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Tests.DbIntegrationTest;
 using System.Net.Http.Json;
+using Microsoft.AspNetCore.Http;
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Tests.ControllerTests
 {
@@ -48,50 +52,64 @@ namespace Tests.ControllerTests
             registerDummy.UserName = dummyUserName;
             registerDummy.Password = password;
 
-            WebRequest request = this.CreateRequest<RegisterVM>(registerDummy, "https://calhost:5001/user/register", "POST");
+            var controllerContext = new ControllerContext()
+            {
+                HttpContext = this.CreateHttpContext<RegisterVM>(registerDummy)
+            };
+
+            _Controller.ControllerContext = controllerContext;
 
             // Act
-            UserProfileVM result = _Client.PostAsync(, registerDummy);
+            UserProfileVM result = _Controller.Register();
 
             // Assert
             Assert.AreEqual(expectation, result);
         }
 
-        private WebRequest CreateRequest<T>(T content, string endpoint, string httpMethod)
+        private DefaultHttpContext CreateHttpContext<T>(T content)
         {
-            WebRequest request = WebRequest.Create(endpoint);
-            request.Method = httpMethod.ToUpper();
-            request.ContentType = "application/json";
+            DefaultHttpContext httpContext = new DefaultHttpContext();
 
-            using(StreamWriter writer = new StreamWriter(request.GetRequestStream()))
-            {
-                string jsonContent = JsonContent.Create(content).ToString();
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(content)));
 
-                writer.Write(jsonContent);
-                writer.Flush();
-                writer.Close();
-            }
+            httpContext.Request.Body = stream;
+            httpContext.Request.ContentLength = stream.Length;
 
-            return request;
+            return httpContext;
+
+            // WebRequest request = WebRequest.Create(endpoint);
+            // request.Method = httpMethod.ToUpper();
+            // request.ContentType = "application/json";
+
+            // using(StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+            // {
+            //     string jsonContent = JsonContent.Create(content).ToString();
+
+            //     writer.Write(jsonContent);
+            //     writer.Flush();
+            //     writer.Close();
+            // }
+
+            // return request;
         }
 
-        [Test]
-        public void Register_ShouldCreateEntity()
-        {
-            // Arrange
-            RegisterVM registerDummy = new RegisterVM();
-            registerDummy.UserName = _newDummy;
-            registerDummy.Password = "456";
+        // [Test]
+        // public void Register_ShouldCreateEntity()
+        // {
+        //     // Arrange
+        //     RegisterVM registerDummy = new RegisterVM();
+        //     registerDummy.UserName = _newDummy;
+        //     registerDummy.Password = "456";
 
-            // Act
-            _Controller.Register(registerDummy);
+        //     // Act
+        //     _Controller.Register(registerDummy);
 
-            // Assert
-            IEnumerable<User> users = _userRepo.GetAllEntities();
-            User userMock = users.Select(user => user).Where(user => user.UserName.Equals(_newDummy)).ToArray()[0];
+        //     // Assert
+        //     IEnumerable<User> users = _userRepo.GetAllEntities();
+        //     User userMock = users.Select(user => user).Where(user => user.UserName.Equals(_newDummy)).ToArray()[0];
 
-            Assert.AreEqual(_newDummy, userMock.UserName);
-        }
+        //     Assert.AreEqual(_newDummy, userMock.UserName);
+        // }
 
         [TearDown]
         public void TearDown()
