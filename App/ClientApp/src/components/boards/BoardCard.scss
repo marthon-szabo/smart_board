@@ -2,10 +2,10 @@
 $point: salmon;
 $point-light: lighten($point, 5%);
 
-$ratio: 1.618;
-$card_width: 250px;
+$ratio: 1.3;
+$card_width: 150px;
 $card_height: $card_width * $ratio;
-$card_padding: 20px;
+$card_padding: 5px;
 $card-bgcolor: white;
 $card_margin: 5px;
 $card_round: 10px;
@@ -23,26 +23,18 @@ body {
     background-color: $point;
 }
 
-.container {
+.card-container {
     width: 80%;
-    min-height: 100vh;
+    height: 250px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.center {
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-}
 
 .card {
     background-color: $card-bgcolor;
@@ -97,7 +89,6 @@ body {
         letter-spacing: -0.25px;
         line-height: 1.25;
         font-size: 16px;
-        word-break: break-all;
         word-wrap: pre-wrap;
         color: $black;
         -webkit-animation-name: p-show; /* Safari 4.0 - 8.0 */
@@ -109,9 +100,8 @@ body {
     button {
         border: none;
         background-color: $point;
-        width: 50%;
+        width: 80px;
         margin: 10px auto;
-        padding: 10px 30px;
         color: white;
         font-family: 'Noto Sans KR', sans-serif;
         text-transform: uppercase;
