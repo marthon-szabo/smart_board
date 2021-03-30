@@ -7,7 +7,7 @@
 }
 
 .welcome-sign {
-    width: 90%;
+    width: 40%;
     margin-left: 5px;
     margin-top: 7px;
 }
@@ -16,4 +16,23 @@
     align-self:auto;
     text-align: right;
     margin-top: 10px;
+}
+
+.nav-menu-elements {
+    width: 550px;
+}
+
+a:link.button-link, a:visited.button-link {
+    background-color: #66c7b9;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+    text-align: center;
+    width: 150px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover.button-link, a:active.button-link {
+    background-color: #726aa7;
 }

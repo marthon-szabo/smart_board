@@ -30,8 +30,5 @@ namespace App.Models.Entities
 
         [Column("badges", TypeName = "char")]
         public string Badges { get; set; }
-        
-        [Column("csrf_token", TypeName = "char")]
-        public string CSRFToken { get; set; }
     }
 }
