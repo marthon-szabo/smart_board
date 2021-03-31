@@ -11,7 +11,7 @@ namespace App.Models.Entities
         [Column("board_name")]
         public string BoardName { get; set; }
         
-        [Column("users_boards_id")]
-        public string UsersBoardsId { get; set; }
+        [Column("user_id")]
+        public string UserId { get; set; }
     }
 }
