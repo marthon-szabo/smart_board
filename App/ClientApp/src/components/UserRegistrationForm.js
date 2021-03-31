@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect, useContext } from 'react';
+import { UserDataContext } from "./contexts/UserDataContext";
 import { addSpinner, removeSpinner } from '../Utilities/Spinner'; 
 import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
 import { LoggedInUserContext } from './contexts/LoggedInUserContext';
@@ -13,7 +14,8 @@ const UseRegistrationForm = (callback, validate) => {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [responseData, setResponseData] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInUserContext)
+    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInUserContext);
+    const [userDataState, setUserDataState] = useContext(UserDataContext);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -35,10 +37,18 @@ const UseRegistrationForm = (callback, validate) => {
     };
 
     const checkRegistration = (data, button, box, buttonText) => {
+        const userDataFromResponse = {
+            username: data.username,
+            email: data.email,
+            doneQuests: data.doneQuests,
+            takenQuests: data.takenQuests,
+            badges: data.badges
+
+        }
 
         if(data.username != null) {
             enableLogin(button);
-
+            setUserDataState(userDataFromResponse);
             setTimeout(() => {
                 setIsLoggedIn(true);
             }, 1000);
