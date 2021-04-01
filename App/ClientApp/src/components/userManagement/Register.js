@@ -80,11 +80,11 @@ function Register({ submitForm }) {
                             {errors.password && <p>{errors.password}</p>}
                         </div>
 
-                            <div class="form-group">
+                            <div className="form-group">
                             <label>Confirm Password</label>
                             <input
                                 type="password"
-                                class="form-control"
+                                className="form-control"
                                 name="password2"
                                 placeholder="Confirm Password "
                                 value={values.password2}
