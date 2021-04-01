@@ -26,10 +26,11 @@ function CreateBoardModal() {
                             name='board-name'
                             placeholder="Enter username"
                         />
+                        
+                        </div>
                         <button id="login-btn" type="submit" className="btn btn-primary btn-block">
                             Submit
                         </button>
-                        </div>
                     </form>
                     </div>
                     
