@@ -1,17 +1,27 @@
+using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class SQLBoardRepositoryTests
+    public class SQLBoardRepositoryTests : SQLRepositoryTestsBase<IBoardRepository, Board>
     {
+        private static string[] seedValues = new string[4]
+        {
+            "TestBoard1", "Test board 1",
+            "TestBoard2", "Test board 2"
+        };
 
-        // [Test]
-        // public void GetAllBoardsByUsername_Username_ReturnsBoards()
-        // {
-        //     // Assert
-        //     IUsersBoardsRepository uBRepo = 
-        //     IBoardRepository boardsRepo = new SQLBoardRepository();
-        // }
+        public SQLBoardRepositoryTests() : base(seedValues)
+        {
+        }
+
+        [Test]
+        public void GetAllBoardsByUsername_Username_ReturnsBoards()
+        {
+            // Act
+            
+
+        }
     }
 }
