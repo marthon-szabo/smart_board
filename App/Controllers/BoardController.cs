@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
@@ -15,7 +16,7 @@ namespace App.Controllers
             _boardRepo = boardRepo;
         }
 
-        [HttpGet("boards/${user}/all")]
+        [HttpGet("boards/username={userName}")]
         public IEnumerable<Board> GetAllBoards(string userName)
         {
             return _boardRepo.GetAllBoardsByUsername(userName);
