@@ -3,8 +3,8 @@ import { LoginStateContext } from "./contexts/LoginStateContext";
 import { RegisterStateContext } from "./contexts/RegisterStateContext";
 import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
 import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
-import Register from "./Register";
-import Login from "./Login";
+import Register from "./userManagement/Register";
+import Login from "./userManagement/Login";
 import { Home } from "./Home";
 import LandingPage from "./LandingPage";
 

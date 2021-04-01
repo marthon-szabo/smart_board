@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import validate from './ValidateRegistrationInformation';
 import useForm from './UserRegistrationForm';
-import { RegisterStateContext } from "./contexts/RegisterStateContext";
-import { LoginStateContext } from "./contexts/LoginStateContext";
-import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
+import { RegisterStateContext } from "../contexts/RegisterStateContext";
+import { LoginStateContext } from "../contexts/LoginStateContext";
+import { CSRFTokenContext } from "../contexts/CSRFTokenContext";
 
-import './Error.css';
+import '../Error.css';
 
 function Register({ submitForm }) {
     const [registerState, setRegisterState] = useContext(RegisterStateContext);

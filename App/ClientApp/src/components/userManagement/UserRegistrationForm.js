@@ -1,17 +1,19 @@
-import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
-import { UserDataContext } from "./contexts/UserDataContext";
-import { addSpinner } from '../Utilities/Spinner'; 
-import { enableLogin, disableLogin } from "../Utilities/UserInteracrtionChecker";
-import { useState, useEffect, useContext } from 'react';
+﻿import { useState, useEffect, useContext } from 'react';
+import { UserDataContext } from "../contexts/UserDataContext";
+import { addSpinner, removeSpinner } from '../../Utilities/Spinner'; 
+import { enableLogin, disableLogin } from "../../Utilities/UserInteracrtionChecker";
+import { LoggedInUserContext } from '../contexts/LoggedInUserContext';
 
-
-const UserLoginForm = (callback, validate) => {
+const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
         username: '',
-        password: ''
+        email: '',
+        password: '',
+        password2: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [responseData, setResponseData] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInUserContext);
     const [userDataState, setUserDataState] = useContext(UserDataContext);
 
@@ -26,12 +28,15 @@ const UserLoginForm = (callback, validate) => {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
-
         setIsSubmitting(true);
+        
     };
 
-    const checkLogin = (data, button, box, buttonText) => {
-        console.log(data)
+    const proceedRegistration = (button) => {
+        enableLogin(button);
+    };
+
+    const checkRegistration = (data, button, box, buttonText) => {
         const userDataFromResponse = {
             username: data.username,
             email: data.email,
@@ -40,6 +45,7 @@ const UserLoginForm = (callback, validate) => {
             badges: data.badges
 
         }
+
         if(data.username != null) {
             enableLogin(button);
             setUserDataState(userDataFromResponse);
@@ -47,31 +53,33 @@ const UserLoginForm = (callback, validate) => {
                 setIsLoggedIn(true);
             }, 1000);
         } else {
-            disableLogin(button, buttonText, box, "Invalid username or password!");
+            disableLogin(button, buttonText, box, 'Username is taken. Please try it again.');
         }
     }
 
     useEffect(
         () => {
-            const button = document.querySelector("#login-btn");
+            const button = document.querySelector("#register-btn");
             const buttonText = button.innerHTML;
-            const box = document.querySelector(".login-head");
+            const box = document.querySelector(".register-head");
 
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
                     Username: values.username,
+                    Email: values.email,
                     Password: values.password
                 })
-                fetch('/user/login', {
+                fetch('/user/register', {
                     method: 'POST',
                     body: data,
                     headers: { 'Content-Type': 'application/json' },
                 })
                     .then(res => res.json())
-                    .then(data => checkLogin(data, button, box, buttonText));
-                
+                    .then(data => checkRegistration(data, button, box, buttonText));
+
                 addSpinner(button);
             }
+           
         },
         [errors]
     );
@@ -79,4 +87,4 @@ const UserLoginForm = (callback, validate) => {
     return { handleChange, handleSubmit, values, errors };
 };
 
-export default UserLoginForm;
+export default UseRegistrationForm;
