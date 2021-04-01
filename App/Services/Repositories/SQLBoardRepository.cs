@@ -20,9 +20,11 @@ namespace App.Services.Repositories
 
         public IEnumerable<Board> GetAllBoardsByUsername(string username)
         {
-            IEnumerable<UsersBoards> usersBoards = _UsersBoardsRepo.GetAllEntities();
             string id = _UserRepo.GetUserByUsername(username).UserId;
-            return usersBoards.Where(userBoard => id.Equals(userBoard.UserId)).Select(userBoard => userBoard.Board);
+            IEnumerable<string> boardIds = _UsersBoardsRepo.GetAllEntities().Where(uB => uB.UserId.Equals(id)).Select(uB => uB.BoardId);
+            
+
+            return this.GetAllEntities().Where(b => boardIds.Contains(b.BoardId)).Select(b => b);
         }
     }
 }
