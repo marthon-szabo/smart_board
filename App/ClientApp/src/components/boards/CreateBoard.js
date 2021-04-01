@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
 import { CreateBoardContext } from "../contexts/CreateBoardContext";
 
 import PlusIcon from '../../images/plus.png';
@@ -13,11 +13,15 @@ const IconStyle = {
 }
 
 function CreateBoard() {
-    const openModalCreateBoard = () => {
+    const [createBoardState, setCreateBoardState] = useContext(CreateBoardContext);
 
+    const openModalCreateBoard = () => {
+        setCreateBoardState(true);
+        document.querySelector(".container").classList.add("blurred-box");
     }
 
     return (
+            
         <div class="card-container center">
             <div class="card">
                 <img src={PlusIcon} alt="Plus icon" style={ IconStyle }></img>
@@ -25,7 +29,7 @@ function CreateBoard() {
                 <p>Click the button to create a new board!</p>
                 <button onClick={ openModalCreateBoard }>Create</button>
             </div>
-        </div>
+            </div>
         )
 }
 

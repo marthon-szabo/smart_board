@@ -1,13 +1,16 @@
 ﻿import React from 'react';
 import LandingHeader from "./LandingHeader";
-import News from "./News";
+import CreateBoardModal from "./boards/CreateBoardModal";
 
 import './NavMenu.css';
 
 function LandingPage() {
     return (
+        <div>
         <div className="container">
             <LandingHeader/>
+            </div>
+            <CreateBoardModal/>
         </div>
         )
 }
