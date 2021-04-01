@@ -14,6 +14,7 @@ function CreateBoardModal() {
         <section>
             <Modal className="create-modal" visible={createBoardState} width="400" height="350" effect="fadeInRight" onClickAway={() => closeModalWindow()}>
                 <div className="container">
+                    <form style={{ padding: '5%' }}>
                     <div className="login-head">
                         <h3>Create a board</h3>
                     </div>
@@ -28,8 +29,10 @@ function CreateBoardModal() {
                         <button id="login-btn" type="submit" className="btn btn-primary btn-block">
                             Submit
                         </button>
+                        </div>
+                    </form>
                     </div>
-                    </div>
+                    
             </Modal>
         </section>
         )
