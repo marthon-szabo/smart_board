@@ -36,6 +36,8 @@ namespace App
             var connectionString = Configuration["AppDb:ConnectionStrings:DefaultConnection"];
             services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
             services.AddScoped<IUserRepository, SQLUserRepository>();
+            services.AddScoped<IBoardRepository, SQLBoardRepository>();
+            services.AddScoped<IUsersBoardsRepository, SQLUsersBoardsRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
