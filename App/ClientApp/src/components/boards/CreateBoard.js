@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { CreateBoardContext } from "../contexts/CreateBoardContext";
 
 import PlusIcon from '../../images/plus.png';
 import './BoardCard.scss';
@@ -12,13 +13,17 @@ const IconStyle = {
 }
 
 function CreateBoard() {
+    const openModalCreateBoard = () => {
+
+    }
+
     return (
         <div class="card-container center">
             <div class="card">
                 <img src={PlusIcon} alt="Plus icon" style={ IconStyle }></img>
                 <hr />
                 <p>Click the button to create a new board!</p>
-                <button>Create</button>
+                <button onClick={ openModalCreateBoard }>Create</button>
             </div>
         </div>
         )
