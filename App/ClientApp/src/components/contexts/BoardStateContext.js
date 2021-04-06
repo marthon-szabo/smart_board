@@ -1,6 +1,6 @@
 ﻿import React, { useState, createContext } from 'react';
 
-export const BoardsStateContext = createContext();
+export const BoardStateContext = createContext();
 
 export const BoardStateProvider = props => {
     const [boardState, setBoardState] = useState(false);
