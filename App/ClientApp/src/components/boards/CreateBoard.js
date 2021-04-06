@@ -22,8 +22,8 @@ function CreateBoard() {
 
     return (
             
-        <div class="card-container center">
-            <div class="card">
+        <div className="card-container center">
+            <div className="card">
                 <img src={PlusIcon} alt="Plus icon" style={ IconStyle }></img>
                 <hr />
                 <p>Click the button to create a new board!</p>
