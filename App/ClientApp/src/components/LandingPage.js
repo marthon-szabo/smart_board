@@ -2,7 +2,7 @@
 import { Route } from 'react-router';
 import LandingHeader from "./LandingHeader";
 import CreateBoardModal from "./boards/CreateBoardModal";
-import { BoardDetails } from "./boards/BoardDetails";
+import BoardDetails from "./boards/BoardDetails";
 
 import './NavMenu.css';
 
@@ -13,6 +13,7 @@ function LandingPage() {
             <LandingHeader/>
             </div>
             <CreateBoardModal />
+            <BoardDetails/>
         </div>
         )
 }
