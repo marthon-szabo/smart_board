@@ -7,6 +7,7 @@ import { LoggedInUserProvider } from "./components/contexts/LoggedInUserContext"
 import { UserDataProvider } from "./components/contexts/UserDataContext";
 import { CreateBoardProvider } from "./components/contexts/CreateBoardContext";
 
+
 import './custom.css';
 import './App.scss';
 export default class App extends Component {
@@ -21,7 +22,7 @@ export default class App extends Component {
       <UserDataProvider>
       <CreateBoardProvider>
       <Layout>
-            
+      
       </Layout>
       </CreateBoardProvider>
       </UserDataProvider>

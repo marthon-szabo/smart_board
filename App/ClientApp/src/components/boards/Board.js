@@ -11,6 +11,7 @@ const IconStyle = {
     marginBottom: "15px"
 }
 
+
 function Board(props) {
     return (
         <div class="card-container center">
