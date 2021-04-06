@@ -6,7 +6,7 @@ import { CSRFTokenContextProvider } from "./components/contexts/CSRFTokenContext
 import { LoggedInUserProvider } from "./components/contexts/LoggedInUserContext";
 import { UserDataProvider } from "./components/contexts/UserDataContext";
 import { CreateBoardProvider } from "./components/contexts/CreateBoardContext";
-
+import { BoardStateProvider } from "./components/contexts/BoardStateContext";
 
 import './custom.css';
 import './App.scss';
@@ -21,9 +21,11 @@ export default class App extends Component {
       <LoggedInUserProvider>
       <UserDataProvider>
       <CreateBoardProvider>
+      <BoardStateProvider>
       <Layout>
       
       </Layout>
+      </BoardStateProvider>
       </CreateBoardProvider>
       </UserDataProvider>
       </LoggedInUserProvider>

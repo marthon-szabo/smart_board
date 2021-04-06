@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import BoardStateContext from "./BoardStateContext";
 
 import BoardsIcon from '../../images/boards.png';
 import './BoardCard.scss';
