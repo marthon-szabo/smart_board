@@ -15,7 +15,6 @@ namespace Tests.DbIntegrationTest
         private readonly IGeneralRepository<TEntity> _repo;
         private readonly IEnumerable<string>? _seedValues;
 
-
         public GeneralIntegra(IGeneralRepository<TEntity> repo, IEnumerable<string> seedValues = null) 
         {
             _repo = repo;
@@ -45,31 +44,6 @@ namespace Tests.DbIntegrationTest
                     propInfo[i % propertyNumber].SetValue(dummyEntity, _seedValues.ToArray()[i]);
                 }
             }
-
-            
-
-            //  _Repo.CreateEntity(
-            //      new User
-            //     {
-            //         UserId = "Test1",
-            //         UserName = "Márton Szabó",
-            //         Password = "12345",
-            //         Email = "stub@stub.com",
-            //     }
-            // );
-        }
-
-        public void DropTable(AppDbContext context)
-        {
-             
-            PropertyInfo[] propInfoes = context.GetType().GetProperties();
-            
-            foreach(PropertyInfo propInfo in propInfoes)
-            {
-                propInfo.SetValue(context, null);
-            }
-
-            _repo.Save();
         }
 
         public static string GetConnection()
