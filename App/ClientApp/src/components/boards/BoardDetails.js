@@ -47,23 +47,29 @@ function BoardDetails() {
 
     useEffect(() => {
         const listDiv = document.getElementById('columns-list');
-        const tr = document.createElement('tr');
+        
         for (var i = 0; i < columnNames.length; ++i) {
-            const th = document.createElement('th');
-            th.innerHTML = columnNames[i].columnName;
-            th.bgColor = "#726aa7";
-            th.id = columnNames[i].id;
-            tr.appendChild(th);
+            const boardColumn = document.createElement('div');
+            const boardTitle = document.createElement('div');
+            const boardContent = document.createElement('div');
+            boardTitle.innerHTML = columnNames[i].columnName;
+            boardColumn.classList.add("board-column");
+            boardTitle.classList.add("board-title");
+            boardContent.classList.add("board-content");
+            boardColumn.id = columnNames[i].id;
+            boardColumn.appendChild(boardTitle);
+            boardColumn.appendChild(boardContent);
+            listDiv.appendChild(boardColumn);
+            
         }
-        listDiv.appendChild(tr);
+        
+        
         for (var i = 0; i < taskNames.length; ++i) {
-            const tr = document.createElement('tr');
-            const td = document.createElement('td');
-            const thMatching = document.getElementById(taskNames[i].columnId);
-            td.innerHTML = taskNames[i].taskName;
-            td.id = taskNames[i].id;
-            tr.appendChild(td);
-            thMatching.appendChild(tr);
+            const contentDiv = document.createElement('div');
+            const matchingDiv = document.getElementById(taskNames[i].columnId);
+            contentDiv.innerHTML = taskNames[i].taskName;
+            contentDiv.id = taskNames[i].id;
+            matchingDiv.appendChild(contentDiv);
         }
         
     }, [])
@@ -72,8 +78,8 @@ function BoardDetails() {
         <section>
             <Modal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInRight" onClickAway={() => closeModalWindow()}>
                 <div className="container">
-                    <table border="1" height="200" width="780" className="table-of-columns" id="columns-list">
-            </table>
+                    <div border="1" height="200" width="780" className="table-of-columns" id="columns-list">
+            </div>
                 </div>
             </Modal>
         </section >
