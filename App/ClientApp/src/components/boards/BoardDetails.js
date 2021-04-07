@@ -78,7 +78,7 @@ function BoardDetails() {
         <section>
             <Modal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInRight" onClickAway={() => closeModalWindow()}>
                 <div className="container">
-                    <div border="1" height="200" width="780" className="table-of-columns" id="columns-list">
+                    <div height="200" width="780" className="table-of-columns" id="columns-list">
             </div>
                 </div>
             </Modal>
