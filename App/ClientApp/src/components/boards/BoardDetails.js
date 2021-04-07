@@ -98,14 +98,21 @@ function BoardDetails() {
                                                         {item.columnName}
                                                 </div>
                                                 {
-                                                    taskNames.map((taskItem) => (
+                                                    taskNames.map((taskItem, index) => (
 
                                                         taskItem.columnId === item.id && (
-                                                            <div className="content-div" id={taskItem.id}>
-                                                                {taskItem.taskName}
-                                                                </div>
-                                                                )
-                                                        ))
+                                                            <Draggable key={taskItem.id} draggableId={taskItem.id} index={index}>
+                                                                {(provided) => (
+                                                                    <div className="content-div"
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
+                                                                    >
+                                                                        {taskItem.taskName}
+                                                                    </div>
+                                                                )}
+                                                            </Draggable>
+                                                    )))
                                                 }
                                             </div>
                                         ))
