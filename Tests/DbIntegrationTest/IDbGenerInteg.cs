@@ -6,6 +6,5 @@ namespace Tests.DbIntegrationTest
     public interface IDbGenerInteg
     {
          void CreateTable(IEnumerable<string> seedValues = null);
-         void DropTable(AppDbContext context);
     }
 }
