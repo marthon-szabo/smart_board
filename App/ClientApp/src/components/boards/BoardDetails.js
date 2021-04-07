@@ -66,6 +66,7 @@ function BoardDetails() {
         
         for (var i = 0; i < taskNames.length; ++i) {
             const contentDiv = document.createElement('div');
+            contentDiv.classList.add("content-div");
             const matchingDiv = document.getElementById(taskNames[i].columnId);
             contentDiv.innerHTML = taskNames[i].taskName;
             contentDiv.id = taskNames[i].id;
