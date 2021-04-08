@@ -46,6 +46,10 @@ function BoardDetails() {
         document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
+    const onDragging = (e) => {
+        console.log("hello world");
+        console.log(e.target);
+    }
 
     return (
         <section>
@@ -68,7 +72,7 @@ function BoardDetails() {
                                                     taskNames.map((taskItem, index) => (
 
                                                         taskItem.columnId === item.id && (
-                                                            <Draggable key={taskItem.id} draggableId={taskItem.id} index={index}>
+                                                            <Draggable onClick={(event) => onDragging.call(event)} key={taskItem.id} draggableId={taskItem.id} index={index}>
                                                                 {(provided) => (
                                                                     <div className="content-div"
                                                                         ref={provided.innerRef}
