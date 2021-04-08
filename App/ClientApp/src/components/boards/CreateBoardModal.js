@@ -28,6 +28,7 @@ function CreateBoardModal() {
         })
             .then(res => res.json())
             .then(data => console.log(data));
+        closeModalWindow();
     }
 
     return (
