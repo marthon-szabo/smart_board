@@ -18,6 +18,7 @@ namespace Tests.DbIntegrationTest
         public GeneralIntegra(IGeneralRepository<TEntity> repo, IEnumerable<string> seedValues = null) 
         {
             _repo = repo;
+            _seedValues = seedValues;
         }
 
         public void CreateTable(IEnumerable<string> seedValues = null)
@@ -44,6 +45,25 @@ namespace Tests.DbIntegrationTest
                     propInfo[i % propertyNumber].SetValue(dummyEntity, _seedValues.ToArray()[i]);
                 }
             }
+        }
+
+        public void DropTable(AppDbContext context)
+        {
+            PropertyInfo[] propertyInfos = Type.GetType(context.GetType().FullName).GetProperties();
+
+            string entityType = typeof(TEntity).Name;
+
+            context.GetType().GetProperty($"{typeof(TEntity).Name}s").SetValue(context, null);
+
+            // foreach (PropertyInfo propertyInfo in propertyInfos)
+            // {
+            //     string propertyName = propertyInfo.Name;
+
+            //     if(propertyName.Equals($"{typeof(TEntity).Name}s"))
+            //     {
+            //         propertyInfo.SetValue(context, null, null);
+            //     }
+            // }
         }
 
         public static string GetConnection()
