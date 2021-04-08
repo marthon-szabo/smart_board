@@ -46,39 +46,6 @@ function BoardDetails() {
         document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
-    useEffect(() => {
-        //const listDiv = document.getElementById('columns-list');
-        
-        //for (var i = 0; i < columnNames.length; ++i) {
-        //    const boardColumn = document.createElement('div');
-        //    const boardTitle = document.createElement('div');
-        //    const boardContent = document.createElement('div');
-        //    boardTitle.innerHTML = columnNames[i].columnName;
-        //    boardColumn.classList.add("board-column");
-        //    boardTitle.classList.add("board-title");
-        //    boardContent.classList.add("board-content");
-        //    boardColumn.id = columnNames[i].id;
-        //    boardColumn.appendChild(boardTitle);
-        //    boardColumn.appendChild(boardContent);
-        //    listDiv.appendChild(boardColumn);
-            
-        //}
-        
-        
-        //for (var i = 0; i < taskNames.length; ++i) {
-        //    const contentDiv = document.createElement('div');
-        //    const draggable = document.createElement('Draggable');
-        //    contentDiv.classList.add("content-div");
-        //    draggable.classList.add("draggable");
-        //    const matchingDiv = document.getElementById(taskNames[i].columnId);
-        //    contentDiv.innerHTML = taskNames[i].taskName;
-        //    contentDiv.id = taskNames[i].id;
-        //    draggable.innerHTML = '{(provided) => (' + contentDiv + ')}';
-            
-        //    matchingDiv.appendChild(draggable);
-        //}
-        
-    }, [])
 
     return (
         <section>
