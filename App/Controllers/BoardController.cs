@@ -13,10 +13,16 @@ namespace App.Controllers
     {
 
         private readonly IBoardRepository _boardRepo;
+        private readonly IUserRepository _userRepo;
+        private readonly IUsersBoardsRepository _usersBoardsRepo;
 
-        public BoardController(IBoardRepository boardRepo)
+        public BoardController(IBoardRepository boardRepo,
+                                IUserRepository userRepo,
+                                IUsersBoardsRepository userBoardsRepo)
         {
             _boardRepo = boardRepo;
+            _userRepo = userRepo;
+            _usersBoardsRepo = userBoardsRepo;
         }
 
         [HttpGet("boards/username={userName}")]
@@ -41,7 +47,24 @@ namespace App.Controllers
             };
 
             _boardRepo.CreateEntity(newBoard);
+            SaveBoardToConnectionTable(newBoard, newBoardVM.UserName);
+
             return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
+        }
+
+        private void SaveBoardToConnectionTable(Board newBoard, string userName)
+        {
+            User currentUser = _userRepo.GetUserByUsername(userName);
+            string id = IdGenerator.GenerateId();
+            UsersBoards usersBoards = new UsersBoards
+            {
+                BoardId = newBoard.BoardId,
+                UserId = currentUser.UserId,
+                UsersBoardsId = id
+            };
+
+            _usersBoardsRepo.CreateEntity(usersBoards);
+
         }
 
         private T ReadRequestBody<T>(Stream stream)
