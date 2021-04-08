@@ -2,8 +2,10 @@
 import Modal from 'react-awesome-modal';
 import { BoardStateContext } from "../contexts/BoardStateContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import BoardModal from './BoardModalComponents/BoardModal';
 
 import "./TableStyle.css";
+import styled from 'styled-components';
 
 const columnNames = [{
     id: "asd",
@@ -36,6 +38,10 @@ const taskNames = [{
     }
 ]
 
+const Mod = styled.div`
+    position: absolute;
+`
+
 
 
 function BoardDetails() {
@@ -53,7 +59,7 @@ function BoardDetails() {
 
     return (
         <section>
-            <Modal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInRight" onClickAway={() => closeModalWindow()}>
+            <BoardModal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div className="container">
                     <DragDropContext>
                         <Droppable droppableId="tasks">
@@ -75,9 +81,9 @@ function BoardDetails() {
                                                             <Draggable onClick={(event) => onDragging.call(event)} key={taskItem.id} draggableId={taskItem.id} index={index}>
                                                                 {(provided) => (
                                                                     <div className="content-div"
-                                                                        ref={provided.innerRef}
-                                                                        {...provided.draggableProps}
-                                                                        {...provided.dragHandleProps}
+                                                                    ref={provided.innerRef}
+                                                                    {...provided.draggableProps}
+                                                                    {...provided.dragHandleProps}
                                                                     >
                                                                         {taskItem.taskName}
                                                                     </div>
@@ -93,7 +99,7 @@ function BoardDetails() {
                         </Droppable>
                     </DragDropContext>
                 </div>
-            </Modal>
+            </BoardModal>
         </section >
     )
 }
