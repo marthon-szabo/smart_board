@@ -13,14 +13,15 @@ function CreateBoardModal() {
         document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
-    const handleSubmit = () => {
-        const name = document.getElementById("board-name");
+    const handleSubmit = e => {
+        e.preventDefault();
+        const name = document.getElementById("board-name").value;
         console.log(name)
         const data = JSON.stringify({
             UserName: username,
-            BoardName: "New Board Test"
+            BoardName: name
         })
-        fetch('/boards/create-board', {
+        fetch('boards/create-board', {
             method: 'POST',
             body: data,
             headers: { 'Content-Type': 'application/json' },
