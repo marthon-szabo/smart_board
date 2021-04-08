@@ -1,3 +1,4 @@
+using System.Reflection;
 using System;
 using System.Collections.Generic;
 using App.Models.Entities;
@@ -16,6 +17,8 @@ namespace Tests
 
         private readonly IEnumerable<string>? _seedValues;
 
+        private IDictionary<string, Object> _repositories;
+
         protected TRepo _repo;
 
         protected Action AdditionalSetupOperations { get; set; }
@@ -25,7 +28,11 @@ namespace Tests
                 .Options)
         {
             _seedValues = seedValues;
-            _repo = (TRepo)Activator.CreateInstance(typeof(TRepo), this, new SQLUsersBoardsRepository(this), new SQLUserRepository(this));
+            this.InitializeRepoDict();
+
+            _repo = (TRepo)_repositories[typeof(TRepo).Name];
+
+            // _repo = (TRepo)Activator.CreateInstance(typeof(TRepo), this, new SQLUsersBoardsRepository(this), new SQLUserRepository(this));
             _integrationTester = new GeneralIntegra<TRepo, TEntity>((IGeneralRepository<TEntity>)_repo, seedValues);
         }
 
@@ -33,6 +40,7 @@ namespace Tests
         protected void SetUp()
         {
             _integrationTester.CreateTable(_seedValues);
+
 
             if (AdditionalSetupOperations != null)
             {
@@ -43,6 +51,9 @@ namespace Tests
         [TearDown]
         protected void TearDown()
         {
+            AdditionalSetupOperations = null;
+
+            _integrationTester.DropTable(this);
 
             base.Database.ExecuteSqlRaw(@"
                     DROP TABLE IF EXISTS Users_Boards;
@@ -75,6 +86,16 @@ namespace Tests
                         board_name CHAR
                     );
                 ");
+        }
+
+        private void InitializeRepoDict()
+        {
+            _repositories = new Dictionary<string, Object>()
+            {
+                { "SQLBoardRepository", new SQLBoardRepository(this, new SQLUsersBoardsRepository(this), new SQLUserRepository(this)) },
+                { "SQLUsersBoardsRepository", new SQLUsersBoardsRepository(this) },
+                { "SQLUserRepository", new SQLUserRepository(this) }
+            };
         }
     }
 }
