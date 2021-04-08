@@ -16,8 +16,5 @@ namespace App.Models.Entities
 
         [Column("user_id")]
         public string UserId { get; set; }
-
-        public User User { get; set; }
-        public Board Board { get; set; }
     }
 }
