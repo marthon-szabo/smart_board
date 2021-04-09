@@ -5,15 +5,16 @@ using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using App.Services.Repositories;
+using System.Collections.Generic;
 
 namespace Tests
 {
     public class SQLBoardRepositoryTests : SQLRepositoryTestsBase<SQLBoardRepository, Board>
     {
-        private static string[] seedValues = new string[4]
+        private static IDictionary<string, string[]> seedValues = new Dictionary<string, string[]>
         {
-            "TestBoard1", "Test board 1",
-            "TestBoard2", "Test board 2"
+            { "BoardId", new string[] { "TestBoard1", "TestBoard2" } },
+            { "BoardName", new string[] { "Test board 1", "Test board 2" } },
         };
 
         public SQLBoardRepositoryTests() : base(seedValues)

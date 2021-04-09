@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data.Common;
 using App.Models.Entities;
 using App.Services.Repositories;
@@ -13,10 +14,11 @@ namespace Tests.ServiceTests.Repositories
     public class SQLUserRepositoryTests : SQLRepositoryTestsBase<SQLUserRepository, User>  
     {
 
-        private static string[] seedValues = new string[8]
+        private static IDictionary<string, string[]> seedValues = new Dictionary<string, string[]>
         {
-            "TestUser1", "Test user 1", "Test1", "test1@test1.com",
-            "TestUser2", "Test user 2", "Test2", "test2@test2.com"
+            { "UserId", new string[] { "TestUser1", "TestUser2" } },
+            { "UserName", new string[] { "Test user 1", "Test user 2" } },
+            { "Email", new string[] { "test1@test1.com", "test1@test2.com" } }
         };
 
         public SQLUserRepositoryTests() : base(seedValues)
