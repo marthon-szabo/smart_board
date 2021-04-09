@@ -52,6 +52,22 @@ namespace App.Controllers
             return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
         }
 
+        [HttpPost("boards/delete-board")]
+        public IEnumerable<Board> DeleteBoard()
+        {
+            Stream stream = Request.Body;
+
+            NewBoardVM newBoardVM = this.ReadRequestBody<NewBoardVM>(stream);
+
+            UsersBoards usersBoardsToDelete = _usersBoardsRepo.GetUsersBoardsByBoardId(newBoardVM.BoardName);
+            _usersBoardsRepo.DeleteEntityById(usersBoardsToDelete.UsersBoardsId);
+
+            Board boardToDelete = _boardRepo.GetBoardByBoardName(newBoardVM.BoardName);
+            _boardRepo.DeleteEntityById(boardToDelete.BoardId);
+
+            return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
+        }
+
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
         {
             User currentUser = _userRepo.GetUserByUsername(userName);
