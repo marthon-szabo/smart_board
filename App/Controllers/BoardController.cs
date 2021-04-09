@@ -59,10 +59,12 @@ namespace App.Controllers
 
             NewBoardVM newBoardVM = this.ReadRequestBody<NewBoardVM>(stream);
 
-            UsersBoards usersBoardsToDelete = _usersBoardsRepo.GetUsersBoardsByBoardId(newBoardVM.BoardName);
+            Board boardToDelete = _boardRepo.GetBoardByBoardName(newBoardVM.BoardName);
+
+            UsersBoards usersBoardsToDelete = _usersBoardsRepo.GetUsersBoardsByBoardId(boardToDelete.BoardId);
             _usersBoardsRepo.DeleteEntityById(usersBoardsToDelete.UsersBoardsId);
 
-            Board boardToDelete = _boardRepo.GetBoardByBoardName(newBoardVM.BoardName);
+            
             _boardRepo.DeleteEntityById(boardToDelete.BoardId);
 
             return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
