@@ -26,5 +26,20 @@ namespace App.Services.Repositories
 
             return this.GetAllEntities().Where(b => boardIds.Contains(b.BoardId)).Select(b => b);
         }
+
+        public Board? GetBoardByBoardName(string boardName)
+        {
+            IEnumerable<Board> boards = this.GetAllEntities();
+
+            foreach (Board board in boards.ToArray())
+            {
+                if (board.BoardName.Equals(boardName))
+                {
+                    return board;
+                }
+            }
+
+            return null;
+        }
     }
 }
