@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
@@ -13,15 +11,15 @@ namespace Tests.DbIntegrationTest
     public class GeneralIntegra<TRepo, TEntity> : IDbGenerInteg
     {
         private readonly IGeneralRepository<TEntity> _repo;
-        private readonly IEnumerable<string>? _seedValues;
+        private readonly IDictionary<string, string[]>? _seedValues;
 
-        public GeneralIntegra(IGeneralRepository<TEntity> repo, IEnumerable<string> seedValues = null) 
+        public GeneralIntegra(IGeneralRepository<TEntity> repo, IDictionary<string, string[]> seedValues = null) 
         {
             _repo = repo;
             _seedValues = seedValues;
         }
 
-        public void CreateTable(IEnumerable<string> seedValues = null)
+        public void CreateTable(IDictionary<string, string[]> seedValues = null)
         {
             TEntity dummyEntity = (TEntity)Activator.CreateInstance(typeof(TEntity));
             
@@ -29,41 +27,20 @@ namespace Tests.DbIntegrationTest
             {
                 Type type = typeof(TEntity); 
                 PropertyInfo[] propInfo = type.GetProperties();
+                
+                byte entityNumber = (byte)(seedValues.Values.Count / seedValues.Keys.Count);
 
-                int propertyNumber = propInfo.Count();
-                int valueNumber = _seedValues.Count();
-
-                for(int i = 0; i < valueNumber; i++)
+                for(byte entityCounter = 0; entityCounter < entityNumber; entityCounter++)
                 {
-                    
-                    if(i % propertyNumber == 0 && i > 0)
-                    {   
-                        _repo.CreateEntity(dummyEntity);
-                        dummyEntity = (TEntity)Activator.CreateInstance(typeof(TEntity));
+                    foreach(string key in seedValues.Keys)
+                    {
+                        type.GetProperty(key).SetValue(dummyEntity, seedValues[key][entityCounter]);
                     }
 
-                    propInfo[i % propertyNumber].SetValue(dummyEntity, _seedValues.ToArray()[i]);
+                    _repo.CreateEntity(dummyEntity);
+                    dummyEntity = (TEntity)Activator.CreateInstance(typeof(TEntity));
                 }
             }
-        }
-
-        public void DropTable(AppDbContext context)
-        {
-            PropertyInfo[] propertyInfos = Type.GetType(context.GetType().FullName).GetProperties();
-
-            string entityType = typeof(TEntity).Name;
-
-            context.GetType().GetProperty($"{typeof(TEntity).Name}s").SetValue(context, null);
-
-            // foreach (PropertyInfo propertyInfo in propertyInfos)
-            // {
-            //     string propertyName = propertyInfo.Name;
-
-            //     if(propertyName.Equals($"{typeof(TEntity).Name}s"))
-            //     {
-            //         propertyInfo.SetValue(context, null, null);
-            //     }
-            // }
         }
 
         public static string GetConnection()
@@ -74,7 +51,35 @@ namespace Tests.DbIntegrationTest
             string connection = configurationStub["AppDb:ConnectionStrings:TestDbConnection"];
 
             return connection;
+        }
 
+        public void DropTable(AppDbContext context)
+        {
+            switch(typeof(TEntity).Name)
+            {
+                case "User":
+                    foreach(var entity in context.Users)
+                    {
+                        context.Users.Remove(entity);
+                    }
+                    break;
+                
+                case "Board":
+                    foreach(var entity in context.Boards)
+                    {
+                        context.Boards.Remove(entity);
+                    }
+                    break;
+                
+                case "UsersBoards":
+                    foreach(var entity in context.UsersBoards)
+                    {
+                        context.UsersBoards.Remove(entity);
+                    }
+                    break;
+            }
+
+            context.SaveChanges();
         }
     }
 }
