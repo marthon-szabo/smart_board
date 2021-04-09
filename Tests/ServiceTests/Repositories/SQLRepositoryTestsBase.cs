@@ -15,7 +15,7 @@ namespace Tests
     {
         private readonly IDbGenerInteg _integrationTester;
 
-        private readonly IEnumerable<string>? _seedValues;
+        private readonly IDictionary<string, string[]>? _seedValues;
 
         private IDictionary<string, Object> _repositories;
 
@@ -23,7 +23,7 @@ namespace Tests
 
         protected Action AdditionalSetupOperations { get; set; }
 
-        public SQLRepositoryTestsBase(IEnumerable<string> seedValues = null) : base(new DbContextOptionsBuilder<AppDbContext>()
+        public SQLRepositoryTestsBase(IDictionary<string, string[]> seedValues = null) : base(new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlite(DbIntegrationTester.GetConnection())
                 .Options)
         {
