@@ -1,5 +1,6 @@
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
+using System.Collections.Generic;
 
 namespace App.Services.Repositories
 {
@@ -9,6 +10,20 @@ namespace App.Services.Repositories
             : base(context)
         {
             
+        }
+
+        public UsersBoards? GetUsersBoardsByBoardId(string boardId)
+        {
+            IEnumerable<UsersBoards> usersBoards = this.GetAllEntities();
+
+            foreach (UsersBoards usersBoard in usersBoards)
+            {
+                if (usersBoard.BoardId.Equals(boardId))
+                {
+                    return usersBoard;
+                }
+            }
+            return null;
         }
     }
 }
