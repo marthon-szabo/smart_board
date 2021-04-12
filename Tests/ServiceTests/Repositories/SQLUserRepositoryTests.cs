@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using System.Data.Common;
 using App.Models.Entities;
 using App.Services.Repositories;
-using App.Services.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System.Linq;
-using Tests.DbIntegrationTest;
 
 namespace Tests.ServiceTests.Repositories
 

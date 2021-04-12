@@ -1,17 +1,14 @@
 using System.Linq;
-using System.Globalization;
 using App.Models.Entities;
-using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using App.Services.Repositories;
-using System.Collections.Generic;
 
 namespace Tests
 {
     public class SQLBoardRepositoryTests : SQLRepositoryTestsBase<SQLBoardRepository, Board>
     {
-        public SQLBoardRepositoryTests() : base()
+        public SQLBoardRepositoryTests()
         {
             base.AdditionalSetupOperations = () => 
             {

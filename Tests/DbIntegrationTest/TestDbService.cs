@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
-namespace Tests.DbIntegrationTest
+namespace Tests.TestDbServices
 {
-    public class GeneralIntegra<TRepo, TEntity> : IDbGenerInteg
+    public class TestDbService<TRepo, TEntity> : ITestDbService
     {
         private readonly IGeneralRepository<TEntity> _repo;
         private readonly IDictionary<string, string[]>? _seedValues;
 
-        public GeneralIntegra(IGeneralRepository<TEntity> repo, IDictionary<string, string[]> seedValues = null) 
+        public TestDbService(IGeneralRepository<TEntity> repo, IDictionary<string, string[]> seedValues = null) 
         {
             _repo = repo;
             _seedValues = seedValues;

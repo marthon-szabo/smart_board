@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using App.Models.Entities;
 
-namespace Tests.DbIntegrationTest
+namespace Tests.TestDbServices
 {
-    public interface IDbGenerInteg
+    public interface ITestDbService
     {
          void CreateTable(IDictionary<string, string[]> seedValues = null);
          void DropTable(AppDbContext context);

@@ -5,7 +5,7 @@ using App.Services.Repositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
-namespace Tests.DbIntegrationTest
+namespace Tests.TestDbServices
 {
     public class UsersBoardsIntegrationTester
     {

@@ -1,4 +1,3 @@
-using System.Reflection;
 using System;
 using System.Collections.Generic;
 using App.Models.Entities;
@@ -6,14 +5,14 @@ using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using Tests.DbIntegrationTest;
+using Tests.TestDbServices;
 
 namespace Tests
 {
     public abstract class SQLRepositoryTestsBase<TRepo, TEntity> : AppDbContext
         where TRepo : IGeneralRepository<TEntity>
     {
-        protected readonly IDbGenerInteg _integrationTester;
+        protected readonly ITestDbService _integrationTester;
 
         private readonly IDictionary<string, string[]>? _seedValues;
 
@@ -24,7 +23,7 @@ namespace Tests
         protected Action AdditionalSetupOperations { get; set; }
 
         public SQLRepositoryTestsBase(IDictionary<string, string[]> seedValues = null) : base(new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(DbIntegrationTester.GetConnection())
+                .UseSqlite(TestDbService<TRepo, TEntity>.GetConnection())
                 .Options)
         {
             _seedValues = seedValues;
@@ -32,8 +31,7 @@ namespace Tests
 
             _repo = (TRepo)_repositories[typeof(TRepo).Name];
 
-            // _repo = (TRepo)Activator.CreateInstance(typeof(TRepo), this, new SQLUsersBoardsRepository(this), new SQLUserRepository(this));
-            _integrationTester = new GeneralIntegra<TRepo, TEntity>((IGeneralRepository<TEntity>)_repo, seedValues);
+            _integrationTester = new TestDbService<TRepo, TEntity>((IGeneralRepository<TEntity>)_repo, seedValues);
         }
 
         [SetUp]

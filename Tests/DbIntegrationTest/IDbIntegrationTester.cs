@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
 
-namespace Tests.DbIntegrationTest
+namespace Tests.TestDbServices
 {
     public interface IDbIntegrationTester
     {
