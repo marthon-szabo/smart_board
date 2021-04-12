@@ -13,7 +13,7 @@ namespace Tests
     public abstract class SQLRepositoryTestsBase<TRepo, TEntity> : AppDbContext
         where TRepo : IGeneralRepository<TEntity>
     {
-        private readonly IDbGenerInteg _integrationTester;
+        protected readonly IDbGenerInteg _integrationTester;
 
         private readonly IDictionary<string, string[]>? _seedValues;
 
@@ -49,7 +49,7 @@ namespace Tests
         }
 
         [TearDown]
-        protected void TearDown()
+        protected virtual void TearDown()
         {
             AdditionalSetupOperations = null;
 
