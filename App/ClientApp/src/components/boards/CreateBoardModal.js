@@ -46,7 +46,7 @@ function CreateBoardModal() {
                                 type="text"
                                 className="form-control"
                                 name='board-name'
-                                placeholder="Enter username"
+                                placeholder="Enter board's name"
                             />
                         </div>
                         <button id="login-btn" type="submit" className="btn btn-primary btn-block">
