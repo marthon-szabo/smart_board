@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
@@ -55,28 +56,10 @@ namespace Tests.DbIntegrationTest
 
         public void DropTable(AppDbContext context)
         {
-            switch(typeof(TEntity).Name)
+
+            foreach(var entity in _repo.GetAllEntities())
             {
-                case "User":
-                    foreach(var entity in context.Users)
-                    {
-                        context.Users.Remove(entity);
-                    }
-                    break;
-                
-                case "Board":
-                    foreach(var entity in context.Boards)
-                    {
-                        context.Boards.Remove(entity);
-                    }
-                    break;
-                
-                case "UsersBoards":
-                    foreach(var entity in context.UsersBoards)
-                    {
-                        context.UsersBoards.Remove(entity);
-                    }
-                    break;
+                context.Remove(entity);
             }
 
             context.SaveChanges();
