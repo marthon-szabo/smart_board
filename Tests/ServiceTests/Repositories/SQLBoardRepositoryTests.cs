@@ -11,19 +11,13 @@ namespace Tests
 {
     public class SQLBoardRepositoryTests : SQLRepositoryTestsBase<SQLBoardRepository, Board>
     {
-        private static IDictionary<string, string[]> seedValues = new Dictionary<string, string[]>
-        {
-            { "BoardId", new string[] { "TestBoard1", "TestBoard2" } },
-            { "BoardName", new string[] { "Test board 1", "Test board 2" } },
-        };
-
-        public SQLBoardRepositoryTests() : base(seedValues)
+        public SQLBoardRepositoryTests() : base()
         {
             base.AdditionalSetupOperations = () => 
             {
                 base.Database.ExecuteSqlRaw("INSERT INTO users (user_id, username, password, email) VALUES('TestUser1', 'Dummy User', 'test', 'a@c.c')");
                 base.Database.ExecuteSqlRaw("INSERT INTO Boards VALUES('TestBoard1', 'Test Board 1')");
-                base.Database.ExecuteSqlRaw("INSERT INTO Users_Boards VALUES('TestUsersBoards', 'TestBoard1', 'TestUser1')");
+                base.Database.ExecuteSqlRaw("INSERT INTO Users_Boards (users_boards_id, board_id, user_id) VALUES('TestUsersBoards', 'TestBoard1', 'TestUser1')");
             };
         }
 
@@ -38,6 +32,41 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(expected, result);
+        }
+
+        protected override void TearDown()
+        {
+            base.Database.ExecuteSqlRaw(@"
+                    DROP TABLE IF EXISTS Users_Boards;
+                    CREATE TABLE Users_Boards (
+                        users_boards_id char PRIMARY KEY,
+                        board_id CHAR NOT NULL,
+                        user_id CHAR NOT NULL,
+                        FOREIGN KEY(board_id) REFERENCES Boards(board_id),
+                        FOREIGN KEY(user_id) REFERENCES Users(user_id)
+                    );
+                ");
+
+                base.Database.ExecuteSqlRaw(@"
+                    DROP TABLE IF EXISTS users;
+                    CREATE TABLE users (
+                        user_id TEXT PRIMARY KEY,
+                        username char(50),
+                        badges char,
+                        done_quests char,
+                        taken_quests char,
+                        password char(250),
+                        email char(250)
+                    );
+                ");
+
+                base.Database.ExecuteSqlRaw(@"
+                    DROP TABLE IF EXISTS Boards;
+                    CREATE TABLE Boards (
+                        board_id CHAR PRIMARY KEY,
+                        board_name CHAR
+                    );
+                ");
         }
     }
 }
