@@ -5,9 +5,13 @@ import { RegisterStateProvider } from "./components/contexts/RegisterStateContex
 import { CSRFTokenContextProvider } from "./components/contexts/CSRFTokenContext";
 import { LoggedInUserProvider } from "./components/contexts/LoggedInUserContext";
 import { UserDataProvider } from "./components/contexts/UserDataContext";
+import { CreateBoardProvider } from "./components/contexts/CreateBoardContext";
+import { BoardStateProvider } from "./components/contexts/BoardStateContext";
+import { DeleteBoardProvider } from "./components/contexts/DeleteBoardContext";
 
 import './custom.css';
 import './App.scss';
+
 export default class App extends Component {
   static displayName = App.name;
 
@@ -18,9 +22,15 @@ export default class App extends Component {
       <CSRFTokenContextProvider>
       <LoggedInUserProvider>
       <UserDataProvider>
+      <CreateBoardProvider>
+      <DeleteBoardProvider>
+      <BoardStateProvider>
       <Layout>
-            
+      
       </Layout>
+      </BoardStateProvider>
+      </DeleteBoardProvider>
+      </CreateBoardProvider>
       </UserDataProvider>
       </LoggedInUserProvider>
       </CSRFTokenContextProvider>

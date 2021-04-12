@@ -3,6 +3,7 @@ import { UserDataContext } from "./contexts/UserDataContext";
 import QuestContainer from "./quests/QuestContainer";
 import Profile from "./Profile";
 import News from "./News";
+import BoardCollection from "./boards/BoardCollection";
 import {
     BrowserRouter as Router,
     Switch,
@@ -44,22 +45,19 @@ function LandingHeader() {
                         <nav>
                             <ul>
                                 <li style={SeparatedButtonStyle}>
-                                    
                                     <Link to="/" className="button-link"><img src={NewsIcon} alt="News" style={IconStyle}></img>News</Link>
                                     </li>
                                 <li style={SeparatedButtonStyle}>
-                                    
                                     <Link to="/quests" className="button-link"><img src={QuestsIcon} alt="Quests" style={IconStyle}></img>Quests</Link>
                                 </li>
                                 <li style={SeparatedButtonStyle}>
-                                    
                                     <Link to="/profile" className="button-link"><img src={ProfileIcon} alt="Profile" style={IconStyle}></img>My profile</Link>
                                 </li>
-                                
+                                <li style={SeparatedButtonStyle}>
+                                    <Link to="/boards" className="button-link"><img src={BoardsIcon} alt="Profile" style={IconStyle}></img>My boards</Link>
+                                </li>
                         </ul>
                     </nav>
-
-                    
                 </div>
                 </div>
             <div className="date-container">
@@ -73,10 +71,12 @@ function LandingHeader() {
                 <Route path="/profile">
                     <Profile />
                 </Route>
+                <Route path="/boards">
+                    <BoardCollection />
+                </Route>
                 <Route path="/">
                     <News />
                 </Route>
-
         </Switch>
         </Router>
         )
