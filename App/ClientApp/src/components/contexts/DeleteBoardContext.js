@@ -3,7 +3,7 @@
 export const DeleteBoardContext = createContext();
 
 export const DeleteBoardProvider = props => {
-    const [deleteBoardState, setDeleteBoardState] = useState(false);
+    const [deleteBoardState, setDeleteBoardState] = useState("");
 
     return (
         <DeleteBoardContext.Provider value={[deleteBoardState, setDeleteBoardState]}>

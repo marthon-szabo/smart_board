@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { Route } from 'react-router';
 import LandingHeader from "./LandingHeader";
 import CreateBoardModal from "./boards/CreateBoardModal";
 import BoardDetails from "./boards/BoardDetails";
