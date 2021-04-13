@@ -5,7 +5,7 @@ import BoardModal from './BoardModalComponents/BoardModal';
 
 import "./TableStyle.css";
 import PlusIcon from "../../images/plus.png";
-import HamburgerIcon from "../../images/hamburger-icon.png";
+
 
 const columnNames = [{
     id: "asd",
@@ -53,9 +53,7 @@ function BoardDetails() {
     return (
         <section>
             <BoardModal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
-                <div className="hamburger-menu">
-                    <img src={HamburgerIcon} alt="hamburger icon"></img>
-                </div>
+               
                 <div className="container">
                     <DragDropContext>
                         <Droppable droppableId="tasks">
