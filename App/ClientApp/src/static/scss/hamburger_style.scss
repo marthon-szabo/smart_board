@@ -1,7 +1,19 @@
 ﻿@import './mixins/_breakpoints.scss';
+.create-modal {
+    display: flex;
+    flex-flow: row;
+    overflow: visible;
+}
 @include lg {
     .hamburger-menu {
         width: 4rem;
-        position: absolute;
+        position: relative;
+
+        & img {
+            width: 4rem;
+            position: absolute;
+            top: 0px;
+            right: -805px;
+        }
     }
 }
