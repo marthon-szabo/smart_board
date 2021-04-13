@@ -90,12 +90,6 @@ function BoardDetails() {
                                         ))
                                         
                                     }
-                                    <div className="board-column">
-                                        <div className="board-title">
-                                            Create new column
-                                        </div>
-                                        <img src={PlusIcon} alt="plus icon"></img>
-                                    </div>
                                 </div>
                             )}
                         </Droppable>
