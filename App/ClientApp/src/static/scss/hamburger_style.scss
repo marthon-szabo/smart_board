@@ -1,0 +1,7 @@
+﻿@import './mixins/_breakpoints.scss';
+@include lg {
+    .hamburger-menu {
+        width: 4rem;
+        position: absolute;
+    }
+}

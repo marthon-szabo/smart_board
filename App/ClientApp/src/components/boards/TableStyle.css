@@ -6,6 +6,8 @@
     width: 170px;
     height: 580px;
     display: inline-block;
+    border: solid;
+    margin: 5px;
 }
 
 .board-title {

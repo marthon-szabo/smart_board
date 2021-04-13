@@ -1,11 +1,11 @@
-﻿import React, { useEffect, useContext } from 'react';
-import Modal from 'react-awesome-modal';
+﻿import React, { useContext } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 
 import "./TableStyle.css";
-import styled from 'styled-components';
+import PlusIcon from "../../images/plus.png";
+import HamburgerIcon from "../../images/hamburger-icon.png";
 
 const columnNames = [{
     id: "asd",
@@ -18,7 +18,7 @@ const columnNames = [{
     {
     id: "321",
     columnName: "Done"
-}
+    }
 ]
 
 const taskNames = [{
@@ -38,12 +38,6 @@ const taskNames = [{
     }
 ]
 
-const Mod = styled.div`
-    position: absolute;
-`
-
-
-
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
 
@@ -53,13 +47,15 @@ function BoardDetails() {
     }
 
     const onDragging = (e) => {
-        console.log("hello world");
         console.log(e.target);
     }
 
     return (
         <section>
             <BoardModal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
+                <div className="hamburger-menu">
+                    <img src={HamburgerIcon} alt="hamburger icon"></img>
+                </div>
                 <div className="container">
                     <DragDropContext>
                         <Droppable droppableId="tasks">
@@ -70,7 +66,7 @@ function BoardDetails() {
                                     height="200" width="780" className="table-of-columns" id="columns-list">
                                     {
                                         columnNames.map((item) => (
-                                            <div className="board-column">
+                                            <div className="board-column" style={{ border: "solid", margin: "5px" }}>
                                                 <div className="board-title">
                                                         {item.columnName}
                                                 </div>
@@ -92,8 +88,16 @@ function BoardDetails() {
                                                     )))
                                                 }
                                             </div>
+                                            
                                         ))
+                                        
                                     }
+                                    <div className="board-column">
+                                        <div className="board-title">
+                                            Create new column
+                                        </div>
+                                        <img src={PlusIcon} alt="plus icon"></img>
+                                    </div>
                                 </div>
                             )}
                         </Droppable>
