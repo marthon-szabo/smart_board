@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Reflection;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
 namespace Tests.TestDbServices
 {
-    public class TestDbService<TRepo, TEntity> : ITestDbService
+    public class TestDbService<TRepo, TEntity> : AppDbContext, ITestDbService
     {
         private readonly IGeneralRepository<TEntity> _repo;
         private readonly IDictionary<string, string[]>? _seedValues;
 
-        public TestDbService(IGeneralRepository<TEntity> repo, IDictionary<string, string[]> seedValues = null) 
+        public TestDbService(IGeneralRepository<TEntity> repo, IDictionary<string, string[]> seedValues = null) : base(new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlite(TestDbService<TRepo, TEntity>.GetConnection())
+                .Options) 
         {
             _repo = repo;
             _seedValues = seedValues;

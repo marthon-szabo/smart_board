@@ -8,7 +8,7 @@ using App.Models.ViewModels;
 using App.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using Tests.DbIntegrationTest;
+using Tests.TestDbServices;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
@@ -17,21 +17,26 @@ using NSubstitute;
 
 namespace Tests.ControllerTests
 {
-    public class UserControllerTests : AppDbContext
+    public class UserControllerTests : TestDbService<SQLUserRepository, User>
     {
-        private readonly IDbIntegrationTester _Tester;
+        private readonly ITestDbService _Tester;
         private SQLUserRepository _userRepo;
         private const string _newDummy = "Zsanett Horváth";
         private const string _existingDummy = "Márton Szabó";
         private readonly UserController _Controller;
         private HttpClient _Client; 
 
-        public UserControllerTests() : base(new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(DbIntegrationTester.GetConnection())
-                .Options)
+        public UserControllerTests() : base(new SQLUserRepository(new AppDbContext()), new Dictionary<string, string[]>
+            {
+                {"UserId", new string[]{"MarthonSzabo"}},
+                {"UserName", new string[]{"Márton Szabó"}},
+                {"Password", new string[]{"MártonSzabó"}},
+                {"Email", new string[]{"a@a.a"}},
+
+            })
         {
             _userRepo = new SQLUserRepository(this);
-            _Tester = new DbIntegrationTester(_userRepo);
+            _Tester = new TestDbService<SQLUserRepository, User>(_userRepo);
             _Controller = new UserController(_userRepo);
         }
 
@@ -106,7 +111,7 @@ namespace Tests.ControllerTests
         public void TearDown()
         {
             var entities = _userRepo.GetAllEntities();
-            _Tester.DropTable(this, entities);
+            _Tester.DropTable(this);
             _Client = null;
         }
 

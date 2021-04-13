@@ -9,7 +9,7 @@ using Tests.TestDbServices;
 
 namespace Tests
 {
-    public abstract class SQLRepositoryTestsBase<TRepo, TEntity> : AppDbContext
+    public abstract class SQLRepositoryTestsBase<TRepo, TEntity> : TestDbService<TRepo, TEntity>
         where TRepo : IGeneralRepository<TEntity>
     {
         protected readonly ITestDbService _integrationTester;
@@ -22,9 +22,7 @@ namespace Tests
 
         protected Action AdditionalSetupOperations { get; set; }
 
-        public SQLRepositoryTestsBase(IDictionary<string, string[]> seedValues = null) : base(new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(TestDbService<TRepo, TEntity>.GetConnection())
-                .Options)
+        public SQLRepositoryTestsBase(IDictionary<string, string[]> seedValues = null)
         {
             _seedValues = seedValues;
             this.InitializeRepoDict();
