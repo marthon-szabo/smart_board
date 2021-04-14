@@ -4,8 +4,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 
 import "./TableStyle.css";
-import PlusIcon from "../../images/plus.png";
-import DeleteIcon from "../../images/delete.png";
+import PlusIcon from "../../images/plus-green.png";
+import DeleteIcon from "../../images/deleteRed.png";
+import DeleteRed from "../../images/delete-red-background.png";
 
 
 const columnNames = [{
@@ -88,11 +89,21 @@ function BoardDetails() {
         elemToShowDelete.classList.remove("hidden");
     }
 
-    const hideHiddenElements = async (e, id) => {
+    const hideHiddenElements = (e, id) => {
         const elemToShowAdd = getElement("addButton-", id);
         elemToShowAdd.classList.add("hidden");
         const elemToShowDelete = getElement("removeButton-", id);
         elemToShowDelete.classList.add("hidden");
+    }
+
+    const showHiddenElementsTask = (e, id) => {
+        const elemToShowAdd = getElement("removeButton-", id);
+        elemToShowAdd.classList.remove("hidden");
+    }
+
+    const hideHiddenElementsTask = (e, id) => {
+        const elemToShowAdd = getElement("removeButton-", id);
+        elemToShowAdd.classList.add("hidden");
     }
 
     return (
@@ -111,9 +122,9 @@ function BoardDetails() {
                                     ref={provided.innerRef}
                                     >
 
-                                                <div className="board-column" id={item.id} onMouseEnter={(e) => showHiddenElements(e, item.id)} onMouseLeave={(e) => hideHiddenElements(e, item.id)} style={{ border: "solid", margin: "5px" }}>
-                                                    <div style={{position:"relative"}}>
-                                                        <img className="remove-button hidden" id={"removeButton-" + item.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left:"140px"}} title="Click here to delete this column"></img>
+                                                <div className="board-column" id={item.id} onMouseEnter={(e) => showHiddenElements(e, item.id)} onMouseLeave={(e) => hideHiddenElements(e, item.id)} style={{ margin: "5px" }}>
+                                                    <div className="board-header" style={{position:"relative"}}>
+                                                        <img className="remove-button hidden" id={"removeButton-" + item.id} src={DeleteRed} alt="delete icon" style={{ position: "absolute", height: "25px", left:"140px"}} title="Click here to delete this column"></img>
                                                     <div className="board-title">
                                                         
                                                         {item.columnName}
@@ -127,12 +138,15 @@ function BoardDetails() {
                                                                 <div id={taskItem.id} onMouseDown={((e) => handleClick(e, taskItem.id))}>
                                                             <Draggable key={taskItem.id} draggableId={taskItem.id} index={index} >
                                                                 {(provided) => (
-                                                                    <div className="content-div" 
+                                                                            <div className="content-div" onMouseEnter={(e) => showHiddenElementsTask(e, taskItem.id)} onMouseLeave={(e) => hideHiddenElementsTask(e, taskItem.id)}
                                                                     ref={provided.innerRef}
                                                                     {...provided.draggableProps}
                                                                     {...provided.dragHandleProps}
-                                                                    >
-                                                                        {taskItem.taskName}
+                                                                            >
+                                                                                <div style={{ position: "relative" }}>
+                                                                                    <img className="remove-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display:"block", top:"10px" }} title="Click here to delete this task"></img>
+                                                                                    {taskItem.taskName}
+                                                                                </div>
                                                                     </div>
                                                                 )}
                                                                     </Draggable>
