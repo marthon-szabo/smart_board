@@ -2,26 +2,43 @@
     display: flex;
 }
 
+.board-header {
+    height: 40px;
+    background-color: #726aa7;
+ 
+}
+
 .board-column {
     width: 170px;
     height: 580px;
     display: inline-block;
     border: solid;
     margin: 5px;
+    background-color: #c2f6ef;
 }
 
+    .board-column:hover {
+        background-color: #aae0d9;
+    }
+
 .board-title {
-    background-color: #726aa7;
     text-align: center;
+    top: 30px;
 }
 
 .content-div {
     border: solid;
+    border-width: 1px;
     border-radius: 10px;
     width: 160px;
     height: 50px;
     margin: 5px;
+    background-color: #eedab3;
 }
+
+    .content-div:hover {
+        background-color: #efd197;
+    }
 
 .hidden {
     visibility: hidden;
