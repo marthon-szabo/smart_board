@@ -45,8 +45,6 @@ namespace Tests
         {
             AdditionalSetupOperations = null;
 
-            base.DropTable(this);
-
             base.Database.ExecuteSqlRaw(@"
                     DROP TABLE IF EXISTS Users_Boards;
                     CREATE TABLE Users_Boards (
@@ -58,26 +56,28 @@ namespace Tests
                     );
                 ");
 
-                base.Database.ExecuteSqlRaw(@"
-                    DROP TABLE IF EXISTS users;
-                    CREATE TABLE users (
-                        user_id TEXT PRIMARY KEY,
-                        username char(50),
-                        badges char,
-                        done_quests char,
-                        taken_quests char,
-                        password char(250),
-                        email char(250)
-                    );
-                ");
+            base.DropTable(this);
 
-                base.Database.ExecuteSqlRaw(@"
-                    DROP TABLE IF EXISTS Boards;
-                    CREATE TABLE Boards (
-                        board_id CHAR PRIMARY KEY,
-                        board_name CHAR
-                    );
-                ");
+            base.Database.ExecuteSqlRaw(@"
+                DROP TABLE IF EXISTS users;
+                CREATE TABLE users (
+                    user_id TEXT PRIMARY KEY,
+                    username char(50),
+                    badges char,
+                    done_quests char,
+                    taken_quests char,
+                    password char(250),
+                    email char(250)
+                );
+            ");
+
+            base.Database.ExecuteSqlRaw(@"
+                DROP TABLE IF EXISTS Boards;
+                CREATE TABLE Boards (
+                    board_id CHAR PRIMARY KEY,
+                    board_name CHAR
+                );
+            ");
         }
 
         private void InitializeRepoDict()
