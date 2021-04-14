@@ -1,47 +1,33 @@
-using System.Data.Common;
+using System.Collections.Generic;
 using App.Models.Entities;
 using App.Services.Repositories;
-using App.Services.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System.Linq;
-using Tests.DbIntegrationTest;
 
 namespace Tests.ServiceTests.Repositories
 
 {   
-    [TestFixture]
-    public class SQLUserRepositoryTests : AppDbContext
+    public class SQLUserRepositoryTests : SQLRepositoryTestsBase<SQLUserRepository, User>  
     {
 
-        private readonly DbConnection _connectionString;
-
-        private IDbIntegrationTester _Tester;
-        private IUserRepository _userRepo;
-
-
-        public SQLUserRepositoryTests() : base(new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite(DbIntegrationTester.GetConnection())
-                .Options)
+        private static IDictionary<string, string[]> seedValues = new Dictionary<string, string[]>
         {
-            
-        }
+            { "UserId", new string[] { "TestUser1", "TestUser2" } },
+            { "UserName", new string[] { "Test user 1", "Test user 2" } },
+            { "Email", new string[] { "test1@test1.com", "test1@test2.com" } }
+        };
 
-        [SetUp]
-        public void SetUp()
+        public SQLUserRepositoryTests() : base(seedValues)
         {
-            _userRepo = new SQLUserRepository(this);
-            _Tester = new DbIntegrationTester(_userRepo);
-            _Tester.CreateTable();
         }
 
         [Test]
         public void GetAllEntities_ReturnsIEnumerableUser()
     {       // Arrange
-            string expected = "Test1";
+            string expected = "TestUser1";
 
             // Act
-            var result = _userRepo.GetAllEntities();
+            var result = _repo.GetAllEntities();
 
             // Assert
             Assert.AreEqual(expected, result.ToArray()[0].UserId);
@@ -50,18 +36,8 @@ namespace Tests.ServiceTests.Repositories
         [Test]
         public void Get_UserEntity_ReturnsEntity()
         {
-            var result = _userRepo.GetEntityById("Test1");
-            Assert.AreEqual("Márton Szabó", result.UserName);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            var entities = _userRepo.GetAllEntities();
-            _Tester.DropTable(this, entities);
-            
-            _userRepo = null;
-            _Tester = null;
+            User result = _repo.GetEntityById("TestUser1");
+            Assert.AreEqual("Test user 1", result.UserName);
         }
     }
 }
