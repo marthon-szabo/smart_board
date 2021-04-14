@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using App.Models.Entities;
 using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +11,6 @@ namespace Tests
     public abstract class SQLRepositoryTestsBase<TRepo, TEntity> : TestDbService<TRepo, TEntity>
         where TRepo : IGeneralRepository<TEntity>
     {
-        protected readonly ITestDbService _integrationTester;
-
         private readonly IDictionary<string, string[]>? _seedValues;
 
         private IDictionary<string, Object> _repositories;
@@ -28,14 +25,13 @@ namespace Tests
             this.InitializeRepoDict();
 
             _repo = (TRepo)_repositories[typeof(TRepo).Name];
-
-            _integrationTester = new TestDbService<TRepo, TEntity>((IGeneralRepository<TEntity>)_repo, seedValues);
+            base._repo = (IGeneralRepository<TEntity>)_repo;
         }
 
         [SetUp]
         protected void SetUp()
         {
-            _integrationTester.CreateTable(_seedValues);
+            base.CreateTable(_seedValues);
 
 
             if (AdditionalSetupOperations != null)
@@ -49,7 +45,7 @@ namespace Tests
         {
             AdditionalSetupOperations = null;
 
-            _integrationTester.DropTable(this);
+            base.DropTable(this);
 
             base.Database.ExecuteSqlRaw(@"
                     DROP TABLE IF EXISTS Users_Boards;

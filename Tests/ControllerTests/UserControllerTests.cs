@@ -17,16 +17,14 @@ using NSubstitute;
 
 namespace Tests.ControllerTests
 {
-    public class UserControllerTests : TestDbService<SQLUserRepository, User>
+    public class UserControllerTests : SQLRepositoryTestsBase<SQLUserRepository, User>
     {
-        private readonly ITestDbService _Tester;
-        private SQLUserRepository _userRepo;
         private const string _newDummy = "Zsanett Horváth";
         private const string _existingDummy = "Márton Szabó";
         private readonly UserController _Controller;
         private HttpClient _Client; 
 
-        public UserControllerTests() : base(new SQLUserRepository(new AppDbContext()), new Dictionary<string, string[]>
+        public UserControllerTests() : base(new Dictionary<string, string[]>
             {
                 {"UserId", new string[]{"MarthonSzabo"}},
                 {"UserName", new string[]{"Márton Szabó"}},
@@ -35,16 +33,7 @@ namespace Tests.ControllerTests
 
             })
         {
-            _userRepo = new SQLUserRepository(this);
-            _Tester = new TestDbService<SQLUserRepository, User>(_userRepo);
-            _Controller = new UserController(_userRepo);
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
-            _Tester.CreateTable();
-            _Client = new HttpClient();
+            _Controller = new UserController(base._repo);
         }
 
         [TestCase(_existingDummy, "123", null)]
@@ -71,7 +60,7 @@ namespace Tests.ControllerTests
             _Controller.Register();
 
             // Assert
-            IEnumerable<User> users = _userRepo.GetAllEntities();
+            IEnumerable<User> users = base._repo.GetAllEntities();
             User userMock = users.Select(user => user).Where(user => user.UserName.Equals(dummyUserName)).ToArray()[0];
 
             Assert.AreEqual(dummyUserName, userMock.UserName);
@@ -105,14 +94,6 @@ namespace Tests.ControllerTests
             stubHttpContext.Request.ContentLength.Returns(stream.Length);
 
             return stubHttpContext;
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            var entities = _userRepo.GetAllEntities();
-            _Tester.DropTable(this);
-            _Client = null;
         }
 
     }

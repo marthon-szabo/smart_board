@@ -11,22 +11,19 @@ namespace Tests.TestDbServices
 {
     public class TestDbService<TRepo, TEntity> : AppDbContext, ITestDbService
     {
-        private readonly IGeneralRepository<TEntity> _repo;
-        private readonly IDictionary<string, string[]>? _seedValues;
+        protected IGeneralRepository<TEntity> _repo;
 
-        public TestDbService(IGeneralRepository<TEntity> repo, IDictionary<string, string[]> seedValues = null) : base(new DbContextOptionsBuilder<AppDbContext>()
+        public TestDbService() : base(new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlite(TestDbService<TRepo, TEntity>.GetConnection())
                 .Options) 
         {
-            _repo = repo;
-            _seedValues = seedValues;
         }
 
         public void CreateTable(IDictionary<string, string[]> seedValues = null)
         {
             TEntity dummyEntity = (TEntity)Activator.CreateInstance(typeof(TEntity));
             
-            if(_seedValues != null)
+            if(seedValues != null)
             {
                 Type type = typeof(TEntity); 
                 PropertyInfo[] propInfo = type.GetProperties();
