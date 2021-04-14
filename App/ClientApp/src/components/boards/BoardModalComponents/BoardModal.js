@@ -73,9 +73,7 @@ export default class BoardModal extends Component {
                             {this.props.children}
                         </div>
                         <div style={this.state.visible ? this.state.style.mask : this.state.style.maskHidden} onClick={this.props.onClickAway ? this.props.onClickAway : null} />
-                        <div className="hamburger-menu" style={this.state.visible ? {...this.state.style.hamburger} : this.state.style.hamburgerHidden}>
-                            <img src={HamburgerIcon} alt="hamburger icon"></img>
-                        </div>
+                        
                     </div>
                 </div>
         );
