@@ -5,13 +5,11 @@ using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using Tests.TestDbServices;
 
 namespace Tests
 {
     public class SQLUsersBoardsRepositoryTests : SQLRepositoryTestsBase<SQLUserRepository, User> 
     {
-        //private UsersBoardsIntegrationTester _tester;
         private IUsersBoardsRepository _uBRepo;
 
         public SQLUsersBoardsRepositoryTests()
@@ -24,7 +22,6 @@ namespace Tests
             };
 
             _uBRepo = new SQLUsersBoardsRepository(this);
-            //_tester = new UsersBoardsIntegrationTester(_uBRepo);
 
         }
 
@@ -47,7 +44,6 @@ namespace Tests
             base.Database.ExecuteSqlRaw("DELETE FROM Boards WHERE board_id == 'TestBoard'");
             base.Database.ExecuteSqlRaw("DELETE FROM Users WHERE user_id == 'TestUser'");
             
-            //_tester = null;
             _uBRepo = null;
         }
     }
