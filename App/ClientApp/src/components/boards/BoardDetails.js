@@ -5,6 +5,7 @@ import BoardModal from './BoardModalComponents/BoardModal';
 
 import "./TableStyle.css";
 import PlusIcon from "../../images/plus.png";
+import DeleteIcon from "../../images/delete.png";
 
 
 const columnNames = [{
@@ -76,16 +77,22 @@ function BoardDetails() {
         }
     }
 
-    async function getElementAsync(taskId) {
-        return document.getElementById("addButton-" + taskId);
+    function getElement(elemType, taskId) {
+        return document.getElementById(elemType + taskId);
     }
 
-    const showHiddenElements = async (e, id) => {
-        getElementAsync(id).then(elemToShow => elemToShow.classList.remove("hidden"));
+    const showHiddenElements =  (e, id) => {
+        const elemToShowAdd = getElement("addButton-", id);
+        elemToShowAdd.classList.remove("hidden");
+        const elemToShowDelete = getElement("removeButton-", id);
+        elemToShowDelete.classList.remove("hidden");
     }
 
     const hideHiddenElements = async (e, id) => {
-        getElementAsync(id).then(elemToShow => elemToShow.classList.add("hidden"));
+        const elemToShowAdd = getElement("addButton-", id);
+        elemToShowAdd.classList.add("hidden");
+        const elemToShowDelete = getElement("removeButton-", id);
+        elemToShowDelete.classList.add("hidden");
     }
 
     return (
@@ -104,10 +111,15 @@ function BoardDetails() {
                                     ref={provided.innerRef}
                                     >
 
-                                                <div className="board-column" id={ item.id } onMouseEnter={(e) => showHiddenElements(e, item.id) } onMouseLeave={(e) => hideHiddenElements(e, item.id) } style={{ border: "solid", margin: "5px" }}>
-                                                <div className="board-title">
+                                                <div className="board-column" id={item.id} onMouseEnter={(e) => showHiddenElements(e, item.id)} onMouseLeave={(e) => hideHiddenElements(e, item.id)} style={{ border: "solid", margin: "5px" }}>
+                                                    <div style={{position:"relative"}}>
+                                                        <img className="remove-button hidden" id={"removeButton-" + item.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left:"140px"}} title="Click here to delete this column"></img>
+                                                    <div className="board-title">
+                                                        
                                                         {item.columnName}
-                                                </div>
+                                                        
+                                                        </div>
+                                                        </div>
                                                     {
                                                         taskNames.map((taskItem, index) => (
 
@@ -128,7 +140,19 @@ function BoardDetails() {
                                                             </div>
                                                         )))
                                                         
-                                                    }<img className="add-image hidden" id={"addButton-" + item.id} src={PlusIcon} alt="plus icon"></img>{provided.placeholder}
+                                                    }<img className="add-image hidden"
+                                                        id={"addButton-" + item.id}
+                                                        src={PlusIcon}
+                                                        alt="plus icon"
+                                                        title="Click here to add a new task"
+                                                        style={{
+                                                            display: "block",
+                                                            marginLeft: "auto",
+                                                            marginRight: "auto",
+                                                            height: "40px"
+                                                        }}
+                                                    >
+                                                    </img>{provided.placeholder}
                                             </div>
                                 </div>
                             )}
