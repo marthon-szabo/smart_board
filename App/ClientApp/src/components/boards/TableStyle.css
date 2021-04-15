@@ -5,7 +5,6 @@
 .board-header {
     height: 40px;
     background-color: #726aa7;
- 
 }
 
 .board-column {
@@ -17,9 +16,9 @@
     background-color: #c2f6ef;
 }
 
-    .board-column:hover {
-        background-color: #aae0d9;
-    }
+.board-column:hover {
+    background-color: #aae0d9;
+}
 
 .board-title {
     text-align: center;
@@ -36,10 +35,31 @@
     background-color: #eedab3;
 }
 
-    .content-div:hover {
-        background-color: #efd197;
-    }
+.content-div:hover {
+    background-color: #efd197;
+}
 
 .hidden {
     visibility: hidden;
+}
+
+.add-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+}
+
+.remove-column-button {
+    position: absolute;
+    height: 25px;
+    left: 140px;
+}
+
+.remove-task-button {
+    position: absolute; 
+    height: 25px; 
+    left: 130px; 
+    display: block; 
+    top: 10px;
 }
