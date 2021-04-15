@@ -1,6 +1,7 @@
 ﻿import React, { useContext, useState } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
 import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
+import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 
@@ -41,13 +42,10 @@ const taskNames = [{
     }
 ]
 
-
-
-
-
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
     const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
+    const [deleteTaskState, setDeleteTaskState] = useContext(DeleteTaskConfirmationContext);
     const [taskId, setTaskId] = useState(null);
 
     const closeModalWindow = () => {
@@ -112,6 +110,14 @@ function BoardDetails() {
         setDeleteColState(columnName);
     }
 
+    const openDeleteTaskModal = (columnName, taskName) => {
+        const taskObj = {
+            columnName: columnName,
+            taskName: taskName
+        }
+        setDeleteTaskState(taskObj);
+    }
+
     return (
         <section>
             <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
@@ -156,7 +162,7 @@ function BoardDetails() {
                                                                     {...provided.dragHandleProps}
                                                                             >
                                                                                 <div style={{ position: "relative" }}>
-                                                                                    <img className="remove-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display:"block", top:"10px" }} title="Click here to delete this task"></img>
+                                                                                    <img className="remove-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display: "block", top: "10px" }} title="Click here to delete this task" onClick={() => openDeleteTaskModal(item.columnName, taskItem.taskName)}></img>
                                                                                     {taskItem.taskName}
                                                                                 </div>
                                                                     </div>
