@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
-import { DeleteConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
+import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { BoardStateContext } from "../contexts/BoardStateContext";
 
 import DeleteIcon from '../../images/delete.png';
@@ -8,7 +8,7 @@ import DeleteIcon from '../../images/delete.png';
 
 function DeleteColumnConfirmationModal() {
 
-    const [openState, setOpenState] = useContext(DeleteConfirmationContext);
+    const [openState, setOpenState] = useContext(DeleteColumnConfirmationContext);
     const [boardName, setBoardName] = useContext(BoardStateContext);
 
     const closeModalWindow = () => {

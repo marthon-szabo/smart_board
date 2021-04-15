@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
-import { DeleteConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
+import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 
@@ -47,7 +47,7 @@ const taskNames = [{
 
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
-    const [deleteColState, setDeleteColState] = useContext(DeleteConfirmationContext);
+    const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
     const [taskId, setTaskId] = useState(null);
 
     const closeModalWindow = () => {
