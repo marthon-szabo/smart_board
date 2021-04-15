@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import LandingHeader from "./LandingHeader";
 import CreateBoardModal from "./boards/CreateBoardModal";
+import CreateColumnModal from "./boards/CreateColumnModal";
+import CreateTaskModal from "./boards/CreateTaskModal";
 import BoardDetails from "./boards/BoardDetails";
 import DeleteConfirmationModal from './boards/DeleteConfirmationModal';
 import DeleteColumnConfirmationModal from "./boards/DeleteColumnConfirmationModal";
@@ -13,13 +15,15 @@ function LandingPage() {
     return (
         <div>
         <div className="container">
-            <LandingHeader/>
+            <LandingHeader />
         </div>
             <CreateBoardModal />
             <DeleteConfirmationModal/>
             <BoardDetails />
             <DeleteColumnConfirmationModal />
             <DeleteTaskConfirmationModal />
+            <CreateColumnModal />
+            <CreateTaskModal />
         </div>
         )
 }
