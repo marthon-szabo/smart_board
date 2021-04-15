@@ -4,6 +4,7 @@ import CreateBoardModal from "./boards/CreateBoardModal";
 import BoardDetails from "./boards/BoardDetails";
 import DeleteConfirmationModal from './boards/DeleteConfirmationModal';
 import DeleteColumnConfirmationModal from "./boards/DeleteColumnConfirmationModal";
+import DeleteTaskConfirmationModal from "./boards/DeleteTaskConfirmationModal";
 
 import './NavMenu.css';
 
@@ -17,7 +18,8 @@ function LandingPage() {
             <CreateBoardModal />
             <DeleteConfirmationModal/>
             <BoardDetails />
-            <DeleteColumnConfirmationModal/>
+            <DeleteColumnConfirmationModal />
+            <DeleteTaskConfirmationModal />
         </div>
         )
 }
