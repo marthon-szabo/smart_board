@@ -20,6 +20,12 @@ namespace Tests
         private readonly IUsersBoardsRepository _dummyUsersBoardsRepo;
         private readonly IColumnRepository _columnRepo;
 
+        private ColumnVM _columnVM = new ColumnVM
+            {
+                ColumnName = "Test Column",
+                BoardName = "First Board"
+            };
+
 
         public BoardControllerTests()
         {
@@ -56,14 +62,9 @@ namespace Tests
         public void CreateColumn_ColumnVM_Void()
         {
             // Arrange
-            ColumnVM columnVM = new ColumnVM
-            {
-                ColumnName = "Test Column",
-                BoardName = "First Board"
-            };
-            string expected = columnVM.ColumnName;
+            string expected = _columnVM.ColumnName;
 
-            base.CreatePostRequest<ColumnVM>(columnVM);
+            base.CreatePostRequest<ColumnVM>(_columnVM);
 
             // Act
             base._controller.CreateColumn();
@@ -72,6 +73,24 @@ namespace Tests
             string result = _columnRepo.GetAllEntities().ToArray()[0].Name;
             Assert.AreEqual(expected, result);
 
+        }
+
+        [Test]
+        public void DeleteColumn()
+        {
+            // Arrange
+            byte expected = 0;
+            
+            base.CreatePostRequest<ColumnVM>(_columnVM);
+            base._controller.CreateColumn();
+
+            // Act
+            base.CreatePostRequest<ColumnVM>(_columnVM);
+            base._controller.DeletColumn();
+
+            // Assert
+            byte result = (byte)_columnRepo.GetAllEntities().ToArray().Length;
+            Assert.AreEqual(expected, result);
         }        
     }
 }
