@@ -1,5 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
+import { DeleteConfirmationContext } from "../contexts/DeleteConfirmationContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 
@@ -46,10 +47,11 @@ const taskNames = [{
 
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
+    const [deleteColState, setDeleteColState] = useContext(DeleteConfirmationContext);
     const [taskId, setTaskId] = useState(null);
 
     const closeModalWindow = () => {
-        setBoardState(false);
+        setBoardState("");
         document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
@@ -106,9 +108,13 @@ function BoardDetails() {
         elemToShowAdd.classList.add("hidden");
     }
 
+    const openDeleteColumnModal = (columnName) => {
+        setDeleteColState(columnName);
+    }
+
     return (
         <section>
-            <BoardModal className="create-modal" visible={boardState} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
+            <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                
                 <div className="container">
                     <DragDropContext onDragEnd={onDragEnd}>
@@ -124,7 +130,13 @@ function BoardDetails() {
 
                                                 <div className="board-column" id={item.id} onMouseEnter={(e) => showHiddenElements(e, item.id)} onMouseLeave={(e) => hideHiddenElements(e, item.id)} style={{ margin: "5px" }}>
                                                     <div className="board-header" style={{position:"relative"}}>
-                                                        <img className="remove-button hidden" id={"removeButton-" + item.id} src={DeleteRed} alt="delete icon" style={{ position: "absolute", height: "25px", left:"140px"}} title="Click here to delete this column"></img>
+                                                        <img className="remove-button hidden"
+                                                            id={"removeButton-" + item.id}
+                                                            src={DeleteRed} alt="delete icon"
+                                                            style={{ position: "absolute", height: "25px", left: "140px" }}
+                                                            title="Click here to delete this column"
+                                                            onClick={() => openDeleteColumnModal(item.columnName) }
+                                                        ></img>
                                                     <div className="board-title">
                                                         
                                                         {item.columnName}
