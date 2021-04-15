@@ -13,4 +13,12 @@
 --     FOREIGN KEY(user_id) REFERENCES Users(user_id)
 -- );
 
-SELECT * FROM Users;
+Create table Columns (
+    column_id int PRIMARY KEY UNIQUE,
+    board_id int not null,
+    column_name char(50) NOT NULL,
+    FOREIGN KEY(board_id)
+    REFERENCES Boards(board_id)
+    ON DELETE CASCADE 
+    ON UPDATE NO ACTION
+);

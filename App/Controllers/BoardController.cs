@@ -15,14 +15,17 @@ namespace App.Controllers
         private readonly IBoardRepository _boardRepo;
         private readonly IUserRepository _userRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
+        private readonly IColumnRepository _columnRepo;
 
         public BoardController(IBoardRepository boardRepo,
                                 IUserRepository userRepo,
-                                IUsersBoardsRepository userBoardsRepo)
+                                IUsersBoardsRepository userBoardsRepo,
+                                IColumnRepository columnRepo)
         {
             _boardRepo = boardRepo;
             _userRepo = userRepo;
             _usersBoardsRepo = userBoardsRepo;
+            _columnRepo = columnRepo;
         }
 
         [HttpGet("boards/username={userName}")]
@@ -68,6 +71,23 @@ namespace App.Controllers
             _boardRepo.DeleteEntityById(boardToDelete.BoardId);
 
             return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
+        }
+
+        [HttpPost("boards/columns")]
+        public void CreateColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+
+            Board board = _boardRepo.GetBoardByBoardName(columnVM.BoardName);
+            Column newColumn = new Column
+            {
+                Id = IdGenerator.GenerateId(),
+                BoardId = board.BoardId,
+                Name = columnVM.ColumnName
+            };
+            _columnRepo.CreateEntity(newColumn);
+            
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
