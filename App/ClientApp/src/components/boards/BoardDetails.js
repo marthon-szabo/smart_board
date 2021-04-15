@@ -163,7 +163,7 @@ function BoardDetails() {
                                                                     {...provided.draggableProps}
                                                                     {...provided.dragHandleProps}>
                                                                                 <div style={{ position: "relative" }}>
-                                                                                    <img className="remove-task-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display: "block", top: "10px" }} title="Click here to delete this task" onClick={() => openDeleteTaskModal(item.columnName, taskItem.taskName)}></img>
+                                                                                    <img className="remove-task-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" title="Click here to delete this task" onClick={() => openDeleteTaskModal(item.columnName, taskItem.taskName)}></img>
                                                                                     {taskItem.taskName}
                                                                                 </div>
                                                                     </div>
