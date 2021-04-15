@@ -6,6 +6,8 @@ import { CSRFTokenContextProvider } from "./components/contexts/CSRFTokenContext
 import { LoggedInUserProvider } from "./components/contexts/LoggedInUserContext";
 import { UserDataProvider } from "./components/contexts/UserDataContext";
 import { CreateBoardProvider } from "./components/contexts/CreateBoardContext";
+import { CreateColumnProvider } from "./components/contexts/CreateColumnContext";
+import { CreateTaskProvider } from "./components/contexts/CreateTaskContext";
 import { BoardStateProvider } from "./components/contexts/BoardStateContext";
 import { DeleteBoardProvider } from "./components/contexts/DeleteBoardContext";
 import { DeleteColumnConfirmationProvider } from "./components/contexts/DeleteColumnConfirmationContext";
@@ -29,9 +31,13 @@ export default class App extends Component {
       <BoardStateProvider>
       <DeleteColumnConfirmationProvider>
       <DeleteTaskConfirmationProvider>
+      <CreateColumnProvider>
+      <CreateTaskProvider>
       <Layout>
       
       </Layout>
+      </CreateTaskProvider>
+      </CreateColumnProvider>
       </DeleteTaskConfirmationProvider>
       </DeleteColumnConfirmationProvider>
       </BoardStateProvider>
