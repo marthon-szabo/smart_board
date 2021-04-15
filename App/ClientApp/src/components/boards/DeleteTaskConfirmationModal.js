@@ -1,17 +1,16 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
-import { BoardStateContext } from "../contexts/BoardStateContext";
 
 import DeleteIcon from '../../images/delete.png';
 
 
-function DeleteColumnConfirmationModal() {
+function DeleteTaskConfirmationModal() {
 
     const [openState, setOpenState] = useContext(DeleteTaskConfirmationContext);
 
     const closeModalWindow = () => {
-        setOpenState("");
+        setOpenState([]);
     }
 
     const IconStyle = {
@@ -34,11 +33,12 @@ function DeleteColumnConfirmationModal() {
 
     return (
         <section>
-            <Modal className="delete-column-modal" visible={openState.length == 0 ? false : true} width="400" height="335" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
+            <Modal className="delete-task-modal" visible={openState.length == 0 ? false : true} width="400" height="335" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div style={{ padding: "0px 25px" }}>
                     <img src={DeleteIcon} alt="delete icon" style={IconStyle}></img>
                     <p>Are you sure you want to delete this column?</p>
-                    <p>Task name: <strong>{openState}</strong> </p>
+                    <p>Task name: <strong>{openState.taskName}</strong> </p>
+                    <p>Column name: <strong>{openState.columnName}</strong> </p>
                     <button style={DeleteStyle} id="delete-btn" type="submit" className="btn btn-primary btn-block">Yes</button>
                     <button id="cancel-btn" type="submit" className="btn btn-primary btn-block">Cancel</button>
                 </div>
@@ -47,4 +47,4 @@ function DeleteColumnConfirmationModal() {
     )
 }
 
-export default DeleteColumnConfirmationModal;
+export default DeleteTaskConfirmationModal;
