@@ -1,4 +1,3 @@
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -6,22 +5,15 @@ using App.Controllers;
 using App.Models.Entities;
 using App.Models.ViewModels;
 using App.Services.Repositories;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using Tests.TestDbServices;
-using Microsoft.AspNetCore.Http;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using NSubstitute;
 
 namespace Tests.ControllerTests
 {
-    public class UserControllerTests : SQLRepositoryTestsBase<SQLUserRepository, User>
+    public class UserControllerTests : ControllerTestBase<UserController, SQLUserRepository, User>
     {
         private const string _newDummy = "Zsanett Horváth";
         private const string _existingDummy = "Márton Szabó";
-        private readonly UserController _Controller;
         private HttpClient _Client; 
 
         public UserControllerTests() : base(new Dictionary<string, string[]>
@@ -33,7 +25,7 @@ namespace Tests.ControllerTests
 
             })
         {
-            _Controller = new UserController(base._repo);
+            base._controller = new UserController(base._repo);
         }
 
         [TestCase(_existingDummy, "123", null)]
@@ -44,7 +36,7 @@ namespace Tests.ControllerTests
             this.TestRegistration(dummyUserName, password);
             
             // Act
-            UserProfileVM result = _Controller.Register();
+            UserProfileVM result = base._controller.Register();
 
             // Assert
             Assert.AreEqual(expectation, result.Username);
@@ -57,7 +49,7 @@ namespace Tests.ControllerTests
             this.TestRegistration(dummyUserName, password);
 
             // Act
-            _Controller.Register();
+            base._controller.Register();
 
             // Assert
             IEnumerable<User> users = base._repo.GetAllEntities();
@@ -72,28 +64,7 @@ namespace Tests.ControllerTests
             registerDummy.UserName = dummyUserName;
             registerDummy.Password = password;
             
-            var controllerContext = new ControllerContext()
-            {
-                HttpContext = this.CreateHttpContext<RegisterVM>(registerDummy)
-            };
-
-            _Controller.ControllerContext = controllerContext;
-        }
-
-        private HttpContext CreateHttpContext<T>(T content)
-        {
-            HttpContext stubHttpContext = Substitute.For<HttpContext>();
-            StubHttpSession stubSession = new StubHttpSession();
-            
-            stubSession["sessionId"] = "test";
-            stubHttpContext.Session.Returns(stubSession);
-
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(content)));
-
-            stubHttpContext.Request.Body.Returns(stream);
-            stubHttpContext.Request.ContentLength.Returns(stream.Length);
-
-            return stubHttpContext;
+            base.CreatePostRequest(registerDummy);
         }
 
     }
