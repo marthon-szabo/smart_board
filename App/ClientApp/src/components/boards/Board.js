@@ -21,7 +21,7 @@ function Board(props) {
     const username = userData.username;
 
     const openModalBoard = () => {
-        setBoardState(true);
+        setBoardState(props.board.boardName);
         document.querySelector(".container").classList.add("blurred-box");
     }
 
