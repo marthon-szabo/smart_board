@@ -1,5 +1,7 @@
 ﻿import React, { useContext, useState } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
+import { CreateColumnContext } from "../contexts/CreateColumnContext";
+import { CreateTaskContext } from "../contexts/CreateTaskContext";
 import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -9,7 +11,6 @@ import "./TableStyle.css";
 import PlusIcon from "../../images/plus-green.png";
 import DeleteIcon from "../../images/deleteRed.png";
 import DeleteRed from "../../images/delete-red-background.png";
-
 
 const columnNames = [{
     id: "asd",
@@ -46,6 +47,8 @@ function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
     const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
     const [deleteTaskState, setDeleteTaskState] = useContext(DeleteTaskConfirmationContext);
+    const [openColumnState, setOpenColumnState] = useContext(CreateColumnContext);
+    const [openTaskState, setOpenTaskState] = useContext(CreateTaskContext);
     const [taskId, setTaskId] = useState(null);
 
     const closeModalWindow = () => {
@@ -118,6 +121,14 @@ function BoardDetails() {
         setDeleteTaskState(taskObj);
     }
 
+    const openAddColumnModal = () => {
+        setOpenColumnState(true);
+    }
+
+    const openAddTaskModal = (columnName) => {
+        setOpenTaskState(columnName);
+    }
+
     return (
         <section>
             <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
@@ -144,9 +155,7 @@ function BoardDetails() {
                                                             onClick={() => openDeleteColumnModal(item.columnName) }
                                                         ></img>
                                                     <div className="board-title">
-                                                        
                                                         {item.columnName}
-                                                        
                                                         </div>
                                                         </div>
                                                     {
@@ -162,7 +171,7 @@ function BoardDetails() {
                                                                     {...provided.dragHandleProps}
                                                                             >
                                                                                 <div style={{ position: "relative" }}>
-                                                                                    <img className="remove-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display: "block", top: "10px" }} title="Click here to delete this task" onClick={() => openDeleteTaskModal(item.columnName, taskItem.taskName)}></img>
+                                                                                    <img className="remove-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display: "block", top: "10px" }} title="Click here to delete this task" onClick={() => openDeleteTaskModal(taskItem.taskName, taskItem.taskName)}></img>
                                                                                     {taskItem.taskName}
                                                                                 </div>
                                                                     </div>
@@ -183,6 +192,7 @@ function BoardDetails() {
                                                             marginRight: "auto",
                                                             height: "40px"
                                                         }}
+                                                        onClick={() => openAddTaskModal(item.columnName)} 
                                                     >
                                                     </img>{provided.placeholder}
                                             </div>
@@ -190,11 +200,9 @@ function BoardDetails() {
                             )}
                                     </Droppable>
                                 ))}
-                            <img src={PlusIcon} alt="plus icon" style={{ height: "30px", display: "block", marginTop:"5px" }} title="Click here to add a new column"></img>
+                            <img src={PlusIcon} alt="plus icon" style={{ height: "30px", display: "block", marginTop: "5px" }} title="Click here to add a new column" onClick={() => openAddColumnModal()}></img>
                         </div>
-                        
                     </DragDropContext>
-                    
                 </div>
             </BoardModal>
         </section >
