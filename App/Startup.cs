@@ -38,6 +38,7 @@ namespace App
             services.AddScoped<IUserRepository, SQLUserRepository>();
             services.AddScoped<IBoardRepository, SQLBoardRepository>();
             services.AddScoped<IUsersBoardsRepository, SQLUsersBoardsRepository>();
+            services.AddScoped<IColumnRepository, SQLColumnRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

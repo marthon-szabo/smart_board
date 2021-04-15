@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
@@ -15,14 +16,17 @@ namespace App.Controllers
         private readonly IBoardRepository _boardRepo;
         private readonly IUserRepository _userRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
+        private readonly IColumnRepository _columnRepo;
 
         public BoardController(IBoardRepository boardRepo,
                                 IUserRepository userRepo,
-                                IUsersBoardsRepository userBoardsRepo)
+                                IUsersBoardsRepository userBoardsRepo,
+                                IColumnRepository columnRepo)
         {
             _boardRepo = boardRepo;
             _userRepo = userRepo;
             _usersBoardsRepo = userBoardsRepo;
+            _columnRepo = columnRepo;
         }
 
         [HttpGet("boards/username={userName}")]
@@ -68,6 +72,34 @@ namespace App.Controllers
             _boardRepo.DeleteEntityById(boardToDelete.BoardId);
 
             return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
+        }
+
+        [HttpPost("boards/columns")]
+        public IEnumerable<Column> CreateColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+            
+            _columnRepo.CreateEntity(_columnRepo.CreatColumnByColumnVM(columnVM, _boardRepo));
+
+            return _columnRepo.GetColumnsByColumnVM(columnVM, _boardRepo);   
+
+        }
+
+        [HttpDelete("boards/columns")]
+        public IEnumerable<Column> DeletColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+
+            Column[] column = _columnRepo.GetAllEntities()
+                .Select((col) => col)
+                .Where(col => col.Name.Equals(columnVM.ColumnName))
+                .ToArray();
+
+            _columnRepo.DeleteEntityById(column[0].Id);
+
+            return _columnRepo.GetColumnsByColumnVM(columnVM, _boardRepo);
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)

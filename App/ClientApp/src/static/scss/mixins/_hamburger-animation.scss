@@ -1,0 +1,23 @@
+@mixin hamburger-menu-animation($zero, $fifty, $twenty, $hundred) {
+    @keyframes menu-animation {
+        0% { 
+            height: $zero;
+            padding-right: $zero; 
+        }
+
+        25% {
+            height: $twenty;
+            padding-right: $twenty;
+        }
+
+        50% { 
+            height: $fifty; 
+            padding-right: $fifty; 
+        }
+
+        100% { 
+            height: $hundred; 
+            padding-right: $hundred; 
+        }
+    }
+}
