@@ -1,13 +1,13 @@
 ﻿import React, { useState, createContext } from 'react';
 
-export const DeleteConfirmationContext = createContext();
+export const DeleteTaskConfirmationContext = createContext();
 
-export const DeleteConfirmationProvider = props => {
-    const [deleteConfirmationState, setDeleteConfirmationState] = useState("");
+export const DeleteTaskConfirmationProvider = props => {
+    const [deleteTaskConfirmationState, setDeleteTaskConfirmationState] = useState("");
 
     return (
-        <DeleteConfirmationContext.Provider value={[deleteConfirmationState, setDeleteConfirmationState]}>
+        <DeleteTaskConfirmationContext.Provider value={[deleteTaskConfirmationState, setDeleteTaskConfirmationState]}>
             {props.children}
-        </DeleteConfirmationContext.Provider>
+        </DeleteTaskConfirmationContext.Provider>
     )
 }
