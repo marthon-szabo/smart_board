@@ -132,7 +132,6 @@ function BoardDetails() {
     return (
         <section>
             <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
-               
                 <div className="container">
                     <DragDropContext onDragEnd={onDragEnd}>
                         <div height="200" width="780" className="table-of-columns" id="columns-list">
@@ -140,17 +139,13 @@ function BoardDetails() {
                                 columnNames.map((item) => (
                                     <Droppable droppableId={ item.id}>
                             {(provided) => (
-
                                 <div {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                    >
-
+                                    ref={provided.innerRef}>
                                                 <div className="board-column" id={item.id} onMouseEnter={(e) => showHiddenElements(e, item.id)} onMouseLeave={(e) => hideHiddenElements(e, item.id)} style={{ margin: "5px" }}>
                                                     <div className="board-header" style={{position:"relative"}}>
-                                                        <img className="remove-button hidden"
+                                                        <img className="remove-column-button hidden"
                                                             id={"removeButton-" + item.id}
                                                             src={DeleteRed} alt="delete icon"
-                                                            style={{ position: "absolute", height: "25px", left: "140px" }}
                                                             title="Click here to delete this column"
                                                             onClick={() => openDeleteColumnModal(item.columnName) }
                                                         ></img>
@@ -158,9 +153,7 @@ function BoardDetails() {
                                                         {item.columnName}
                                                         </div>
                                                         </div>
-                                                    {
-                                                        taskNames.map((taskItem, index) => (
-
+                                                    {taskNames.map((taskItem, index) => (
                                                             taskItem.columnId === item.id && (
                                                                 <div id={taskItem.id} onMouseDown={((e) => handleClick(e, taskItem.id))}>
                                                             <Draggable key={taskItem.id} draggableId={taskItem.id} index={index} >
@@ -168,30 +161,21 @@ function BoardDetails() {
                                                                             <div className="content-div" onMouseEnter={(e) => showHiddenElementsTask(e, taskItem.id)} onMouseLeave={(e) => hideHiddenElementsTask(e, taskItem.id)}
                                                                     ref={provided.innerRef}
                                                                     {...provided.draggableProps}
-                                                                    {...provided.dragHandleProps}
-                                                                            >
+                                                                    {...provided.dragHandleProps}>
                                                                                 <div style={{ position: "relative" }}>
-                                                                                    <img className="remove-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display: "block", top: "10px" }} title="Click here to delete this task" onClick={() => openDeleteTaskModal(taskItem.taskName, taskItem.taskName)}></img>
+                                                                                    <img className="remove-task-button hidden" id={"removeButton-" + taskItem.id} src={DeleteIcon} alt="delete icon" style={{ position: "absolute", height: "25px", left: "130px", display: "block", top: "10px" }} title="Click here to delete this task" onClick={() => openDeleteTaskModal(item.columnName, taskItem.taskName)}></img>
                                                                                     {taskItem.taskName}
                                                                                 </div>
                                                                     </div>
                                                                 )}
                                                                     </Draggable>
-                                                                    
                                                             </div>
                                                         )))
-                                                        
                                                     }<img className="add-image hidden"
                                                         id={"addButton-" + item.id}
                                                         src={PlusIcon}
                                                         alt="plus icon"
                                                         title="Click here to add a new task"
-                                                        style={{
-                                                            display: "block",
-                                                            marginLeft: "auto",
-                                                            marginRight: "auto",
-                                                            height: "40px"
-                                                        }}
                                                         onClick={() => openAddTaskModal(item.columnName)} 
                                                     >
                                                     </img>{provided.placeholder}
