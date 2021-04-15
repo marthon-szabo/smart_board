@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
@@ -88,6 +89,20 @@ namespace App.Controllers
             };
             _columnRepo.CreateEntity(newColumn);
             
+        }
+
+        [HttpDelete("boards/columns")]
+        public void DeletColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+
+            Column[] column = _columnRepo.GetAllEntities()
+                .Select((col) => col)
+                .Where(col => col.Name.Equals(columnVM.ColumnName))
+                .ToArray();
+
+            _columnRepo.DeleteEntityById(column[0].Id);
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
