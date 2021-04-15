@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
-import { DeleteConfirmationContext } from "../contexts/DeleteConfirmationContext";
+import { DeleteConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 

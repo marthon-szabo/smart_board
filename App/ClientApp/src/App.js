@@ -8,7 +8,7 @@ import { UserDataProvider } from "./components/contexts/UserDataContext";
 import { CreateBoardProvider } from "./components/contexts/CreateBoardContext";
 import { BoardStateProvider } from "./components/contexts/BoardStateContext";
 import { DeleteBoardProvider } from "./components/contexts/DeleteBoardContext";
-import { DeleteConfirmationProvider } from "./components/contexts/DeleteConfirmationContext";
+import { DeleteConfirmationProvider } from "./components/contexts/DeleteColumnConfirmationContext";
 
 import './custom.css';
 import './App.scss';
