@@ -12,10 +12,27 @@ function CreateColumnModal() {
         setOpenState(false);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const name = document.getElementById("column-name").value;
+        const data = JSON.stringify({
+            BoardName: boardName,
+            ColumnName: name
+        })
+        fetch('boards/columns', {
+            method: 'POST',
+            body: data,
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+        closeModalWindow();
+    }
+
     return (
         <section>
             <Modal className="create-modal" visible={openState} width="400" height="250" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
-                <form id="create-column-form" style={{ padding: '5%' }}>
+                <form id="create-column-form" style={{ padding: '5%' }} onSubmit={(e) => handleSubmit(e) }>
                 <div className="container">
                     <div className="create-column-head">
                         <h3>Create a column for <strong>{boardName}</strong></h3>
