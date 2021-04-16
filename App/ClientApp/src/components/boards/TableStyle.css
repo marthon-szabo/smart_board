@@ -9,7 +9,7 @@
 
 .board-column {
     width: 170px;
-    height: 580px;
+    height: 560px;
     display: inline-block;
     border: solid;
     margin: 5px;
@@ -62,4 +62,10 @@
     left: 130px; 
     display: block; 
     top: 10px;
+}
+
+.board-title-header {
+    text-align: center;
+    border-bottom: 3px solid;
+    margin-bottom: 20px;
 }
