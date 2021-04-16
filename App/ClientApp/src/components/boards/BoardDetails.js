@@ -131,10 +131,13 @@ function BoardDetails() {
 
     return (
         <section>
-            <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="600" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
+            <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="670" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div className="container">
+                    <div className="board-title-header">
+                        <h1> { boardState } </h1>
+                    </div>
                     <DragDropContext onDragEnd={onDragEnd}>
-                        <div height="200" width="780" className="table-of-columns" id="columns-list">
+                        <div width="780" className="table-of-columns" id="columns-list">
                             {
                                 columnNames.map((item) => (
                                     <Droppable droppableId={ item.id}>
