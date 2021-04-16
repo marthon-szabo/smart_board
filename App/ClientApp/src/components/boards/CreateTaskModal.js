@@ -29,6 +29,7 @@ function CreateTaskModal() {
                             <Calendar
                                 onChange={onChange}
                                 value={value}
+                                locale="en-EN"
                             />
                         </div>
                         <div className="form-group">
