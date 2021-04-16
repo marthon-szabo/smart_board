@@ -19,7 +19,7 @@ namespace App.Services.Repositories
         {
             Board board = this.GetBoard(columnVM, boardRepo);
 
-            Column newColumn = new Column
+            Column newColumn = new Column()
             {
                 Id = IdGenerator.GenerateId(),
                 BoardId = board.BoardId,
