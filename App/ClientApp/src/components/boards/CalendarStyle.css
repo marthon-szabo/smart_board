@@ -1,0 +1,11 @@
+﻿.react-calendar__tile {
+    padding: 0.25em 0.5em;
+}
+
+.react-calendar {
+    height: 230px;
+}
+
+.react-calendar__navigation {
+    height: 20px;
+}
