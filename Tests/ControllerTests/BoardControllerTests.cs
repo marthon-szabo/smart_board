@@ -59,7 +59,7 @@ namespace Tests
         }
 
         [Test]
-        public void CreateColumn_ColumnVM_Void()
+        public void CreateColumn_ColumnVM_WritesDataToDb()
         {
             // Arrange
             string expected = _columnVM.ColumnName;
@@ -76,7 +76,23 @@ namespace Tests
         }
 
         [Test]
-        public void DeleteColumn()
+        public void CreateColumn_ColumnVM_ReturnsIEnumerable()
+        {
+            // Arrange
+            string expected = _columnVM.ColumnName;
+
+            base.CreatePostRequest<ColumnVM>(_columnVM);
+
+            // Act
+            string result = base._controller.CreateColumn().ToArray()[0].Name;
+
+            // Assert
+            Assert.AreEqual(expected, result);
+
+        }
+
+        [Test]
+        public void DeleteColumn_DeletesColumnFromDatabase()
         {
             // Arrange
             byte expected = 0;
@@ -91,6 +107,6 @@ namespace Tests
             // Assert
             byte result = (byte)_columnRepo.GetAllEntities().ToArray().Length;
             Assert.AreEqual(expected, result);
-        }        
+        }
     }
 }
