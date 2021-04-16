@@ -10,14 +10,17 @@ namespace App.Services.Repositories
 {
     public class SQLColumnRepository : SQLRepositoryBase<Column>, IColumnRepository
     {
-        public SQLColumnRepository(AppDbContext context)
+        private readonly IBoardRepository _boardRepo;
+
+        public SQLColumnRepository(AppDbContext context, IBoardRepository boardRepo)
             : base(context)
         {
+            _boardRepo = boardRepo;
         }
 
-        public Column CreatColumnByColumnVM(ColumnVM columnVM,  IBoardRepository boardRepo)
+        public Column CreatColumnByColumnVM(ColumnVM columnVM)
         {
-            Board board = this.GetBoard(columnVM, boardRepo);
+            Board board = this.GetBoard(columnVM);
 
             Column newColumn = new Column()
             {
@@ -29,16 +32,23 @@ namespace App.Services.Repositories
             return newColumn;
         }
 
-        public IEnumerable<Column> GetColumnsByColumnVM(ColumnVM columnVM, IBoardRepository boardRepo)
+        public IEnumerable<Column> GetColumnsByBoardName(string boardName)
         {
-            Board board = this.GetBoard(columnVM, boardRepo);
+            string boardId = _boardRepo.GetBoardByBoardName(boardName).BoardId;
+
+            return this.GetAllEntities().Select(col => col).Where(col => col.BoardId.Equals(boardId));
+        }
+
+        public IEnumerable<Column> GetColumnsByColumnVM(ColumnVM columnVM)
+        {
+            Board board = this.GetBoard(columnVM);
             
             return base.GetAllEntities().Select(col => col).Where(col => col.BoardId.Equals(board.BoardId));
         }
 
-        private Board GetBoard(ColumnVM columnVM, IBoardRepository boardRepo)
+        private Board GetBoard(ColumnVM columnVM)
         {
-            return boardRepo.GetBoardByBoardName(columnVM.BoardName);
+            return _boardRepo.GetBoardByBoardName(columnVM.BoardName);
         }
     }
 }
