@@ -36,13 +36,14 @@ namespace Tests
             };
 
             _boardRepo = base._repo;
-            _columnRepo = new SQLColumnRepository(this);
+            _columnRepo = new SQLColumnRepository(this, new SQLBoardRepository(this, new SQLUsersBoardsRepository(this), new SQLUserRepository(this)));
             _dummyUserRepo = Substitute.For<IUserRepository>();
             _dummyUsersBoardsRepo = Substitute.For<IUsersBoardsRepository>();
 
             base._controller = new BoardController(_boardRepo, _dummyUserRepo, _dummyUsersBoardsRepo, _columnRepo);
 
         }
+
 
         [Test]
         public void GetAllBoards_Username_ReturnsBoards()
@@ -72,6 +73,23 @@ namespace Tests
             string result = _columnRepo.GetAllEntities().ToArray()[0].Name;
             Assert.AreEqual(expected, result);
 
+        }
+
+        [Test]
+        public void GetAllColumnsByBoardName_BoardName_ReturnsIEnumerable()
+        {
+            // Arrange
+            base.CreatePostRequest<ColumnVM>(_columnVM);
+            base._controller.CreateColumn();
+            
+            string expected = _columnVM.ColumnName;
+            string boardName = _columnVM.BoardName;
+
+            // Act
+            string result = base._controller.GetAllColumnsByBoardName(boardName).ToArray()[0].Name;
+
+            // Assert
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
