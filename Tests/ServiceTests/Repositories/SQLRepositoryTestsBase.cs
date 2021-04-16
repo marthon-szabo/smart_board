@@ -43,7 +43,6 @@ namespace Tests
         [TearDown]
         protected virtual void TearDown()
         {
-            AdditionalSetupOperations = null;
 
             base.Database.ExecuteSqlRaw(@"
                     DROP TABLE IF EXISTS Users_Boards;
