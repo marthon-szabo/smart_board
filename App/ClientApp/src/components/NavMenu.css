@@ -27,8 +27,6 @@ html {
     height: 100%;
     position: relative;
     color: #111e6c;
-    /* Try using a background image
-  background: url('images/frontPageBackground.jpg');*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
