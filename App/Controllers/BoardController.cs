@@ -102,7 +102,7 @@ namespace App.Controllers
             return _columnRepo.GetColumnsByColumnVM(columnVM);
         }
 
-        [HttpGet("boards/columns/{boardname}")]
+        [HttpGet("boards/columns/boardname={boardname}")]
         public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
         {
             return _columnRepo.GetColumnsByBoardName(boardname);

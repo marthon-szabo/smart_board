@@ -12,6 +12,7 @@ import { BoardStateProvider } from "./components/contexts/BoardStateContext";
 import { DeleteBoardProvider } from "./components/contexts/DeleteBoardContext";
 import { DeleteColumnConfirmationProvider } from "./components/contexts/DeleteColumnConfirmationContext";
 import { DeleteTaskConfirmationProvider } from "./components/contexts/DeleteTaskConfirmationContext";
+import { ColumnsProvider } from "./components/contexts/ColumnsContext";
 
 import './custom.css';
 import './App.scss';
@@ -33,9 +34,11 @@ export default class App extends Component {
       <DeleteTaskConfirmationProvider>
       <CreateColumnProvider>
       <CreateTaskProvider>
+      <ColumnsProvider>
       <Layout>
       
       </Layout>
+      </ColumnsProvider>
       </CreateTaskProvider>
       </CreateColumnProvider>
       </DeleteTaskConfirmationProvider>

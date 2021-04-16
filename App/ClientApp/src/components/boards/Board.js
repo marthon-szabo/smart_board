@@ -1,7 +1,7 @@
 ﻿import React, { useContext } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
-import { UserDataContext } from "../contexts/UserDataContext";
 import { DeleteBoardContext } from "../contexts/DeleteBoardContext";
+import { ColumnsContext } from "../contexts/ColumnsContext";
 
 import BoardsIcon from '../../images/boards.png';
 import './BoardCard.scss';
@@ -16,20 +16,27 @@ const IconStyle = {
 
 function Board(props) {
     const [boardState, setBoardState] = useContext(BoardStateContext);
-    const [userData, setUserData] = useContext(UserDataContext);
     const [deleteBoardState, setDeleteBoardState] = useContext(DeleteBoardContext);
-    const username = userData.username;
+    const [columns, setColumns] = useContext(ColumnsContext);
 
     const openModalBoard = () => {
         setBoardState(props.board.boardName);
         document.querySelector(".container").classList.add("blurred-box");
+        loadColumns();
+        console.log(columns);
     }
 
     const deleteBoard = () => {
         document.querySelector(".container").classList.add("blurred-box");
         setDeleteBoardState(props.board.boardName);
-        
     }
+
+    const loadColumns = () => {
+        fetch("/boards/columns/boardname=" + props.board.boardName)
+            .then(res => res.json())
+            .then(data => setColumns(data));
+        
+    };
 
     return (
         <div class="card-container center">

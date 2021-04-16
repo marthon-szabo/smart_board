@@ -15,11 +15,16 @@ function CreateTaskModal() {
         setOpenState("");
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert(value);
+    }
+
     return (
         <section>
             <Modal className="create-modal" visible={openState.length == 0 ? false : true} width="400" height="670" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 
-                <form id="create-task-form" style={{ padding: '5%' }}>
+                <form id="create-task-form" style={{ padding: '5%' }} onSubmit={(e) => handleSubmit(e) }>
                     <div className="container">
                         <div className="create-task-head">
                             <h3>Create a task for <strong>{openState}</strong></h3>
