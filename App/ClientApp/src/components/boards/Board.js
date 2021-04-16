@@ -36,7 +36,7 @@ function Board(props) {
             <div class="card">
                 <img src={BoardsIcon} alt="Boards icon" style={ IconStyle }></img>
                 <hr />
-                <p>{props.board.boardName}</p>
+                <p>{props.board.boardName.length > 15 ? props.board.boardName.substring(0, 15) + "..." : props.board.boardName}</p>
                 <button onClick={openModalBoard}>Open</button>
                 <button onClick={deleteBoard}>Delete</button>
             </div>
