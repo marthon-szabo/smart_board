@@ -80,9 +80,9 @@ namespace App.Controllers
             Stream stream = Request.Body;
             ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
             
-            _columnRepo.CreateEntity(_columnRepo.CreatColumnByColumnVM(columnVM, _boardRepo));
+            _columnRepo.CreateEntity(_columnRepo.CreatColumnByColumnVM(columnVM));
 
-            return _columnRepo.GetColumnsByColumnVM(columnVM, _boardRepo);   
+            return _columnRepo.GetColumnsByColumnVM(columnVM);   
 
         }
 
@@ -99,7 +99,13 @@ namespace App.Controllers
 
             _columnRepo.DeleteEntityById(column[0].Id);
 
-            return _columnRepo.GetColumnsByColumnVM(columnVM, _boardRepo);
+            return _columnRepo.GetColumnsByColumnVM(columnVM);
+        }
+
+        [HttpGet("boards/columns/{boardname}")]
+        public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
+        {
+            return _columnRepo.GetColumnsByBoardName(boardname);
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
