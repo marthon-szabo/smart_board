@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useState, useEffect } from 'react';
 import { BoardStateContext } from "../contexts/BoardStateContext";
 import { CreateColumnContext } from "../contexts/CreateColumnContext";
 import { CreateTaskContext } from "../contexts/CreateTaskContext";
@@ -6,25 +6,12 @@ import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirm
 import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
+import { ColumnsContext } from '../contexts/ColumnsContext';
 
 import "./TableStyle.css";
 import PlusIcon from "../../images/plus-green.png";
 import DeleteIcon from "../../images/deleteRed.png";
 import DeleteRed from "../../images/delete-red-background.png";
-
-const columnNames = [{
-    id: "asd",
-    columnName: "New"
-},
-    {
-    id: "123",
-    columnName: "In progress"
-},
-    {
-    id: "321",
-    columnName: "Done"
-    }
-]
 
 const taskNames = [{
     id: "fdrg",
@@ -45,6 +32,8 @@ const taskNames = [{
 
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
+    const [columns, setColumns] = useContext(ColumnsContext);
+    const [tasks, setTasks] = useState([]);
     const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
     const [deleteTaskState, setDeleteTaskState] = useContext(DeleteTaskConfirmationContext);
     const [openColumnState, setOpenColumnState] = useContext(CreateColumnContext);
@@ -139,7 +128,7 @@ function BoardDetails() {
                     <DragDropContext onDragEnd={onDragEnd}>
                         <div width="780" className="table-of-columns" id="columns-list">
                             {
-                                columnNames.map((item) => (
+                                columns.map((item) => (
                                     <Droppable droppableId={ item.id}>
                             {(provided) => (
                                 <div {...provided.droppableProps}
@@ -150,10 +139,10 @@ function BoardDetails() {
                                                             id={"removeButton-" + item.id}
                                                             src={DeleteRed} alt="delete icon"
                                                             title="Click here to delete this column"
-                                                            onClick={() => openDeleteColumnModal(item.columnName) }
+                                                            onClick={() => openDeleteColumnModal(item.name) }
                                                         ></img>
                                                     <div className="board-title">
-                                                        {item.columnName}
+                                                        {item.name}
                                                         </div>
                                                         </div>
                                                     {taskNames.map((taskItem, index) => (
