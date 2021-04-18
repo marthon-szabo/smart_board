@@ -5,7 +5,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 import Columns from '../columns/Columns';
 
-import "./TableStyle.css";
+import "../../static/scss/TableStyle.scss";
 import PlusIcon from "../../images/plus-green.png";
 
 const taskNames = [{

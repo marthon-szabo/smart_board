@@ -4,7 +4,7 @@ import { CreateTaskContext } from "../contexts/CreateTaskContext";
 import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
 
-import "../boards/TableStyle.css";
+import "../../static/scss/TableStyle.scss";
 import DeleteIcon from "../../images/deleteRed.png";
 import DeleteRed from "../../images/delete-red-background.png";
 import PlusIcon from "../../images/plus-green.png";

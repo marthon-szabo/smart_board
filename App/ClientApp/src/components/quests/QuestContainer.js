@@ -4,7 +4,7 @@ import FinishedQuests from "./FinishedQuests";
 import TakenQuests from "./TakenQuests";
 
 import '../NavMenu.css';
-import './LandingPageContainers.css';
+import './QuestContainer.scss';
 
 function QuestContainer() {
     return (
