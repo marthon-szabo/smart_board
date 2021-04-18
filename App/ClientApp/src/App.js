@@ -14,8 +14,8 @@ import { DeleteColumnConfirmationProvider } from "./components/contexts/DeleteCo
 import { DeleteTaskConfirmationProvider } from "./components/contexts/DeleteTaskConfirmationContext";
 import { ColumnsProvider } from "./components/contexts/ColumnsContext";
 
-import './custom.css';
-import './App.scss';
+import './static/scss/custom.scss';
+import './static/scss/App.scss';
 
 export default class App extends Component {
   static displayName = App.name;

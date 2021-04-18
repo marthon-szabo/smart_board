@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import { CreateTaskContext } from "../contexts/CreateTaskContext";
 
 import 'react-calendar/dist/Calendar.css';
-import './CalendarStyle.css';
+import './CreateTaskModal.scss';
 
 function CreateTaskModal() {
 
