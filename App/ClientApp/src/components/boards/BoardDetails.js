@@ -7,8 +7,6 @@ import Columns from '../columns/Columns';
 
 import "./TableStyle.css";
 import PlusIcon from "../../images/plus-green.png";
-import DeleteIcon from "../../images/deleteRed.png";
-import DeleteRed from "../../images/delete-red-background.png";
 
 const taskNames = [{
     id: "fdrg",
