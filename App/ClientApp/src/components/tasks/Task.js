@@ -42,7 +42,7 @@ function Task(props) {
 
     return (
         <div id={props.task.id} onMouseDown={((e) => handleClick(e, props.task.id))}>
-            <Draggable key={props.task.id} draggableId={props.task.id} index={props.task.index} >
+            <Draggable key={props.task.id} draggableId={props.task.id} >
                 {(provided) => (
                     <div className="content-div" onMouseEnter={(e) => showHiddenElementsTask(e, props.task.id)} onMouseLeave={(e) => hideHiddenElementsTask(e, props.task.id)}
                         ref={provided.innerRef}
