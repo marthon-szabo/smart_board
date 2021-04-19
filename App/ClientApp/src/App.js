@@ -6,11 +6,16 @@ import { CSRFTokenContextProvider } from "./components/contexts/CSRFTokenContext
 import { LoggedInUserProvider } from "./components/contexts/LoggedInUserContext";
 import { UserDataProvider } from "./components/contexts/UserDataContext";
 import { CreateBoardProvider } from "./components/contexts/CreateBoardContext";
+import { CreateColumnProvider } from "./components/contexts/CreateColumnContext";
+import { CreateTaskProvider } from "./components/contexts/CreateTaskContext";
 import { BoardStateProvider } from "./components/contexts/BoardStateContext";
 import { DeleteBoardProvider } from "./components/contexts/DeleteBoardContext";
+import { DeleteColumnConfirmationProvider } from "./components/contexts/DeleteColumnConfirmationContext";
+import { DeleteTaskConfirmationProvider } from "./components/contexts/DeleteTaskConfirmationContext";
+import { ColumnsProvider } from "./components/contexts/ColumnsContext";
 
-import './custom.css';
-import './App.scss';
+import './static/scss/custom.scss';
+import './static/scss/App.scss';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -25,9 +30,19 @@ export default class App extends Component {
       <CreateBoardProvider>
       <DeleteBoardProvider>
       <BoardStateProvider>
+      <DeleteColumnConfirmationProvider>
+      <DeleteTaskConfirmationProvider>
+      <CreateColumnProvider>
+      <CreateTaskProvider>
+      <ColumnsProvider>
       <Layout>
       
       </Layout>
+      </ColumnsProvider>
+      </CreateTaskProvider>
+      </CreateColumnProvider>
+      </DeleteTaskConfirmationProvider>
+      </DeleteColumnConfirmationProvider>
       </BoardStateProvider>
       </DeleteBoardProvider>
       </CreateBoardProvider>

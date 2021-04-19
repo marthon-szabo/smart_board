@@ -33,7 +33,7 @@ function CreateBoardModal() {
 
     return (
         <section>
-            <Modal className="create-modal" visible={createBoardState} width="400" height="350" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
+            <Modal className="create-modal" visible={createBoardState} width="400" height="250" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div className="container">
                     <form id="create-board-form" style={{ padding: '5%' }} onSubmit={handleSubmit}>
                     <div className="login-head">

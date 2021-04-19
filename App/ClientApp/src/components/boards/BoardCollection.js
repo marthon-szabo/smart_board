@@ -2,7 +2,7 @@
 import CreateBoard from "./CreateBoard";
 import Boards from "./Boards";
 
-import "./BoardCollection.css";
+import "./BoardCollection.scss";
 
 
 

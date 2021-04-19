@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
@@ -74,20 +75,37 @@ namespace App.Controllers
         }
 
         [HttpPost("boards/columns")]
-        public void CreateColumn()
+        public IEnumerable<Column> CreateColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+            
+            _columnRepo.CreateEntity(_columnRepo.CreatColumnByColumnVM(columnVM));
+
+            return _columnRepo.GetColumnsByColumnVM(columnVM);   
+
+        }
+
+        [HttpDelete("boards/columns")]
+        public IEnumerable<Column> DeletColumn()
         {
             Stream stream = Request.Body;
             ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
 
-            Board board = _boardRepo.GetBoardByBoardName(columnVM.BoardName);
-            Column newColumn = new Column
-            {
-                Id = IdGenerator.GenerateId(),
-                BoardId = board.BoardId,
-                Name = columnVM.ColumnName
-            };
-            _columnRepo.CreateEntity(newColumn);
-            
+            Column[] column = _columnRepo.GetAllEntities()
+                .Select((col) => col)
+                .Where(col => col.Name.Equals(columnVM.ColumnName))
+                .ToArray();
+
+            _columnRepo.DeleteEntityById(column[0].Id);
+
+            return _columnRepo.GetColumnsByColumnVM(columnVM);
+        }
+
+        [HttpGet("boards/columns/boardname={boardname}")]
+        public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
+        {
+            return _columnRepo.GetColumnsByBoardName(boardname);
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
