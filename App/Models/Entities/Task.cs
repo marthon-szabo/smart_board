@@ -21,7 +21,7 @@ namespace App.Models.Entities
          [Column("is_done")]
         public bool IsDone { get; set; }
 
-         [Column("description")]
+         [Column("task_description")]
         public DateTime Description { get; set; }
 
          [Column("subtask_id")]
