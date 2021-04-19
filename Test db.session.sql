@@ -35,4 +35,14 @@ Create table Columns (
     ON UPDATE NO ACTION
 );
 
-SELECT * FROM Boards;
+DROP TABLE IF EXISTS Tasks;
+CREATE TABLE Tasks (
+    task_id CHAR PRIMARY KEY,
+    task_name CHAR(50) NOT NULL,
+    deadline SMALLDATETIME
+    is_done INTEGER,
+    task_description CHAR(100),
+    subtask_id CHAR,
+    FOREIGN KEY(subtask_id)
+    REFERENCES Tasks(task_id)
+);
