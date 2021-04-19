@@ -74,6 +74,12 @@ namespace App.Controllers
             return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
         }
 
+        [HttpGet("boards/columns/{boardname}")]
+        public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
+        {
+            return _columnRepo.GetColumnsByBoardName(boardname);
+        }
+
         [HttpPost("boards/columns")]
         public IEnumerable<Column> CreateColumn()
         {
@@ -102,11 +108,16 @@ namespace App.Controllers
             return _columnRepo.GetColumnsByColumnVM(columnVM);
         }
 
-        [HttpGet("boards/columns/{boardname}")]
-        public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
+        [HttpPatch("boards/columns")]
+        public IEnumerable<Column> UpdateColumnByColumn()
         {
-            return _columnRepo.GetColumnsByBoardName(boardname);
-        }
+            Stream stream = Request.Body;
+            Column column = this.ReadRequestBody<Column>(stream);
+            
+            _columnRepo.UpdateEntityById(column);
+
+            return _columnRepo.GetAllEntities();
+        }        
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
         {
