@@ -13,6 +13,7 @@ import { DeleteBoardProvider } from "./components/contexts/DeleteBoardContext";
 import { DeleteColumnConfirmationProvider } from "./components/contexts/DeleteColumnConfirmationContext";
 import { DeleteTaskConfirmationProvider } from "./components/contexts/DeleteTaskConfirmationContext";
 import { ColumnsProvider } from "./components/contexts/ColumnsContext";
+import { TaskDetailsProvider } from "./components/contexts/TaskDetailsContext";
 
 import './static/scss/custom.scss';
 import './static/scss/App.scss';
@@ -35,9 +36,11 @@ export default class App extends Component {
       <CreateColumnProvider>
       <CreateTaskProvider>
       <ColumnsProvider>
+      <TaskDetailsProvider>
       <Layout>
       
       </Layout>
+      </TaskDetailsProvider>
       </ColumnsProvider>
       </CreateTaskProvider>
       </CreateColumnProvider>
