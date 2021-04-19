@@ -17,7 +17,7 @@ namespace App.Controllers
         [HttpGet("boards/{columnName}/tasks")]
         public void GetAllEntitiesByColumnName(string columnName)
         {
-
+            
         }
     }
 }
