@@ -81,7 +81,7 @@ namespace Tests
             // Arrange
             base.CreatePostRequest<ColumnVM>(_columnVM);
             base._controller.CreateColumn();
-            
+
             string expected = _columnVM.ColumnName;
             string boardName = _columnVM.BoardName;
 
@@ -102,6 +102,27 @@ namespace Tests
 
             // Act
             string result = base._controller.CreateColumn().ToArray()[0].Name;
+
+            // Assert
+            Assert.AreEqual(expected, result);
+
+        }
+
+        [Test]
+        public void UpdateColumnByColumn_Column_ReturnsIEnumerable()
+        {
+            // Assert
+            base.CreatePostRequest<ColumnVM>(_columnVM);
+            base._controller.CreateColumn();
+            
+            string expected = "Updated Column";
+
+            Column column = _columnRepo.GetColumnsByColumnVM(_columnVM).ToArray()[0];
+            column.Name = expected;
+            base.CreatePostRequest<Column>(column);
+
+            // Act
+            string result = base._controller.UpdateColumnByColumn().ToArray()[0].Name;
 
             // Assert
             Assert.AreEqual(expected, result);
