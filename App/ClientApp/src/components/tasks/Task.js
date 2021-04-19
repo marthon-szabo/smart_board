@@ -2,6 +2,7 @@
 import { Draggable } from 'react-beautiful-dnd';
 import { ColumnsContext } from "../contexts/ColumnsContext";
 import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
+import { TaskDetailsContext } from "../contexts/TaskDetailsContext";
 
 import "../../static/scss/TableStyle.scss";
 
@@ -10,6 +11,7 @@ import DeleteIcon from "../../images/deleteRed.png";
 function Task(props) {
     const [columnName, setColumnName] = useContext(ColumnsContext);
     const [deleteTaskState, setDeleteTaskState] = useContext(DeleteTaskConfirmationContext);
+    const [taskDetails, setTaskDetails] = useContext(TaskDetailsContext);
 
     const [taskId, setTaskId] = useState(null);
 
@@ -40,11 +42,19 @@ function Task(props) {
         setDeleteTaskState(taskObj);
     }
 
+    const openDetailModal = () => {
+        setTaskDetails(props.task);
+    }
+
     return (
         <div id={props.task.id} onMouseDown={((e) => handleClick(e, props.task.id))}>
             <Draggable key={props.task.id} draggableId={props.task.id} >
                 {(provided) => (
-                    <div className="content-div" onMouseEnter={(e) => showHiddenElementsTask(e, props.task.id)} onMouseLeave={(e) => hideHiddenElementsTask(e, props.task.id)}
+                    <div className="content-div"
+                        title="Double click for more details"
+                        onDoubleClick={openDetailModal}
+                        onMouseEnter={(e) => showHiddenElementsTask(e, props.task.id)}
+                        onMouseLeave={(e) => hideHiddenElementsTask(e, props.task.id)}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}>
