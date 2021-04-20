@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
@@ -47,5 +48,18 @@ namespace App.Controllers
 
             return _taskRepo.GetAllEntities();
        }
+
+        [HttpDelete("boards/{columnName}/tasks")]
+        public IEnumerable<Task> DeleteTask()
+        {
+            Stream stream = Request.Body;
+
+            Task taskToDelete = base.ReadRequestBody<Task>(stream);
+
+            _taskRepo.DeleteEntityById(taskToDelete.Id);
+
+            return _taskRepo.GetAllEntities();
+        }
     }
+
 }
