@@ -9,8 +9,7 @@ import DeleteColumnConfirmationModal from "./columns/DeleteColumnConfirmationMod
 import DeleteTaskConfirmationModal from "./tasks/DeleteTaskConfirmationModal";
 import TaskDetailsModal from "./tasks/TaskDetailsModal";
 
-import './NavMenu.css';
-
+import './NavMenu.scss';
 
 function LandingPage() {
     return (

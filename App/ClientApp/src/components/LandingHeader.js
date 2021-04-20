@@ -11,7 +11,7 @@ import {
     Link
 } from "react-router-dom";
 
-import "./LandingHeader.css";
+import "./LandingHeader.scss";
 import ProfileIcon from "../images/profile.png";
 import NewsIcon from "../images/news.png";
 import QuestsIcon from "../images/quests.png";

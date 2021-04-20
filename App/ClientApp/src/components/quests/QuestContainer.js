@@ -3,7 +3,7 @@ import AvailableQuests from "./AvailableQuests";
 import FinishedQuests from "./FinishedQuests";
 import TakenQuests from "./TakenQuests";
 
-import '../NavMenu.css';
+import '../NavMenu.scss';
 import './QuestContainer.scss';
 
 function QuestContainer() {

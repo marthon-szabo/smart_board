@@ -6,7 +6,7 @@ import { LoginStateContext } from "../contexts/LoginStateContext";
 import { RegisterStateContext } from "../contexts/RegisterStateContext";
 import { CSRFTokenContext } from "../contexts/CSRFTokenContext";
 
-import '../Error.css';
+import '../Error.scss';
 
 function Login({ submitForm }) {
     const [loginState, setLoginState] = useContext(LoginStateContext);
