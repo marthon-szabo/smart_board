@@ -27,6 +27,41 @@ namespace App.Models.Entities
                     Email = "stub@stub.com",
                 }
             );
+
+            modelBuilder.Entity<Board>().HasData(
+                new Board
+                {
+                    BoardName = "My board",
+                    BoardId = "myBoard"
+                }
+            );
+            
+            modelBuilder.Entity<Column>().HasData(
+                new Column
+                {
+                    Id = "myColumn",
+                    Name = "My Column",
+                    BoardId = "myBoard"
+                }
+            );
+
+            modelBuilder.Entity<Task>().HasData(
+                new Task
+                {
+                    Id = "myTaks",
+                    TaskName = "My Task1",
+                    ColumnId = "myColumn"
+                }
+            );
+            
+            modelBuilder.Entity<Task>().HasData(
+                new Task
+                {
+                    Id = "myTaks2",
+                    TaskName = "My Task2",
+                    ColumnId = "myColumn"
+                }
+            );
         }
     }
 }
