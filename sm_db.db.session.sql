@@ -38,11 +38,13 @@ Create table Columns (
 DROP TABLE IF EXISTS Tasks;
 CREATE TABLE Tasks (
     task_id CHAR PRIMARY KEY,
+    column_id CHAR NOT NULL,
     task_name CHAR(50) NOT NULL,
     deadline SMALLDATETIME
-    is_done INTEGER,
+    is_done INT,
     task_description CHAR(100),
     subtask_id CHAR,
+    FOREIGN KEY(column_id) REFERENCES Columns(colimn_id),
     FOREIGN KEY(subtask_id)
     REFERENCES Tasks(task_id)
 );
