@@ -26,8 +26,8 @@ CREATE TABLE Users_Boards (
 
 DROP TABLE IF EXISTS Columns;
 Create table Columns (
-    column_id int PRIMARY KEY UNIQUE,
-    board_id int not null,
+    column_id CHAR PRIMARY KEY UNIQUE,
+    board_id CHAR not null,
     column_name char(50) NOT NULL,
     FOREIGN KEY(board_id)
     REFERENCES Boards(board_id)
@@ -40,12 +40,12 @@ CREATE TABLE Tasks (
     task_id CHAR PRIMARY KEY,
     column_id CHAR NOT NULL,
     task_name CHAR(50) NOT NULL,
-    deadline SMALLDATETIME
-    is_done INT,
+    deadline SMALLDATETIME,
+    is_done INTEGER,
     task_description CHAR(100),
-    subtask_id CHAR,
-    FOREIGN KEY(column_id) REFERENCES Columns(colimn_id),
-    FOREIGN KEY(subtask_id)
-    REFERENCES Tasks(task_id)
+    subtask_id CHAR NULL,
+    FOREIGN KEY(column_id) REFERENCES Columns(column_id)
+    -- FOREIGN KEY(subtask_id)
+    -- REFERENCES Tasks(task_id)
 );
 
