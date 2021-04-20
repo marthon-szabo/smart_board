@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
 
@@ -15,6 +16,15 @@ namespace App.Services.Repositories
             _columnRepo = columnRepo;
         }
 
-        
+        public IEnumerable<Task> GetTasksByColumnName(string columnName)
+        {
+            string columnId = _columnRepo.GetColumnByColumnName(columnName).Id;
+
+            IEnumerable<Task> tasks = _context.Tasks
+                .Select(task => task)
+                .Where(task => task.ColumnId.Equals(columnId));
+
+            return tasks;
+        }
     }
 }
