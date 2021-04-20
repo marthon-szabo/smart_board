@@ -36,6 +36,16 @@ namespace App.Controllers
             return _taskRepo.GetAllEntities();
         }
 
-       
+       [HttpPatch("boards/{columnName}/tasks")]
+       public IEnumerable<Task> UpdateTask()
+       {
+            Stream stream = Request.Body;
+
+            Task taskToUpdate = base.ReadRequestBody<Task>(stream);
+
+            _taskRepo.UpdateEntityById(taskToUpdate);
+
+            return _taskRepo.GetAllEntities();
+       }
     }
 }
