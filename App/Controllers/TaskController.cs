@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +17,9 @@ namespace App.Controllers
         }
 
         [HttpGet("boards/{columnName}/tasks")]
-        public void GetAllEntitiesByColumnName(string columnName)
+        public IEnumerable<Task> GetAllEntitiesByColumnName(string columnName)
         {
-            
+            return _taskRepo.GetTasksByColumnName(columnName);
         }
     }
 }
