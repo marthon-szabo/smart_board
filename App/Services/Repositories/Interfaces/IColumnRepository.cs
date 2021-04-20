@@ -6,6 +6,7 @@ namespace App.Services.Repositories.Interfaces
 {
     public interface IColumnRepository : IGeneralRepository<Column>
     {
+         Column GetColumnByColumnName(string columnName);
          IEnumerable<Column> GetColumnsByColumnVM(ColumnVM columnVM);
          IEnumerable<Column> GetColumnsByBoardName(string boardName);
          Column CreatColumnByColumnVM(ColumnVM columnVM);

@@ -32,6 +32,11 @@ namespace App.Services.Repositories
             return newColumn;
         }
 
+        public Column GetColumnByColumnName(string columnName)
+        {
+            return _context.Columns.Select(col => col).Where(col => col.Name.Equals(columnName)).ToArray()[0];
+        }
+
         public IEnumerable<Column> GetColumnsByBoardName(string boardName)
         {
             string boardId = _boardRepo.GetBoardByBoardName(boardName).BoardId;
