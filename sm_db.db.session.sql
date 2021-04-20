@@ -46,3 +46,4 @@ CREATE TABLE Tasks (
     FOREIGN KEY(subtask_id)
     REFERENCES Tasks(task_id)
 );
+

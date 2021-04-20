@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS Columns;
 Create table Columns (
     column_id int PRIMARY KEY UNIQUE,
     board_id int not null,
-    column_name char(50) NOT NULL,
+    column_name char(50) NOT NULL
     FOREIGN KEY(board_id)
     REFERENCES Boards(board_id)
     ON DELETE CASCADE 
@@ -43,6 +43,7 @@ CREATE TABLE Tasks (
     is_done INTEGER,
     task_description CHAR(100),
     subtask_id CHAR,
-    FOREIGN KEY(subtask_id)
-    REFERENCES Tasks(task_id)
+    column_id CHAR NOT NULL,SQLITE_ERROR: near "FOREIGN": syntax error
+    FOREIGN KEY(subtask_id) REFERENCES Tasks(task_id),
+    FOREIGN KEY(column_id) REFERENCES Columns(column_id)
 );
