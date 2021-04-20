@@ -16,7 +16,7 @@ namespace App.Controllers
         private readonly IBoardRepository _boardRepo;
         private readonly IUserRepository _userRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
-        private readonly IColumnRepository _columnRepo;
+        protected readonly IColumnRepository _columnRepo;
 
         public BoardController(IBoardRepository boardRepo,
                                 IUserRepository userRepo,
@@ -123,7 +123,7 @@ namespace App.Controllers
 
         }
 
-        private T ReadRequestBody<T>(Stream stream)
+        protected T ReadRequestBody<T>(Stream stream)
         {
             StreamReader sr = new StreamReader(stream);
             string requestJson = sr.ReadToEndAsync().Result;
