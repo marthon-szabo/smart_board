@@ -24,7 +24,7 @@ namespace App.Services.Repositories
 
             Column newColumn = new Column()
             {
-                Id = IdGenerator.GenerateId(),
+                Id = columnVM.ColumnName,
                 BoardId = board.BoardId,
                 Name = columnVM.ColumnName
             };
