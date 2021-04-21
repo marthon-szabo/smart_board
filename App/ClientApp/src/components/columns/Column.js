@@ -63,7 +63,7 @@ function Column(props) {
                                 {item.name}
                             </div>
                         </div>
-                        <Tasks />
+                        <Tasks columnName={ item.name}/>
                         <img className="add-image hidden"
                             id={"addButton-" + item.id}
                             src={PlusIcon}
