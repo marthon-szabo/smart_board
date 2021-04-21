@@ -9,11 +9,14 @@ import "../../static/scss/TableStyle.scss";
 import DeleteIcon from "../../images/deleteRed.png";
 
 function Task(props) {
-    const [columnName, setColumnName] = useContext(ColumnsContext);
+    const [column, setColumn] = useContext(ColumnsContext);
     const [deleteTaskState, setDeleteTaskState] = useContext(DeleteTaskConfirmationContext);
     const [taskDetails, setTaskDetails] = useContext(TaskDetailsContext);
 
     const [taskId, setTaskId] = useState(null);
+    const parentColumn = column;
+
+    const index = 0;
 
     const handleClick = (e, data) => {
         console.log(data);
@@ -36,11 +39,12 @@ function Task(props) {
 
     const openDeleteTaskModal = (columnName, taskName) => {
         const taskObj = {
-            columnName: columnName,
+            columnName: columnName[0].name,
             taskName: taskName
         }
+        console.log("taskObj");
         console.log(taskObj);
-        // setDeleteTaskState(taskObj);
+        setDeleteTaskState(taskObj);
     }
 
     const openDetailModal = () => {
@@ -49,18 +53,18 @@ function Task(props) {
 
     return (
         <div id={props.task.id} onMouseDown={((e) => handleClick(e, props.task.id))}>
-            <Draggable key={props.task.id} draggableId={props.task.id} >
+            <Draggable key={props.task.id} draggableId={props.task.id} index={index}>
                 {(provided) => (
                     <div className="content-div"
                         title="Double click for more details"
-                        // onDoubleClick={openDetailModal}
+                        onDoubleClick={openDetailModal}
                         onMouseEnter={(e) => showHiddenElementsTask(e, props.task.id)}
                         onMouseLeave={(e) => hideHiddenElementsTask(e, props.task.id)}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}>
                         <div style={{ position: "relative" }}>
-                            <img className="remove-task-button hidden" id={"removeButton-" + props.task.id} src={DeleteIcon} alt="delete icon" title="Click here to delete this task" onClick={() => openDeleteTaskModal(columnName, props.task.taskName)}></img>
+                            <img className="remove-task-button hidden" id={"removeButton-" + props.task.id} src={DeleteIcon} alt="delete icon" title="Click here to delete this task" onClick={() => openDeleteTaskModal(parentColumn, props.task.taskName)}></img>
                             {props.task.taskName}
                         </div>
                     </div>
