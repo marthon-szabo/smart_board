@@ -43,8 +43,8 @@ CREATE TABLE Tasks (
     deadline SMALLDATETIME,
     is_done INTEGER,
     task_description CHAR(100),
-    subtask_id CHAR NULL,
+    -- subtask_id CHAR,
     FOREIGN KEY(column_id) REFERENCES Columns(column_id)
-    FOREIGN KEY(subtask_id) REFERENCES Tasks(task_id)
+    -- FOREIGN KEY(subtask_id) REFERENCES Tasks(task_id)
 );
 
