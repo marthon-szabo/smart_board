@@ -1,31 +1,18 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import Task from "./Task";
-
-const taskNames = [{
-    id: "fdrg",
-    index: 1,
-    taskName: "First task",
-    columnId: "asd"
-},
-{
-    id: "aaa",
-    index: 2,
-    taskName: "Second task",
-    columnId: "asd"
-},
-{
-    id: "1111",
-    index: 3,
-    taskName: "Third task",
-    columnId: "321"
-}]
 
 function showElements(task) {
     return (<Task task={task} />)
 }
 
-function Tasks() {
-    return taskNames.map(showElements);
+function Tasks(props) {
+    const [tasks, setTasks] = useState([]);
+    const columnName = props.columnName;
+
+    fetch(`/boards/${columnName}/tasks`)
+        .then(res => res.json())
+        .then(data => setTasks(data));
+    return tasks.map(showElements);
 }
 
 export default Tasks;
