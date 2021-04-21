@@ -17,7 +17,8 @@ function CreateColumnModal() {
         const name = document.getElementById("column-name").value;
         const data = JSON.stringify({
             BoardName: boardName,
-            ColumnName: name
+            ColumnName: name,
+            Id: name
         })
         fetch('boards/columns', {
             method: 'POST',
