@@ -29,7 +29,7 @@ namespace App.Controllers
             _columnRepo = columnRepo;
         }
 
-        [HttpGet("boards/username={userName}")]
+        [HttpGet("boards/{userName}")]
         public IEnumerable<Board> GetAllBoards(string userName)
         {
             return _boardRepo.GetAllBoardsByUsername(userName);
@@ -123,7 +123,7 @@ namespace App.Controllers
 
         }
 
-        protected T ReadRequestBody<T>(Stream stream)
+        private T ReadRequestBody<T>(Stream stream)
         {
             StreamReader sr = new StreamReader(stream);
             string requestJson = sr.ReadToEndAsync().Result;
