@@ -39,7 +39,8 @@ function Task(props) {
             columnName: columnName,
             taskName: taskName
         }
-        setDeleteTaskState(taskObj);
+        console.log(taskObj);
+        // setDeleteTaskState(taskObj);
     }
 
     const openDetailModal = () => {
@@ -52,7 +53,7 @@ function Task(props) {
                 {(provided) => (
                     <div className="content-div"
                         title="Double click for more details"
-                        onDoubleClick={openDetailModal}
+                        // onDoubleClick={openDetailModal}
                         onMouseEnter={(e) => showHiddenElementsTask(e, props.task.id)}
                         onMouseLeave={(e) => hideHiddenElementsTask(e, props.task.id)}
                         ref={provided.innerRef}
