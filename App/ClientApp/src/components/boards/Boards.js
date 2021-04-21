@@ -10,7 +10,7 @@ function Boards() {
     const [userData, setUserData] = useContext(UserDataContext);
     const username = userData.username;
     const [boards, setBoards] = useState([]);
-    fetch("/boards/username=" + username)
+    fetch("boards/" + username)
         .then(res => res.json())
         .then(data => setBoards(data));
 

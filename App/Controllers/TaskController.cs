@@ -26,7 +26,7 @@ namespace App.Controllers
         }
 
         [HttpPost("boards/{columnName}/tasks")]
-        public IEnumerable<Task> CreateNewTask()
+        public IEnumerable<Task> CreateNewTask(string columnName)
         {
             Stream stream = Request.Body;
 
@@ -49,14 +49,12 @@ namespace App.Controllers
             return _taskRepo.GetAllEntities();
        }
 
-        [HttpDelete("boards/{columnName}/tasks")]
-        public IEnumerable<Task> DeleteTask()
+        [HttpDelete("boards/{columnName}/tasks/{id}")]
+        public IEnumerable<Task> DeleteTask(string id)
         {
             Stream stream = Request.Body;
 
-            Task taskToDelete = ReadRequestBody<Task>(stream);
-
-            _taskRepo.DeleteEntityById(taskToDelete.Id);
+            _taskRepo.DeleteEntityById(id);
 
             return _taskRepo.GetAllEntities();
         }
