@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../static/scss/Flippable-card.scss";
+import Timer from "../../images/quests/timer.png";
 
 export default class AvailableQuests extends Component {
     render() {
@@ -51,12 +52,8 @@ export default class AvailableQuests extends Component {
                                 </div>
 
                                 <div class="flippable-card__side flippable-card__side--front">
-                                    <div class="flippable-card__theme">
-                                        <div class="flippable-card__theme-box">
-                                            <p class="flippable-card__subject">Web Developer</p>
                                             <p class="flippable-card__title">Hello World!</p>
-                                        </div>
-                                    </div>
+                                            <img src={Timer} alt="quest logo"></img>
                                 </div>
 
                             </div>

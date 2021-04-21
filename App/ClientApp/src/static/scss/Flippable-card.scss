@@ -114,9 +114,8 @@ body {
         backface-visibility: hidden; /* We don't want to see the back part of the element. */
         border-radius: 3px;
         overflow: hidden; /* The image is overflowing the parent. */
-
         &--front {
-            background-image: linear-gradient( to right bottom, rgba($color-primary-dark, 0.65), rgba($color-primary-light, 0.7) ), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
+            background-color: $color-white;
         }
 
         &--back {
@@ -147,16 +146,16 @@ body {
 
     &__subject {
         font-family: "Inconsolata", monospace;
-        letter-spacing: 0.8rem;
-        font-size: 1.6rem;
+        letter-spacing: 0.2rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        margin-bottom: 1rem;
     }
 
     &__title {
         font-family: "VT323", monospace;
+        letter-spacing: 0.2rem;
         text-transform: uppercase;
-        font-size: 6rem;
+        font-size: 1rem;
         font-weight: 100;
     }
     // Back side of the card
