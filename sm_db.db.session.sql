@@ -45,7 +45,6 @@ CREATE TABLE Tasks (
     task_description CHAR(100),
     subtask_id CHAR NULL,
     FOREIGN KEY(column_id) REFERENCES Columns(column_id)
-    -- FOREIGN KEY(subtask_id)
-    -- REFERENCES Tasks(task_id)
+    FOREIGN KEY(subtask_id) REFERENCES Tasks(task_id)
 );
 
