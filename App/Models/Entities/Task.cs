@@ -19,12 +19,11 @@ namespace App.Models.Entities
         public DateTime Deadline { get; set; }
 
          [Column("is_done")]
-        public bool IsDone { get; set; }
+        public int IsDone { get; set; }
 
          [Column("task_description")]
-        public DateTime Description { get; set; }
+        public string Description { get; set; }
 
-         [Column("subtask_id")]
-        public DateTime SubtaskId { get; set; }
+        
     }
 }
