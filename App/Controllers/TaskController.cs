@@ -19,7 +19,7 @@ namespace App.Controllers
             _taskRepo = taskRepo;
         }
 
-        [HttpGet("boards/{columnName}/tasks")]
+        [HttpGet("boards/columnName={columnName}/tasks")]
         public IEnumerable<Task> GetAllEntitiesByColumnName(string columnName)
         {
             return _taskRepo.GetTasksByColumnName(columnName);
