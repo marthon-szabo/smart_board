@@ -4,22 +4,22 @@ using System.IO;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace App.Controllers
 {
-    public class TaskController : BoardController
+    public class TaskController : Controller
     {
+        private readonly IColumnRepository _columnRepo;
         private ITaskRepository _taskRepo;
 
-        public TaskController(IColumnRepository columnRepo, ITaskRepository taskRepo, IBoardRepository boardRepo,
-                                IUserRepository userRepo,
-                                IUsersBoardsRepository userBoardsRepo)
-            : base(boardRepo, userRepo, userBoardsRepo, columnRepo)
+        public TaskController(IColumnRepository columnRepo, ITaskRepository taskRepo)
         {
+            _columnRepo = columnRepo;
             _taskRepo = taskRepo;
         }
 
-        [HttpGet("boards/columnName={columnName}/tasks")]
+        [HttpGet("boards/{columnName}/tasks")]
         public IEnumerable<Task> GetAllEntitiesByColumnName(string columnName)
         {
             return _taskRepo.GetTasksByColumnName(columnName);
@@ -30,7 +30,7 @@ namespace App.Controllers
         {
             Stream stream = Request.Body;
 
-            Task newTask = base.ReadRequestBody<Task>(stream);
+            Task newTask = ReadRequestBody<Task>(stream);
 
             _taskRepo.CreateEntity(newTask);
 
@@ -42,7 +42,7 @@ namespace App.Controllers
        {
             Stream stream = Request.Body;
 
-            Task taskToUpdate = base.ReadRequestBody<Task>(stream);
+            Task taskToUpdate = ReadRequestBody<Task>(stream);
 
             _taskRepo.UpdateEntityById(taskToUpdate);
 
@@ -54,11 +54,21 @@ namespace App.Controllers
         {
             Stream stream = Request.Body;
 
-            Task taskToDelete = base.ReadRequestBody<Task>(stream);
+            Task taskToDelete = ReadRequestBody<Task>(stream);
 
             _taskRepo.DeleteEntityById(taskToDelete.Id);
 
             return _taskRepo.GetAllEntities();
+        }
+
+         private T ReadRequestBody<T>(Stream stream)
+        {
+            StreamReader sr = new StreamReader(stream);
+            string requestJson = sr.ReadToEndAsync().Result;
+
+            T requestVM = JsonConvert.DeserializeObject<T>(requestJson);
+
+            return requestVM;
         }
     }
 
