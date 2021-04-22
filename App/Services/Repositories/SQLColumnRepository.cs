@@ -24,7 +24,7 @@ namespace App.Services.Repositories
 
             Column newColumn = new Column()
             {
-                Id = columnVM.ColumnName,
+                Id = (columnVM.ColumnId != null) ? columnVM.ColumnId : columnVM.ColumnName,
                 BoardId = board.BoardId,
                 Name = columnVM.ColumnName
             };
