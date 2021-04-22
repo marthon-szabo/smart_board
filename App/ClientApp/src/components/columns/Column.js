@@ -61,6 +61,10 @@ function Column(props) {
             }
         });
 
+        document.addEventListener("click", () => {
+            title.innerHTML = inputField.value;
+        });
+
         title.innerHTML = "";
         title.appendChild(inputField);
         inputField.focus();
