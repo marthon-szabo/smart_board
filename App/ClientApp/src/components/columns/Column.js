@@ -3,7 +3,7 @@ import Tasks from "../tasks/Tasks";
 import { Droppable } from 'react-beautiful-dnd';
 import { CreateTaskContext } from "../contexts/CreateTaskContext";
 import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
-
+import { BoardStateContext } from "../contexts/BoardStateContext";
 
 import "../../static/scss/TableStyle.scss";
 
@@ -19,6 +19,7 @@ function Column(props) {
 
     const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
     const [openTaskState, setOpenTaskState] = useContext(CreateTaskContext);
+    const [boardName, setBoardName] = useContext(BoardStateContext);
 
     function getElement(elemType, taskId) {
         return document.getElementById(elemType + taskId);
@@ -46,8 +47,12 @@ function Column(props) {
         setOpenTaskState(columnName);
     }
 
-    const switchToInput = () => {
-        const title = document.querySelector(".board-title");
+    const handleUpdate = () => {
+        console.log(boardName);
+    }
+
+    const switchToInput = (event) => {
+        const title = event.target;
         const titleName = title.innerHTML;
         
         const inputField = document.createElement("input")
@@ -58,6 +63,7 @@ function Column(props) {
         inputField.addEventListener("keyup", (event) => {
             if (event.keyCode === 13) {
                 title.innerHTML = inputField.value;
+                handleUpdate();
             }
         });
 
@@ -86,7 +92,7 @@ function Column(props) {
                                 title="Click here to delete this column"
                                 onClick={() => openDeleteColumnModal(item.name)}
                             ></img>
-                            <div className="board-title" onDoubleClick={switchToInput}>
+                            <div className="board-title" onDoubleClick={(e) => switchToInput(e)}>
                                 {item.name}
                             </div>
                         </div>
