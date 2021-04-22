@@ -63,9 +63,9 @@ function Task(props) {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}>
-                        <div style={{ position: "relative" }}>
+                        <div style={{ position: "relative"}}>
                             <img className="remove-task-button hidden" id={"removeButton-" + props.task.id} src={DeleteIcon} alt="delete icon" title="Click here to delete this task" onClick={() => openDeleteTaskModal(parentColumn, props.task.taskName)}></img>
-                            {props.task.taskName}
+                            <p style={{ padding: "5px" }}>{props.task.taskName}</p>
                         </div>
                     </div>
                 )}
