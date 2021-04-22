@@ -31,7 +31,9 @@ namespace App.Controllers
             Stream stream = Request.Body;
 
             Task newTask = ReadRequestBody<Task>(stream);
-
+            string columnId = _columnRepo.GetColumnByColumnName(newTask.ColumnId).Id;
+            
+            newTask.ColumnId = columnId;
             _taskRepo.CreateEntity(newTask);
 
             return _taskRepo.GetAllEntities();
