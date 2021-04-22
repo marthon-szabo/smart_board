@@ -46,6 +46,29 @@ function Column(props) {
         setOpenTaskState(columnName);
     }
 
+    const switchToInput = () => {
+        const title = document.querySelector(".board-title");
+        const titleName = title.innerHTML;
+        
+        const inputField = document.createElement("input")
+        inputField.setAttribute("type", "text");
+        inputField.value = titleName;
+        inputField.className = "column-input";
+        
+        inputField.addEventListener("keyup", (event) => {
+            if (event.keyCode === 13) {
+                title.innerHTML = inputField.value;
+            }
+        });
+
+        title.innerHTML = "";
+        title.appendChild(inputField);
+        inputField.focus();
+        inputField.select();
+        
+
+    }
+
     return (
         <Droppable droppableId={item.id}>
             {(provided) => (
@@ -59,7 +82,7 @@ function Column(props) {
                                 title="Click here to delete this column"
                                 onClick={() => openDeleteColumnModal(item.name)}
                             ></img>
-                            <div className="board-title">
+                            <div className="board-title" onDoubleClick={switchToInput}>
                                 {item.name}
                             </div>
                         </div>
