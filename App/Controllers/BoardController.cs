@@ -102,6 +102,15 @@ namespace App.Controllers
             return _columnRepo.GetColumnsByColumnVM(columnVM);
         }
 
+        [HttpPatch("boards/columns")]
+        public void UpdateColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+
+            _columnRepo.UpdateEntityById(_columnRepo.CreatColumnByColumnVM(columnVM));
+        }
+
         [HttpGet("boards/columns/boardname={boardname}")]
         public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
         {
