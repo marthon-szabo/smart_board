@@ -47,8 +47,20 @@ function Column(props) {
         setOpenTaskState(columnName);
     }
 
-    const handleUpdate = () => {
-        console.log(boardName);
+    const handleUpdate = (newTitle, oldTitle, e) => {
+        e.preventDefault();
+        const data = JSON.stringify({
+            BoardName: boardName,
+            ColumnName: newTitle,
+            ColumnId: oldTitle
+        })
+        fetch('boards/columns', {
+            method: 'PATCH',
+            body: data,
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
     }
 
     const switchToInput = (event) => {
@@ -63,7 +75,7 @@ function Column(props) {
         inputField.addEventListener("keyup", (event) => {
             if (event.keyCode === 13) {
                 title.innerHTML = inputField.value;
-                handleUpdate();
+                handleUpdate(inputField.value, titleName, event);
             }
         });
 
