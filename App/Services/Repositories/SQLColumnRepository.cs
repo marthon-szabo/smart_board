@@ -24,12 +24,17 @@ namespace App.Services.Repositories
 
             Column newColumn = new Column()
             {
-                Id = IdGenerator.GenerateId(),
+                Id = (columnVM.ColumnId != null) ? columnVM.ColumnId : columnVM.ColumnName,
                 BoardId = board.BoardId,
                 Name = columnVM.ColumnName
             };
 
             return newColumn;
+        }
+
+        public Column GetColumnByColumnName(string columnName)
+        {
+            return _context.Columns.Select(col => col).Where(col => col.Name.Equals(columnName)).ToArray()[0];
         }
 
         public IEnumerable<Column> GetColumnsByBoardName(string boardName)

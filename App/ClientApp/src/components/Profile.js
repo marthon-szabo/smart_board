@@ -2,7 +2,7 @@
 import { UserDataContext } from "./contexts/UserDataContext";
 import UnloadedPicture from "../images/unloaded_profile_picture.png";
 
-import "./profile.css";
+import "./Profile.scss";
 
 function Profile() {
     const [userData, setUserData] = useContext(UserDataContext);

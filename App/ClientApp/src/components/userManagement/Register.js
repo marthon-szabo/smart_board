@@ -6,7 +6,7 @@ import { RegisterStateContext } from "../contexts/RegisterStateContext";
 import { LoginStateContext } from "../contexts/LoginStateContext";
 import { CSRFTokenContext } from "../contexts/CSRFTokenContext";
 
-import '../Error.css';
+import '../Error.scss';
 
 function Register({ submitForm }) {
     const [registerState, setRegisterState] = useContext(RegisterStateContext);
@@ -32,7 +32,6 @@ function Register({ submitForm }) {
         validate
     );
 
-
         return (
             <section>
                 <Modal className="register-modal" visible={registerState} style={{ background: "#fcd281" }} width="400" height="550" effect="fadeInLeft" onClickAway={() => closeRegisterWindow()}>
@@ -40,7 +39,6 @@ function Register({ submitForm }) {
                         <div className="register-head">
                             <h3>Sign Up</h3>
                         </div>
-
                         <div className="form-group">
                             <label>Username</label>
                             <input
@@ -53,7 +51,6 @@ function Register({ submitForm }) {
                             />
                             {errors.username && <p>{errors.username}</p>}
                         </div>
-
                         <div className="form-group">
                             <label>Email address</label>
                             <input
@@ -66,7 +63,6 @@ function Register({ submitForm }) {
                             />
                             {errors.email && <p>{errors.email}</p>}
                         </div>
-
                         <div className="form-group">
                             <label>Password</label>
                             <input
@@ -79,7 +75,6 @@ function Register({ submitForm }) {
                             />
                             {errors.password && <p>{errors.password}</p>}
                         </div>
-
                             <div className="form-group">
                             <label>Confirm Password</label>
                             <input

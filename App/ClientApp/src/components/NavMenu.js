@@ -8,8 +8,7 @@ import Login from "./userManagement/Login";
 import { Home } from "./Home";
 import LandingPage from "./LandingPage";
 
-import './NavMenu.css';
-
+import './NavMenu.scss';
 
 function NavMenu() {
     const [loginState, setLoginState] = useContext(LoginStateContext);
@@ -33,7 +32,6 @@ function NavMenu() {
         return (
             <>
                 {
-
                     loggedInUser === true &&
                     <LandingPage />
                 }
@@ -42,7 +40,6 @@ function NavMenu() {
                     <div>
                         <div className="container">
                             <div className="container-fluid main">
-
                                 <div className="text-center main-text">
                                     <div className="c2a-btn footer-c2a-btn">
                                         <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
@@ -60,16 +57,8 @@ function NavMenu() {
                         <Login />
                         </div>
                 }
-                    
-                
-                
-            
                     </>
-    );
-       
+    );  
 }
 
 export default NavMenu;
-
-
-        

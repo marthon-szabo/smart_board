@@ -81,11 +81,18 @@ namespace Tests
 
         private void InitializeRepoDict()
         {
+            IUserRepository userRepo = new SQLUserRepository(this);
+            IUsersBoardsRepository usersBoardsRepo = new SQLUsersBoardsRepository(this);
+            IBoardRepository boardRepo = new SQLBoardRepository(this, usersBoardsRepo, userRepo);
+            IColumnRepository columnRepo = new SQLColumnRepository(this, boardRepo);
+            ITaskRepository taskRepo = new SQLTaskRepository(this, columnRepo);
+
             _repositories = new Dictionary<string, Object>()
             {
-                { "SQLBoardRepository", new SQLBoardRepository(this, new SQLUsersBoardsRepository(this), new SQLUserRepository(this)) },
-                { "SQLUsersBoardsRepository", new SQLUsersBoardsRepository(this) },
-                { "SQLUserRepository", new SQLUserRepository(this) }
+                { "SQLBoardRepository", boardRepo },
+                { "SQLUsersBoardsRepository", usersBoardsRepo },
+                { "SQLUserRepository", userRepo },
+                { "SQLTaskRepository", taskRepo}
             };
         }
     }

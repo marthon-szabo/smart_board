@@ -4,5 +4,6 @@ namespace App.Models.ViewModels
     {
         public string BoardName { get; set; }
         public string ColumnName { get; set; }
+        public string? ColumnId { get; set; }
     }
 }

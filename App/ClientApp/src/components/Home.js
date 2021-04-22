@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from "../images/smartboard.png"
-import './Center.css'
+import '../static/scss/Center.scss'
 
 export class Home extends Component {
   static displayName = Home.name;

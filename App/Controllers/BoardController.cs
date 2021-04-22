@@ -16,7 +16,7 @@ namespace App.Controllers
         private readonly IBoardRepository _boardRepo;
         private readonly IUserRepository _userRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
-        private readonly IColumnRepository _columnRepo;
+        protected readonly IColumnRepository _columnRepo;
 
         public BoardController(IBoardRepository boardRepo,
                                 IUserRepository userRepo,
@@ -29,7 +29,7 @@ namespace App.Controllers
             _columnRepo = columnRepo;
         }
 
-        [HttpGet("boards/username={userName}")]
+        [HttpGet("boards/{userName}")]
         public IEnumerable<Board> GetAllBoards(string userName)
         {
             return _boardRepo.GetAllBoardsByUsername(userName);
@@ -100,6 +100,15 @@ namespace App.Controllers
             _columnRepo.DeleteEntityById(column[0].Id);
 
             return _columnRepo.GetColumnsByColumnVM(columnVM);
+        }
+
+        [HttpPatch("boards/columns")]
+        public void UpdateColumn()
+        {
+            Stream stream = Request.Body;
+            ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
+
+            _columnRepo.UpdateEntityById(_columnRepo.CreatColumnByColumnVM(columnVM));
         }
 
         [HttpGet("boards/columns/boardname={boardname}")]

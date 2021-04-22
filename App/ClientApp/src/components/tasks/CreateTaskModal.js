@@ -17,7 +17,24 @@ function CreateTaskModal() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(value);
+        
+        const name = document.getElementById("task-name").value;
+        const description = document.getElementById("task-description").value;
+        const data = JSON.stringify({
+            TaskName: name,
+            Description: description,
+            Deadline: value,
+            ColumnId: openState,
+            Id: name
+        })
+        fetch(`boards/${openState}/tasks`, {
+            method: 'POST',
+            body: data,
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+        closeModalWindow();
     }
 
     return (
