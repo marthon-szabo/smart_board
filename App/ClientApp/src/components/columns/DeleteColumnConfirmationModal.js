@@ -2,13 +2,15 @@
 import Modal from 'react-awesome-modal';
 import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { BoardStateContext } from "../contexts/BoardStateContext";
+import { ColumnsContext } from "../contexts/ColumnsContext";
 
 import DeleteIcon from '../../images/delete.png';
 
 function DeleteColumnConfirmationModal() {
 
     const [openState, setOpenState] = useContext(DeleteColumnConfirmationContext);
-    const [boardName, setBoardName] = useContext(BoardStateContext);
+    const [boardState, setBoardState] = useContext(BoardStateContext);
+    const [columnState, setColumnState] = useContext(ColumnsContext);
 
     const closeModalWindow = () => {
         setOpenState("");
@@ -33,10 +35,15 @@ function DeleteColumnConfirmationModal() {
     }
 
     const deleteColumn = () => {
-        const name = openState;
+        const name = columnState.columnName;
+        const boardId = boardState.boardId;
+        const columnId = columnState.columnId;
+
         const data = JSON.stringify({
-            BoardName: boardName,
-            ColumnName: name
+            BoardId: boardId,
+            ColumnName: name,
+            ColumnId: columnId
+
         })
         fetch('boards/columns', {
             method: 'DELETE',
@@ -55,7 +62,7 @@ function DeleteColumnConfirmationModal() {
                     <img src={DeleteIcon} alt="delete icon" style={ IconStyle }></img>
                 <p>Are you sure you want to delete this column?</p>
                 <p>Column name: <strong>{openState}</strong> </p>
-                    <p>From this table: <strong>{boardName}</strong> </p>
+                    <p>From this table: <strong>{boardState.boardName}</strong> </p>
                     <button style={DeleteStyle} id="delete-btn" type="submit" className="btn btn-primary btn-block" onClick={() => deleteColumn()}>Yes</button>
                     <button id="cancel-btn" type="submit" className="btn btn-primary btn-block" onClick={() => closeModalWindow()}>Cancel</button>
                     </div>

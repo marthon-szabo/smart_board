@@ -4,6 +4,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import { CreateTaskContext } from "../contexts/CreateTaskContext";
 import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
 import { BoardStateContext } from "../contexts/BoardStateContext";
+import { ColumnsContext } from "../contexts/ColumnsContext";
 
 import "../../static/scss/TableStyle.scss";
 
@@ -19,7 +20,8 @@ function Column(props) {
 
     const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
     const [openTaskState, setOpenTaskState] = useContext(CreateTaskContext);
-    const [boardName, setBoardName] = useContext(BoardStateContext);
+    const [boardState, setBoardState] = useContext(BoardStateContext);
+    const [columnState, setcolumnState] = useContext(ColumnsContext);
 
     function getElement(elemType, taskId) {
         return document.getElementById(elemType + taskId);
@@ -43,16 +45,21 @@ function Column(props) {
         setDeleteColState(columnName);
     }
 
-    const openAddTaskModal = (columnName) => {
-        setOpenTaskState(columnName);
+    const openAddTaskModal = (columnName, columnId) => {
+        const columnObj = {
+            columnName: columnName,
+            columnId: columnId
+        }
+        
+        setOpenTaskState(columnObj);
     }
 
-    const handleUpdate = (newTitle, oldTitle, e) => {
+    const handleUpdate = (newTitle, columnId, e) => {
         e.preventDefault();
         const data = JSON.stringify({
-            BoardName: boardName,
+            BoardId: boardState.boardId,
             ColumnName: newTitle,
-            ColumnId: oldTitle
+            ColumnId: columnId
         })
         fetch('boards/columns', {
             method: 'PATCH',
@@ -63,7 +70,7 @@ function Column(props) {
             .then(data => console.log(data));
     }
 
-    const switchToInput = (event) => {
+    const switchToInput = (event, columnId) => {
         const title = event.target;
         const titleName = title.innerHTML;
         
@@ -75,7 +82,7 @@ function Column(props) {
         inputField.addEventListener("keyup", (event) => {
             if (event.keyCode === 13) {
                 title.innerHTML = inputField.value;
-                handleUpdate(inputField.value, titleName, event);
+                handleUpdate(inputField.value, columnId, event);
             }
         });
 
@@ -104,17 +111,17 @@ function Column(props) {
                                 title="Click here to delete this column"
                                 onClick={() => openDeleteColumnModal(item.name)}
                             ></img>
-                            <div className="board-title" onDoubleClick={(e) => switchToInput(e)}>
+                            <div className="board-title" onDoubleClick={(e) => switchToInput(e, item.id)}>
                                 {item.name}
                             </div>
                         </div>
-                        <Tasks columnName={ item.name}/>
+                        <Tasks columnId={ item.id}/>
                         <img className="add-image hidden"
                             id={"addButton-" + item.id}
                             src={PlusIcon}
                             alt="plus icon"
                             title="Click here to add a new task"
-                            onClick={() => openAddTaskModal(item.name)}
+                            onClick={() => openAddTaskModal(item.name, item.id)}
                         >
                         </img>{provided.placeholder}
                     </div>
