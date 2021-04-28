@@ -3,7 +3,7 @@
 export const BoardStateContext = createContext();
 
 export const BoardStateProvider = props => {
-    const [boardState, setBoardState] = useState("");
+    const [boardState, setBoardState] = useState([]);
 
     return (
         <BoardStateContext.Provider value={[boardState, setBoardState]}>
