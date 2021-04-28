@@ -80,6 +80,8 @@ namespace App.Controllers
             Stream stream = Request.Body;
             ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
             
+            columnVM.ColumnId = IdGenerator.GenerateId();
+
             _columnRepo.CreateEntity(_columnRepo.CreatColumnByColumnVM(columnVM));
 
             return _columnRepo.GetColumnsByColumnVM(columnVM);   
@@ -94,7 +96,7 @@ namespace App.Controllers
 
             Column[] column = _columnRepo.GetAllEntities()
                 .Select((col) => col)
-                .Where(col => col.Name.Equals(columnVM.ColumnName))
+                .Where(col => col.BoardId.Equals(columnVM.BoardId))
                 .ToArray();
 
             _columnRepo.DeleteEntityById(column[0].Id);
@@ -103,18 +105,20 @@ namespace App.Controllers
         }
 
         [HttpPatch("boards/columns")]
-        public void UpdateColumn()
+        public IEnumerable<Column> UpdateColumnById()
         {
             Stream stream = Request.Body;
             ColumnVM columnVM = this.ReadRequestBody<ColumnVM>(stream);
 
             _columnRepo.UpdateEntityById(_columnRepo.CreatColumnByColumnVM(columnVM));
+
+            return _columnRepo.GetAllEntities();
         }
 
-        [HttpGet("boards/columns/boardname={boardname}")]
-        public IEnumerable<Column> GetAllColumnsByBoardName(string boardname)
+        [HttpGet("boards/columns/{boardid}")]
+        public IEnumerable<Column> GetAllColumnsByBoardId(string boardid)
         {
-            return _columnRepo.GetColumnsByBoardName(boardname);
+            return _columnRepo.GetColumnsByBoardId(boardid);
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userName)
