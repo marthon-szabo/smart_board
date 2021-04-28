@@ -30,7 +30,7 @@ function BoardDetails() {
     const [taskId, setTaskId] = useState(null);
 
     const closeModalWindow = () => {
-        setBoardState("");
+        setBoardState([]);
         document.querySelector(".container.blurred-box").classList.remove("blurred-box");
     }
 
@@ -64,7 +64,7 @@ function BoardDetails() {
             <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="670" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div className="container">
                     <div className="board-title-header">
-                        <h1> { boardState } </h1>
+                        <h1> { boardState.boardName } </h1>
                     </div>
                     <DragDropContext onDragEnd={onDragEnd}>
                         <div width="780" className="table-of-columns" id="columns-list">
