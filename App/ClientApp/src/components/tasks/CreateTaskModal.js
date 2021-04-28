@@ -12,22 +12,21 @@ function CreateTaskModal() {
     const [value, onChange] = useState(new Date());
 
     const closeModalWindow = () => {
-        setOpenState("");
+        setOpenState([]);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        console.log("asd: " + openState.columnId)
         const name = document.getElementById("task-name").value;
         const description = document.getElementById("task-description").value;
         const data = JSON.stringify({
             TaskName: name,
             Description: description,
             Deadline: value,
-            ColumnId: openState,
-            Id: name
+            ColumnId: openState.columnId
         })
-        fetch(`boards/${openState}/tasks`, {
+        fetch(`boards/${openState.columnId}/tasks`, {
             method: 'POST',
             body: data,
             headers: { 'Content-Type': 'application/json' },
@@ -44,7 +43,7 @@ function CreateTaskModal() {
                 <form id="create-task-form" style={{ padding: '5%' }} onSubmit={(e) => handleSubmit(e) }>
                     <div className="container">
                         <div className="create-task-head">
-                            <h3>Create a task for <strong>{openState}</strong></h3>
+                            <h3>Create a task for <strong>{openState.columnName}</strong></h3>
                         </div>
                         <div className="form-group">
                             <label>Deadline:</label>
