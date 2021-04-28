@@ -20,12 +20,11 @@ namespace App.Services.Repositories
 
         public Column CreatColumnByColumnVM(ColumnVM columnVM)
         {
-            Board board = this.GetBoard(columnVM);
 
             Column newColumn = new Column()
             {
-                Id = (columnVM.ColumnId != null) ? columnVM.ColumnId : columnVM.ColumnName,
-                BoardId = board.BoardId,
+                Id = columnVM.ColumnId,
+                BoardId = columnVM.BoardId,
                 Name = columnVM.ColumnName
             };
 
@@ -37,11 +36,9 @@ namespace App.Services.Repositories
             return _context.Columns.Select(col => col).Where(col => col.Name.Equals(columnName)).ToArray()[0];
         }
 
-        public IEnumerable<Column> GetColumnsByBoardName(string boardName)
+        public IEnumerable<Column> GetColumnsByBoardId(string boardId)
         {
-            string boardId = _boardRepo.GetBoardByBoardName(boardName).BoardId;
-
-            return this.GetAllEntities().Select(col => col).Where(col => col.BoardId.Equals(boardId));
+            return _context.Columns.Select(col => col).Where(col => col.BoardId.Equals(boardId));
         }
 
         public IEnumerable<Column> GetColumnsByColumnVM(ColumnVM columnVM)
@@ -53,7 +50,7 @@ namespace App.Services.Repositories
 
         private Board GetBoard(ColumnVM columnVM)
         {
-            return _boardRepo.GetBoardByBoardName(columnVM.BoardName);
+            return _boardRepo.GetEntityById(columnVM.BoardId);
         }
     }
 }
