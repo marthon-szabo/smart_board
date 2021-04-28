@@ -7,9 +7,13 @@ function showElements(task) {
 
 function Tasks(props) {
     const [tasks, setTasks] = useState([]);
-    const columnName = props.columnName;
-
-    fetch(`/boards/${columnName}/tasks`)
+    const columnId = props.columnId;
+    fetch(`/boards/${columnId}/tasks`, {
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+    })
         .then(res => res.json())
         .then(data => setTasks(data));
     return tasks.map(showElements);

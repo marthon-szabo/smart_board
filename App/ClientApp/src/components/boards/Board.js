@@ -20,7 +20,7 @@ function Board(props) {
     const [columns, setColumns] = useContext(ColumnsContext);
 
     const openModalBoard = () => {
-        setBoardState(props.board.boardName);
+        setBoardState(props.board);
         document.querySelector(".container").classList.add("blurred-box");
         loadColumns();
         console.log(columns);
@@ -32,7 +32,7 @@ function Board(props) {
     }
 
     const loadColumns = () => {
-        fetch("/boards/columns/boardname=" + props.board.boardName)
+        fetch("/boards/columns/" + props.board.boardId)
             .then(res => res.json())
             .then(data => setColumns(data));
         

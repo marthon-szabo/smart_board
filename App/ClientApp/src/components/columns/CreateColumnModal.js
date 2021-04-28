@@ -6,7 +6,7 @@ import { BoardStateContext } from "../contexts/BoardStateContext";
 function CreateColumnModal() {
 
     const [openState, setOpenState] = useContext(CreateColumnContext);
-    const [boardName, setBoardName] = useContext(BoardStateContext);
+    const [boardState, setBoardState] = useContext(BoardStateContext);
 
     const closeModalWindow = () => {
         setOpenState(false);
@@ -16,9 +16,8 @@ function CreateColumnModal() {
         e.preventDefault();
         const name = document.getElementById("column-name").value;
         const data = JSON.stringify({
-            BoardName: boardName,
+            BoardId: boardState.boardId,
             ColumnName: name,
-            Id: name
         })
         fetch('boards/columns', {
             method: 'POST',
@@ -36,7 +35,7 @@ function CreateColumnModal() {
                 <form id="create-column-form" style={{ padding: '5%' }} onSubmit={(e) => handleSubmit(e) }>
                 <div className="container">
                     <div className="create-column-head">
-                        <h3>Create a column for <strong>{boardName}</strong></h3>
+                        <h3>Create a column for <strong>{boardState.boardName}</strong></h3>
                         </div>
                         <div className="form-group">
                             <label>Column name:</label>

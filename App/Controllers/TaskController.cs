@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
 using App.Services.Repositories.Interfaces;
+using App.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -19,21 +20,22 @@ namespace App.Controllers
             _taskRepo = taskRepo;
         }
 
-        [HttpGet("boards/{columnName}/tasks")]
-        public IEnumerable<Task> GetAllEntitiesByColumnName(string columnName)
+        [HttpGet("boards/{columnId}/tasks")]
+        public IEnumerable<Task> GetAllEntitiesByColumnName(string columnId)
         {
-            return _taskRepo.GetTasksByColumnName(columnName);
+            return _taskRepo.GetTasksByColumnId(columnId);
         }
 
-        [HttpPost("boards/{columnName}/tasks")]
-        public IEnumerable<Task> CreateNewTask(string columnName)
+        [HttpPost("boards/{columnId}/tasks")]
+        public IEnumerable<Task> CreateNewTask(string columnId)
         {
             Stream stream = Request.Body;
 
             Task newTask = ReadRequestBody<Task>(stream);
-            string columnId = _columnRepo.GetColumnByColumnName(newTask.ColumnId).Id;
             
             newTask.ColumnId = columnId;
+            newTask.Id = IdGenerator.GenerateId();
+
             _taskRepo.CreateEntity(newTask);
 
             return _taskRepo.GetAllEntities();
@@ -51,7 +53,7 @@ namespace App.Controllers
             return _taskRepo.GetAllEntities();
        }
 
-        [HttpDelete("boards/{columnName}/tasks/{id}")]
+        [HttpDelete("boards/{columnId}/tasks/{id}")]
         public IEnumerable<Task> DeleteTask(string id)
         {
             Stream stream = Request.Body;

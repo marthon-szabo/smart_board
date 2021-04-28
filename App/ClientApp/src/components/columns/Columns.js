@@ -10,7 +10,9 @@ function showElements(column) {
 function Columns() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
     const [columns, setColumns] = useContext(ColumnsContext);
-    fetch("/boards/columns/boardname=" + boardState)
+    const boardId = boardState.boardId;
+    
+    fetch(`/boards/columns/${boardId}`)
         .then(res => res.json())
         .then(data => setColumns(data));
     return columns.map(showElements);

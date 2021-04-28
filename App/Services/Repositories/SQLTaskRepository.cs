@@ -16,9 +16,8 @@ namespace App.Services.Repositories
             _columnRepo = columnRepo;
         }
 
-        public IEnumerable<Task> GetTasksByColumnName(string columnName)
+        public IEnumerable<Task> GetTasksByColumnId(string columnId)
         {
-            string columnId = _columnRepo.GetColumnByColumnName(columnName).Id;
 
             IEnumerable<Task> tasks = _context.Tasks
                 .Select(task => task)

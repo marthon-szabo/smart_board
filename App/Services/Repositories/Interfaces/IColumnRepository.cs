@@ -8,7 +8,7 @@ namespace App.Services.Repositories.Interfaces
     {
          Column GetColumnByColumnName(string columnName);
          IEnumerable<Column> GetColumnsByColumnVM(ColumnVM columnVM);
-         IEnumerable<Column> GetColumnsByBoardName(string boardName);
+         IEnumerable<Column> GetColumnsByBoardId(string boardName);
          Column CreatColumnByColumnVM(ColumnVM columnVM);
     }
 }
