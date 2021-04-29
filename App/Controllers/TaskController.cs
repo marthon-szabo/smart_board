@@ -32,7 +32,7 @@ namespace App.Controllers
             Stream stream = Request.Body;
 
             Task newTask = ReadRequestBody<Task>(stream);
-            
+
             newTask.ColumnId = columnId;
             newTask.Id = IdGenerator.GenerateId();
 
@@ -41,7 +41,7 @@ namespace App.Controllers
             return _taskRepo.GetAllEntities();
         }
 
-       [HttpPatch("boards/{columnName}/tasks")]
+       [HttpPatch("boards/tasks")]
        public IEnumerable<Task> UpdateTask()
        {
             Stream stream = Request.Body;
