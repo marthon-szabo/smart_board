@@ -1,0 +1,38 @@
+﻿.main-header {
+    height: 50px;
+    background-color: #ed6c7b;
+    display: flex;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.welcome-sign {
+    width: 25%;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+.date {
+    align-self:auto;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.nav-menu-elements {
+    width: 720px;
+}
+
+a:link.button-link, a:visited.button-link {
+    background-color: #66c7b9;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+    text-align: center;
+    width: 150px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover.button-link, a:active.button-link {
+    background-color: #726aa7;
+}

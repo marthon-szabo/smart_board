@@ -1,49 +1,64 @@
-import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import './NavMenu.css';
+import React, { useContext } from 'react';
+import { LoginStateContext } from "./contexts/LoginStateContext";
+import { RegisterStateContext } from "./contexts/RegisterStateContext";
+import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
+import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
+import Register from "./userManagement/Register";
+import Login from "./userManagement/Login";
+import { Home } from "./Home";
+import LandingPage from "./LandingPage";
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+import './NavMenu.scss';
 
-  constructor (props) {
-    super(props);
+function NavMenu() {
+    const [loginState, setLoginState] = useContext(LoginStateContext);
+    const [registrationState, setRegistrationState] = useContext(RegisterStateContext);
+    const [token, setToken] = useContext(CSRFTokenContext);
+    const [loggedInUser, setLoggedInUser] = useContext(LoggedInUserContext);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
+    const openRegistrationWindow = () => {
+        setRegistrationState(true);
+        document.querySelector(".container").classList.add("blurred-box");
+    }
 
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
+    const openLoginWindow = () => {
+        setLoginState(true);
+        fetch('/user/token')
+            .then(res => res.json())
+            .then(data => setToken(data))
+        document.querySelector(".container").classList.add("blurred-box");
+    }
 
-  render () {
-    return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-          <Container>
-            <NavbarBrand tag={Link} to="/">App</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                </NavItem>
-              </ul>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </header>
-    );
-  }
+        return (
+            <>
+                {
+                    loggedInUser === true &&
+                    <LandingPage />
+                }
+                {
+                    loggedInUser === false &&
+                    <div>
+                        <div className="container">
+                            <div className="container-fluid main">
+                                <div className="text-center main-text">
+                                    <div className="c2a-btn footer-c2a-btn">
+                                        <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
+                                            <a type="button" className="btn btn-default btn-lg" href="#" onClick={() => openRegistrationWindow()}>Sign up</a>
+                                            <span className="btn-circle btn-or">or</span>
+                                            <a type="button" className="btn btn-default btn-lg" href="#" onClick={() => openLoginWindow()}>Sign in</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <Home />
+                        </div>
+                    
+                    <Register />
+                        <Login />
+                        </div>
+                }
+                    </>
+    );  
 }
+
+export default NavMenu;

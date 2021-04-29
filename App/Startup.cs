@@ -1,7 +1,11 @@
+using System;
+using App.Models.Entities;
+using App.Services.Repositories;
+using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +26,20 @@ namespace App
         {
 
             services.AddControllersWithViews();
+            services.AddMvc();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            var connectionString = Configuration["AppDb:ConnectionStrings:DefaultConnection"];
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
+            services.AddScoped<IUserRepository, SQLUserRepository>();
+            services.AddScoped<IBoardRepository, SQLBoardRepository>();
+            services.AddScoped<IUsersBoardsRepository, SQLUsersBoardsRepository>();
+            services.AddScoped<IColumnRepository, SQLColumnRepository>();
+            services.AddScoped<ITaskRepository, SQLTaskRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -49,6 +67,8 @@ namespace App
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
