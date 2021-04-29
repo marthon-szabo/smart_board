@@ -15,7 +15,7 @@ namespace App.Utilities
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-            string id = Convert.ToBase64String(salt).Replace("/", "0").Replace("=", "0");
+            string id = Convert.ToBase64String(salt).Replace("/", "0").Replace("=", "0").Replace("+", "0");
 
             return id;
         }

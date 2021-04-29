@@ -53,7 +53,7 @@ namespace App.Controllers
             return _taskRepo.GetAllEntities();
        }
 
-        [HttpDelete("boards/{columnId}/tasks/{id}")]
+        [HttpDelete("boards/tasks/{id}")]
         public IEnumerable<Task> DeleteTask(string id)
         {
             Stream stream = Request.Body;

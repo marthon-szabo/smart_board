@@ -11,9 +11,6 @@ import "../../static/scss/TableStyle.scss";
 import DeleteRed from "../../images/delete-red-background.png";
 import PlusIcon from "../../images/plus-green.png";
 
-
-
-
 function Column(props) {
 
     const item = props.column;
@@ -21,7 +18,6 @@ function Column(props) {
     const [deleteColState, setDeleteColState] = useContext(DeleteColumnConfirmationContext);
     const [openTaskState, setOpenTaskState] = useContext(CreateTaskContext);
     const [boardState, setBoardState] = useContext(BoardStateContext);
-    const [columnState, setcolumnState] = useContext(ColumnsContext);
 
     function getElement(elemType, taskId) {
         return document.getElementById(elemType + taskId);
@@ -50,7 +46,6 @@ function Column(props) {
             columnName: columnName,
             columnId: columnId
         }
-        
         setOpenTaskState(columnObj);
     }
 
@@ -94,8 +89,6 @@ function Column(props) {
         title.appendChild(inputField);
         inputField.focus();
         inputField.select();
-        
-
     }
 
     return (
@@ -115,7 +108,7 @@ function Column(props) {
                                 {item.name}
                             </div>
                         </div>
-                        <Tasks columnId={ item.id}/>
+                        <Tasks columnId={item.id} columnName={item.name}/>
                         <img className="add-image hidden"
                             id={"addButton-" + item.id}
                             src={PlusIcon}
