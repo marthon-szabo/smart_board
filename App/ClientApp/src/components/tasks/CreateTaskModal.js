@@ -17,16 +17,19 @@ function CreateTaskModal() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("asd: " + openState.columnId)
         const name = document.getElementById("task-name").value;
         const description = document.getElementById("task-description").value;
+        const columnId = openState.columnId;
         const data = JSON.stringify({
             TaskName: name,
             Description: description,
             Deadline: value,
-            ColumnId: openState.columnId
+            ColumnId: columnId
         })
-        fetch(`boards/${openState.columnId}/tasks`, {
+ 
+        console.log("asd: " + columnId);
+
+        fetch(`boards/${columnId}/tasks`, {
             method: 'POST',
             body: data,
             headers: { 'Content-Type': 'application/json' },
