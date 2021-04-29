@@ -1,15 +1,12 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
 import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
-import { ColumnsContext } from "../contexts/ColumnsContext";
 
 import DeleteIcon from '../../images/delete.png';
-
 
 function DeleteTaskConfirmationModal() {
 
     const [openState, setOpenState] = useContext(DeleteTaskConfirmationContext);
-    const [columnState, setColumnState] = useContext(ColumnsContext);
 
     const closeModalWindow = () => {
         setOpenState([]);
@@ -33,12 +30,9 @@ function DeleteTaskConfirmationModal() {
         padding: "0.375rem 0.75rem"
     }
 
-    const columnId = columnState.columnId;
     const taskId = openState.taskId;
-    console.log("openstate: ")
-    console.log(openState)
     const deleteTask = () => {
-        fetch(`boards/${columnId}/tasks/${taskId}`, {
+        fetch(`boards/tasks/${taskId}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
