@@ -36,9 +36,10 @@ function Task(props) {
         elemToShowAdd.classList.add("hidden");
     }
 
-    const openDeleteTaskModal = (columnName, taskId, taskName) => {
+    const openDeleteTaskModal = (columnName, columnId, taskId, taskName) => {
         const taskObj = {
-            columnName: columnName[0].name,
+            columnName: props.columnName,
+            columnId: columnId,
             taskId: taskId,
             taskName: taskName
         }
@@ -62,7 +63,7 @@ function Task(props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}>
                         <div style={{ position: "relative" }}>
-                            <img className="remove-task-button hidden" id={"removeButton-" + props.task.id} src={DeleteIcon} alt="delete icon" title="Click here to delete this task" onClick={() => openDeleteTaskModal(parentColumn, props.task.id, props.task.taskName)}></img>
+                            <img className="remove-task-button hidden" id={"removeButton-" + props.task.id} src={DeleteIcon} alt="delete icon" title="Click here to delete this task" onClick={() => openDeleteTaskModal(parentColumn, props.task.columnId, props.task.id, props.task.taskName)}></img>
                             {props.task.taskName}
                         </div>
                     </div>
