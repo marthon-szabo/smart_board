@@ -6,7 +6,6 @@ import { TaskDetailsContext } from "../contexts/TaskDetailsContext";
 
 import "./TaskDetailsModal.scss";
 import 'react-calendar/dist/Calendar.css';
-import Task from './Task';
 
 function TaskDetailsModal() {
     const [taskDetails, setTaskDetails] = useContext(TaskDetailsContext);
@@ -14,18 +13,37 @@ function TaskDetailsModal() {
     const [changeNameState, setChangeNameState] = useState(false);
     const [changeDateState, setChangeDateState] = useState(false);
     const [changeDescriptionState, setChangeDescriptionState] = useState(false);
+    const [changed, setChanged] = useState(false);
     const [value, onChange] = useState(new Date());
     const [checked, setChecked] = useState(taskDetails.isDone);
 
     const taskNameInput = useRef();
     const descriptionInput = useRef();
 
-
     const handleChange = nextChecked => {
         setChecked(nextChecked);
     };
 
     const closeModalWindow = () => {
+        console.log(changed);
+        if (changed) {
+            const data = JSON.stringify({
+                taskId: taskDetails.taskId,
+                columnId: taskDetails.columnId,
+                taskName: taskDetails.taskName,
+                deadline: taskDetails.deadline,
+                isDone: checked,
+                description: taskDetails.description
+            })
+            console.log("sákráválihólihólijézusamiurunk");
+            fetch(`boards/tasks`, {
+                method: 'PATCH',
+                body: data,
+                headers: { 'Content-Type': 'application/json' },
+            })
+                .then(res => res.json())
+                .then(data => console.log(data));
+        }
         setTaskDetails([]);
     }
 
@@ -35,16 +53,18 @@ function TaskDetailsModal() {
 
     const changeTaskName = (event) => {
         if (event.keyCode === 13) {
+            setChanged(true);
             const newData = {
                 taskId: taskDetails.taskId,
                 columnId: taskDetails.columnId,
                 taskName: taskNameInput.current.value,
                 deadline: taskDetails.deadline,
-                isDone: taskDetails.isDone,
+                isDone: checked,
                 description: taskDetails.description
             };
             setTaskDetails(newData);
             setChangeNameState(false);
+            console.log(changed);
         };
     }
 
@@ -53,13 +73,14 @@ function TaskDetailsModal() {
     }
 
     const changeDeadline = (event) => {
-            console.log("adjeffed0");
+        console.log("adjeffed0");
+        setChanged(true);
             const newData = {
                 taskId: taskDetails.taskId,
                 columnId: taskDetails.columnId,
                 taskName: taskDetails.taskName,
                 deadline: value.toString(),
-                isDone: taskDetails.isDone,
+                isDone: checked,
                 description: taskDetails.description
             };
             setTaskDetails(newData);
@@ -71,14 +92,14 @@ function TaskDetailsModal() {
     }
 
     const changeDescription = (event) => {
-        
         if (event.keyCode === 13) {
+            setChanged(true);
             const newData = {
                 taskId: taskDetails.taskId,
                 columnId: taskDetails.columnId,
                 taskName: taskDetails.taskName,
                 deadline: taskDetails.deadline,
-                isDone: taskDetails.isDone,
+                isDone: checked,
                 description: descriptionInput.current.value
             };
             setTaskDetails(newData);
