@@ -7,14 +7,15 @@ namespace App.Models.Entities
     [Table("Messages")]
     public class Message
     {
-        [Column("id")]
+        [Column("message_id")]
         [Required]
         public string Id { get; set; }
-        
+
+        [Column("content")]
         [Required]
         public string Content { get; set; }
         
-        [Column("date")]
+        [Column("message_date")]
         public DateTime Date { get; set; }
         
     }

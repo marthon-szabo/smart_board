@@ -6,7 +6,7 @@ namespace App.Models.Entities
     [Table("Users_Messages")]
     public class UsersMessages
     {
-        [Column("id")]
+        [Column("users_messages_id")]
         [Required]
         public string Id { get; set; }
 
