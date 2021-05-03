@@ -1,12 +1,38 @@
-﻿import React, { Component } from "react";
+﻿import React from "react";
 import Slider from "react-slick";
+import AvailableQuest from "./AvailableQuest";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../static/scss/Flippable-card.scss";
 
-export default class AvailableQuests extends Component {
-    render() {
+function showElements(quest) {
+    return (
+        <div>
+            <AvailableQuest quest={quest} />
+        </div>
+        )}
+
+function AvailableQuests () {
+    const availableQuestList = [{
+        picturePath: "/images/quests/timer.png" 
+        },
+        {
+            picturePath: "/images/quests/chest.png"
+        },
+        {
+            picturePath: "/images/quests/exclamation.png"
+        },
+        {
+            picturePath: "/images/quests/pen.png"
+        },
+        {
+            picturePath: "/images/quests/sandclock.png"
+        },
+        {
+            picturePath: "/images/quests/star.png"
+        }]
+
 
         const settings = {
             dots: true,
@@ -27,215 +53,12 @@ export default class AvailableQuests extends Component {
             <div style={{ width: "auto", marginLeft:"35px", marginRight: "35px" }}>
                 <p style={ centerStyle }>Available quests</p>
                 <Slider {...settings}>
-                    <div>
-                        <div class="artboard">
-                            <div class="flippable-card">
-
-                                <div class="flippable-card__side flippable-card__side--back">
-                                    <div class="flippable-card__cover">
-                                        <h4 class="flippable-card__heading">
-                                            <span class="flippable-card__heading-span">Skill Set</span>
-                                        </h4>
-                                    </div>
-                                    <div class="flippable-card__details">
-                                        <ul>
-                                            <li>Advanced JS and CSS</li>
-                                            <li>JS/CSS Preprocessors</li>
-                                            <li>JS Frameworks</li>
-                                            <li>Advanced Animations</li>
-                                            <li>Deployment Pipelines</li>
-                                            <li>Large Apps Architectures</li>
-                                            <li>Naming Conventions</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="flippable-card__side flippable-card__side--front">
-                                            <p class="flippable-card__title">Hello World!</p>
-                                    <img src="/images/quests/timer.png" alt="quest logo"></img>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="artboard">
-                            <div class="flippable-card">
-
-                                <div class="flippable-card__side flippable-card__side--back">
-                                    <div class="flippable-card__cover">
-                                        <h4 class="flippable-card__heading">
-                                            <span class="flippable-card__heading-span">Skill Set</span>
-                                        </h4>
-                                    </div>
-                                    <div class="flippable-card__details">
-                                        <ul>
-                                            <li>Advanced JS and CSS</li>
-                                            <li>JS/CSS Preprocessors</li>
-                                            <li>JS Frameworks</li>
-                                            <li>Advanced Animations</li>
-                                            <li>Deployment Pipelines</li>
-                                            <li>Large Apps Architectures</li>
-                                            <li>Naming Conventions</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="flippable-card__side flippable-card__side--front">
-                                    <div class="flippable-card__theme">
-                                        <div class="flippable-card__theme-box">
-                                            <p class="flippable-card__subject">Web Developer</p>
-                                            <p class="flippable-card__title">Hello World!</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="artboard">
-                            <div class="flippable-card">
-
-                                <div class="flippable-card__side flippable-card__side--back">
-                                    <div class="flippable-card__cover">
-                                        <h4 class="flippable-card__heading">
-                                            <span class="flippable-card__heading-span">Skill Set</span>
-                                        </h4>
-                                    </div>
-                                    <div class="flippable-card__details">
-                                        <ul>
-                                            <li>Advanced JS and CSS</li>
-                                            <li>JS/CSS Preprocessors</li>
-                                            <li>JS Frameworks</li>
-                                            <li>Advanced Animations</li>
-                                            <li>Deployment Pipelines</li>
-                                            <li>Large Apps Architectures</li>
-                                            <li>Naming Conventions</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="flippable-card__side flippable-card__side--front">
-                                    <div class="flippable-card__theme">
-                                        <div class="flippable-card__theme-box">
-                                            <p class="flippable-card__subject">Web Developer</p>
-                                            <p class="flippable-card__title">Hello World!</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="artboard">
-                            <div class="flippable-card">
-
-                                <div class="flippable-card__side flippable-card__side--back">
-                                    <div class="flippable-card__cover">
-                                        <h4 class="flippable-card__heading">
-                                            <span class="flippable-card__heading-span">Skill Set</span>
-                                        </h4>
-                                    </div>
-                                    <div class="flippable-card__details">
-                                        <ul>
-                                            <li>Advanced JS and CSS</li>
-                                            <li>JS/CSS Preprocessors</li>
-                                            <li>JS Frameworks</li>
-                                            <li>Advanced Animations</li>
-                                            <li>Deployment Pipelines</li>
-                                            <li>Large Apps Architectures</li>
-                                            <li>Naming Conventions</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="flippable-card__side flippable-card__side--front">
-                                    <div class="flippable-card__theme">
-                                        <div class="flippable-card__theme-box">
-                                            <p class="flippable-card__subject">Web Developer</p>
-                                            <p class="flippable-card__title">Hello World!</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="artboard">
-                            <div class="flippable-card">
-
-                                <div class="flippable-card__side flippable-card__side--back">
-                                    <div class="flippable-card__cover">
-                                        <h4 class="flippable-card__heading">
-                                            <span class="flippable-card__heading-span">Skill Set</span>
-                                        </h4>
-                                    </div>
-                                    <div class="flippable-card__details">
-                                        <ul>
-                                            <li>Advanced JS and CSS</li>
-                                            <li>JS/CSS Preprocessors</li>
-                                            <li>JS Frameworks</li>
-                                            <li>Advanced Animations</li>
-                                            <li>Deployment Pipelines</li>
-                                            <li>Large Apps Architectures</li>
-                                            <li>Naming Conventions</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="flippable-card__side flippable-card__side--front">
-                                    <div class="flippable-card__theme">
-                                        <div class="flippable-card__theme-box">
-                                            <p class="flippable-card__subject">Web Developer</p>
-                                            <p class="flippable-card__title">Hello World!</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="artboard">
-                            <div class="flippable-card">
-
-                                <div class="flippable-card__side flippable-card__side--back">
-                                    <div class="flippable-card__cover">
-                                        <h4 class="flippable-card__heading">
-                                            <span class="flippable-card__heading-span">Skill Set</span>
-                                        </h4>
-                                    </div>
-                                    <div class="flippable-card__details">
-                                        <ul>
-                                            <li>Advanced JS and CSS</li>
-                                            <li>JS/CSS Preprocessors</li>
-                                            <li>JS Frameworks</li>
-                                            <li>Advanced Animations</li>
-                                            <li>Deployment Pipelines</li>
-                                            <li>Large Apps Architectures</li>
-                                            <li>Naming Conventions</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="flippable-card__side flippable-card__side--front">
-                                    <div class="flippable-card__theme">
-                                        <div class="flippable-card__theme-box">
-                                            <p class="flippable-card__subject">Web Developer</p>
-                                            <p class="flippable-card__title">Hello World!</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    {availableQuestList.map((quest) => showElements(quest))}
                 </Slider>
                 
             </div>
         );
-    }
+    
 }
+
+export default AvailableQuests;
