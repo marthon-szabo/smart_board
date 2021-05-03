@@ -26,16 +26,16 @@ function TaskDetailsModal() {
 
     const closeModalWindow = () => {
         console.log(changed);
+        console.log(taskDetails.taskId);
         if (changed) {
             const data = JSON.stringify({
-                taskId: taskDetails.taskId,
+                id: taskDetails.id,
                 columnId: taskDetails.columnId,
                 taskName: taskDetails.taskName,
                 deadline: taskDetails.deadline,
                 isDone: checked,
                 description: taskDetails.description
             })
-            console.log("sákráválihólihólijézusamiurunk");
             fetch(`boards/tasks`, {
                 method: 'PATCH',
                 body: data,
@@ -55,7 +55,7 @@ function TaskDetailsModal() {
         if (event.keyCode === 13) {
             setChanged(true);
             const newData = {
-                taskId: taskDetails.taskId,
+                id: taskDetails.id,
                 columnId: taskDetails.columnId,
                 taskName: taskNameInput.current.value,
                 deadline: taskDetails.deadline,
@@ -76,7 +76,7 @@ function TaskDetailsModal() {
         console.log("adjeffed0");
         setChanged(true);
             const newData = {
-                taskId: taskDetails.taskId,
+                id: taskDetails.id,
                 columnId: taskDetails.columnId,
                 taskName: taskDetails.taskName,
                 deadline: value.toString(),
@@ -95,7 +95,7 @@ function TaskDetailsModal() {
         if (event.keyCode === 13) {
             setChanged(true);
             const newData = {
-                taskId: taskDetails.taskId,
+                id: taskDetails.id,
                 columnId: taskDetails.columnId,
                 taskName: taskDetails.taskName,
                 deadline: taskDetails.deadline,
