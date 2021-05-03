@@ -1,9 +1,9 @@
-﻿import React from 'react';
+﻿import React, { Component } from "react";
+import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../static/scss/Flippable-card.scss";
-import Timer from "../../images/quests/timer.png";
 
 export default class AvailableQuests extends Component {
     render() {
@@ -52,7 +52,7 @@ export default class AvailableQuests extends Component {
 
                                 <div class="flippable-card__side flippable-card__side--front">
                                             <p class="flippable-card__title">Hello World!</p>
-                                            <img src={Timer} alt="quest logo"></img>
+                                    <img src="/images/quests/timer.png" alt="quest logo"></img>
                                 </div>
 
                             </div>
