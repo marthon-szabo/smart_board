@@ -11,13 +11,10 @@ namespace App.Models.Entities
         [Required]
         public string Id { get; set; }
         
-        [Column("user_id")]
-        [Required]
-        public string UserId { get; set; }
-        
         [Required]
         public string Content { get; set; }
         
+        [Column("date")]
         public DateTime Date { get; set; }
         
     }
