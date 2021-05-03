@@ -48,3 +48,18 @@ CREATE TABLE Tasks (
     -- FOREIGN KEY(subtask_id) REFERENCES Tasks(task_id)
 );
 
+DROP TABLE IF EXISTS Messages;
+CREATE TABLE Messages (
+    message_id CHAR PRIMARY KEY,
+    content CHAR NOT NULL,
+    message_date SMALLDATETIME
+);
+
+DROP TABLE IF EXISTS Users_Messages;
+CREATE TABLE Users_Messages (
+    users_messages_id CHAR PRIMARY KEY,
+    message_id CHAR NOT NULL,
+    user_id CHAR NOT NULL,
+    FOREIGN KEY(message_id) REFERENCES Messages(message_id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
