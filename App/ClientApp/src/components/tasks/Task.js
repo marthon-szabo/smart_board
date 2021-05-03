@@ -48,6 +48,7 @@ function Task(props) {
 
     const openDetailModal = () => {
         setTaskDetails(props.task);
+        console.log(props.task);
     }
 
     return (
