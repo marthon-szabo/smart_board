@@ -18,7 +18,7 @@ function AvailableQuest(props) {
                 <div className="flippable-card__side flippable-card__side--front">
                     <div className="flippable-card__theme">
                         <p className="flippable-card__title">Quest!</p>
-                        <div>
+                        <div className="image-container">
                             <img className="quest-badge" src={props.quest.picturePath} alt="quest logo"></img>
                         </div>
                     </div>
