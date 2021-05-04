@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\components\contexts\questContexts\" />
     <Folder Include="ClientApp\src\images\quests\" />
   </ItemGroup>
 
