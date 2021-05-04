@@ -119,6 +119,7 @@ body {
         -webkit-backface-visibility: hidden; /* We don't want to see the back part of the element. */
         backface-visibility: hidden; /* We don't want to see the back part of the element. */
         border-radius: 15px;
+        border: solid;
         overflow: hidden; /* The image is overflowing the parent. */
         &--front {
             background-color: $color-white;
