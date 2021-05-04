@@ -7,6 +7,7 @@ function AvailableQuest(props) {
 
     const openDetailModal = () => {
         setOpenState(props.quest);
+        document.querySelector(".container").classList.add("blurred-box");
     }
 
     return (
