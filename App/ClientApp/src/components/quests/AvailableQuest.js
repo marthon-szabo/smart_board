@@ -1,9 +1,12 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
+import { AvailableQuestDetailContext } from "../contexts/questContexts/AvailableQuestDetailContext";
 
 function AvailableQuest(props) {
 
+    const [openState, setOpenState] = useContext(AvailableQuestDetailContext);
+
     const openDetailModal = () => {
-        alert("clicked " + props.quest.description);
+        setOpenState(props.quest);
     }
 
     return (
@@ -12,7 +15,11 @@ function AvailableQuest(props) {
                 <div className="flippable-card__side flippable-card__side--back">
                     <div className="flippable-card__theme">
                         <p>{props.quest.description}</p>
-                        <button type="submit" onClick={openDetailModal}>Check details</button>
+                        <button
+                            className={props.quest.id % 2 == 0 ? "even-button" : "odd-button"}
+                            type="submit"
+                            onClick={openDetailModal}
+                        >Check details</button>
                     </div>
                 </div>
                 <div className="flippable-card__side flippable-card__side--front">
