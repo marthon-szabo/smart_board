@@ -57,7 +57,22 @@ function AvailableQuests() {
             picturePath: "/images/quests/star.png",
             description: "Make a new friend this week to earn this badge!",
             toFinish: "7 days"
-        }]
+        },
+        {
+            id: 7,
+            questName: "Master creator",
+            picturePath: "/images/quests/thunder.png",
+            description: "Create 20 new tasks this week to earn this badge!",
+            toFinish: "7 days"
+        },
+        {
+            id: 8,
+            questName: "Master of all tasks",
+            picturePath: "/images/quests/trophy.png",
+            description: "Finish all your tasks this week to earn this badge!",
+            toFinish: "7 days"
+        },
+    ]
 
     const settings = {
         dots: true,
