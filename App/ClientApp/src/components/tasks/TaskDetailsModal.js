@@ -2,7 +2,7 @@
 import Modal from 'react-awesome-modal';
 import Switch from "react-switch";
 import Calendar from 'react-calendar';
-import { TaskDetailsContext } from "../contexts/TaskDetailsContext";
+import { TaskDetailsContext } from "../contexts/taskContexts/TaskDetailsContext";
 
 import "./TaskDetailsModal.scss";
 import 'react-calendar/dist/Calendar.css';

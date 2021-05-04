@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import { CreateBoardContext } from "../contexts/CreateBoardContext";
+import { CreateBoardContext } from "../contexts/boardContexts/CreateBoardContext";
 
 import PlusIcon from '../../images/plus.png';
 import './BoardCard.scss';

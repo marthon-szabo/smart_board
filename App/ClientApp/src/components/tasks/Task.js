@@ -1,8 +1,8 @@
 ﻿import React, { useContext, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { ColumnsContext } from "../contexts/ColumnsContext";
-import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
-import { TaskDetailsContext } from "../contexts/TaskDetailsContext";
+import { ColumnsContext } from "../contexts/columnContexts/ColumnsContext";
+import { DeleteTaskConfirmationContext } from "../contexts/taskContexts/DeleteTaskConfirmationContext";
+import { TaskDetailsContext } from "../contexts/taskContexts/TaskDetailsContext";
 
 import "../../static/scss/TableStyle.scss";
 

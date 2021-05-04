@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import { UserDataContext } from "./contexts/UserDataContext";
+import { UserDataContext } from "./contexts/userContexts/UserDataContext";
 import UnloadedPicture from "../images/unloaded_profile_picture.png";
 
 import "./Profile.scss";

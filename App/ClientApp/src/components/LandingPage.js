@@ -8,6 +8,7 @@ import DeleteConfirmationModal from './boards/DeleteConfirmationModal';
 import DeleteColumnConfirmationModal from "./columns/DeleteColumnConfirmationModal";
 import DeleteTaskConfirmationModal from "./tasks/DeleteTaskConfirmationModal";
 import TaskDetailsModal from "./tasks/TaskDetailsModal";
+import AvailableDetailModal from "./quests/AvailableDetailModal";
 
 import './NavMenu.scss';
 
@@ -25,6 +26,7 @@ function LandingPage() {
             <CreateColumnModal />
             <CreateTaskModal />
             <TaskDetailsModal />
+            <AvailableDetailModal />
         </div>
     )
 }

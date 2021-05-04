@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useState } from 'react';
 import Modal from 'react-awesome-modal';
 import Calendar from 'react-calendar';
-import { CreateTaskContext } from "../contexts/CreateTaskContext";
+import { CreateTaskContext } from "../contexts/taskContexts/CreateTaskContext";
 
 import 'react-calendar/dist/Calendar.css';
 import './CreateTaskModal.scss';

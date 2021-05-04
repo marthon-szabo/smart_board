@@ -1,7 +1,7 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
-import { CreateBoardContext } from "../contexts/CreateBoardContext";
-import { UserDataContext } from "../contexts/UserDataContext";
+import { CreateBoardContext } from "../contexts/boardContexts/CreateBoardContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
 function CreateBoardModal() {
     const [createBoardState, setCreateBoardState] = useContext(CreateBoardContext);

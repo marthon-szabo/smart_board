@@ -1,8 +1,14 @@
 ﻿import React from 'react';
 
 function FinishedQuests() {
+
+    const centerStyle = {
+        textAlign: "center",
+        fontSize: "1.5rem"
+    };
+
     return (
-        <p>Finished quests will come here</p>
+        <p style={centerStyle}><strong>Finished quests will come here</strong></p>
         )
 }
 

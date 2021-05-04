@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
-import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
+import { DeleteTaskConfirmationContext } from "../contexts/taskContexts/DeleteTaskConfirmationContext";
 
 import DeleteIcon from '../../images/delete.png';
 
