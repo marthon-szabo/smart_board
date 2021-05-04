@@ -4,6 +4,19 @@
     margin-bottom: 40px;
 }
 
+.profile-box {
+    width: 620px;
+    height: 300px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #96dcd2;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid;
+}
+
 .profile-picture {
     display: inline-block;
     float: left;
@@ -13,6 +26,5 @@
 }
 
 .profile-content {
-    margin-top: 75px;
     text-align: justify;
 }
