@@ -14,6 +14,7 @@ import { DeleteColumnConfirmationProvider } from "./components/contexts/columnCo
 import { DeleteTaskConfirmationProvider } from "./components/contexts/taskContexts/DeleteTaskConfirmationContext";
 import { ColumnsProvider } from "./components/contexts/columnContexts/ColumnsContext";
 import { TaskDetailsProvider } from "./components/contexts/taskContexts/TaskDetailsContext";
+import { AvailableQuestDetailProvider } from "./components/contexts/questContexts/AvailableQuestDetailContext";
 
 import './static/scss/custom.scss';
 import './static/scss/App.scss';
@@ -37,9 +38,11 @@ export default class App extends Component {
       <CreateTaskProvider>
       <ColumnsProvider>
       <TaskDetailsProvider>
+      <AvailableQuestDetailProvider>
       <Layout>
       
       </Layout>
+      </AvailableQuestDetailProvider>
       </TaskDetailsProvider>
       </ColumnsProvider>
       </CreateTaskProvider>
