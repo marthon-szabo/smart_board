@@ -68,14 +68,13 @@ function AvailableQuests() {
     };
 
     const centerStyle = {
-        diplay: "block",
-        left: "auto",
-        right: "auto"
+        textAlign: "center",
+        fontSize: "1.5rem"
     };
 
     return(
         <div style={{ width: "auto", marginLeft: "35px", marginRight: "35px" }}>
-            <p style={centerStyle}>Available quests</p>
+            <p style={centerStyle}><strong>Available quests</strong></p>
             <Slider {...settings}>
                 {availableQuestList.map((quest) => showElements(quest))}
             </Slider>
