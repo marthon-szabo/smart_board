@@ -9,6 +9,9 @@ import './QuestContainer.scss';
 function QuestContainer() {
     return (
         <div className="container">
+            <div className="quest-header">
+                <h1> Quests </h1>
+            </div>
             <div className="available-quests">
                 <AvailableQuests />
             </div>
