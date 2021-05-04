@@ -47,7 +47,6 @@ function AvailableQuests() {
             description: "Make a new friend this week to earn this badge!"
         }]
 
-
     const settings = {
         dots: true,
         infinite: true,
@@ -62,16 +61,13 @@ function AvailableQuests() {
         right: "auto"
     };
 
-    return (
-
+    return(
         <div style={{ width: "auto", marginLeft: "35px", marginRight: "35px" }}>
             <p style={centerStyle}>Available quests</p>
             <Slider {...settings}>
                 {availableQuestList.map((quest) => showElements(quest))}
             </Slider>
-
-        </div>
-    );
+        </div>);
 }
 
 export default AvailableQuests;
