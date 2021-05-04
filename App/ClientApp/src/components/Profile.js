@@ -17,7 +17,6 @@ function Profile() {
                 <h1> Profile </h1>
             </div>
             <div className="profile-box">
-                <div className="profile-data">
                 <img className="profile-picture" src={UnloadedPicture} alt="Question mark for unloaded profile"></img>
                 <div className="profile-content">
                     <p><strong>Your username:</strong> {username}</p>
@@ -25,8 +24,42 @@ function Profile() {
                     <p><strong>Number of taken quests:</strong> {takenQuests} </p>
                     <p><strong>Number of done quests:</strong> {doneQuests} </p>
                     <p><strong>Number of your badges:</strong> {badges} </p>
-                    </div>
                 </div>
+            </div>
+            <div className="password-changer-box">
+                <p className="change-title"><strong>Change password</strong></p>
+                <form>
+                    <div className="form-group">
+                        <label>Old password:</label>
+                        <input
+                            type="password"
+                            className="form-control profile-password"
+                            name="old-password"
+                            placeholder="Enter old password"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>New password:</label>
+                        <input
+                            type="password"
+                            className="form-control profile-password"
+                            name="new-password"
+                            placeholder="Enter new password"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>New password again:</label>
+                        <input
+                            type="password"
+                            className="form-control profile-password"
+                            name="confirm-password"
+                            placeholder="Enter new password again"
+                        />
+                    </div>
+                    <button id="change-btn" type="submit" className="btn btn-primary btn-block profile-button">
+                        Change
+                    </button>
+                </form>
             </div>
         </div>
     )
