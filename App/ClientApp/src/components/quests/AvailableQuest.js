@@ -7,15 +7,21 @@ function AvailableQuest(props) {
     }
 
     return (
-        <div class="artboard">
-            <div class="flippable-card">
-                <div class="flippable-card__side flippable-card__side--back">
-                    <p>{props.quest.description}</p>
-                    <button type="submit" onClick={openDetailModal}>Check details</button>
+        <div className="artboard">
+            <div className="flippable-card">
+                <div className="flippable-card__side flippable-card__side--back">
+                    <div className="flippable-card__theme">
+                        <p>{props.quest.description}</p>
+                        <button type="submit" onClick={openDetailModal}>Check details</button>
+                    </div>
                 </div>
-                <div class="flippable-card__side flippable-card__side--front">
-                    <p class="flippable-card__title">Quest!</p>
-                    <img src={props.quest.picturePath} alt="quest logo"></img>
+                <div className="flippable-card__side flippable-card__side--front">
+                    <div className="flippable-card__theme">
+                        <p className="flippable-card__title">Quest!</p>
+                        <div>
+                            <img className="quest-badge" src={props.quest.picturePath} alt="quest logo"></img>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
