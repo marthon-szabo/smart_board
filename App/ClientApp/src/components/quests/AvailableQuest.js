@@ -2,8 +2,8 @@
 
 function AvailableQuest(props) {
 
-    const centerStyle = {
-        textAlign: "center"
+    const openDetailModal = () => {
+        alert("clicked " + props.quest.description);
     }
 
     return (
@@ -11,6 +11,7 @@ function AvailableQuest(props) {
             <div class="flippable-card">
                 <div class="flippable-card__side flippable-card__side--back">
                     <p>{props.quest.description}</p>
+                    <button type="submit" onClick={openDetailModal}>Check details</button>
                 </div>
                 <div class="flippable-card__side flippable-card__side--front">
                     <p class="flippable-card__title">Quest!</p>
