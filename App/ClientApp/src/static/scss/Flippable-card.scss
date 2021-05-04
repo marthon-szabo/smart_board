@@ -130,6 +130,9 @@ body {
 
     &:hover &__side--front {
         transform: rotateY(-180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     // Front side of the card
     &__theme {
