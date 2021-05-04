@@ -28,3 +28,36 @@
 .profile-content {
     text-align: justify;
 }
+
+.password-changer-box {
+    width: 320px;
+    height: 400px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-top: 30px;
+    background-color: #ea697a;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid;
+}
+
+.profile-password {
+    width: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile-button {
+    width: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.change-title {
+    font-size: 1.5rem;
+}
