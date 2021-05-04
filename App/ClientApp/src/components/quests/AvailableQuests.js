@@ -17,26 +17,32 @@ function showElements(quest) {
 function AvailableQuests() {
     const availableQuestList = [
         {
+            id: 1,
             picturePath: "/images/quests/timer.png",
             description: "Finish 5 tasks in a week to earn this badge!"
         },
         {
+            id: 2,
             picturePath: "/images/quests/chest.png",
             description: "Make 3 new friends this week to earn this badge!"
         },
         {
+            id: 3,
             picturePath: "/images/quests/exclamation.png",
             description: "Create a new board with a friend to earn this badge!"
         },
         {
+            id: 4,
             picturePath: "/images/quests/pen.png",
             description: "Create 10 tasks in a week to earn this badge!"
         },
         {
+            id: 5,
             picturePath: "/images/quests/sandclock.png",
             description: "Finish 10 tasks in a week to earn this badge!"
         },
         {
+            id: 6,
             picturePath: "/images/quests/star.png",
             description: "Make a new friend this week to earn this badge!"
         }]
