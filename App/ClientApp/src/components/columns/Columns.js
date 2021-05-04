@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
-import { ColumnsContext } from "../contexts/ColumnsContext";
-import { BoardStateContext } from "../contexts/BoardStateContext";
+import { ColumnsContext } from "../contexts/columnContexts/ColumnsContext";
+import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
 import Column from "./Column";
 
 function showElements(column) {

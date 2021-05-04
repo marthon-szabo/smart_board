@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import { UserDataContext } from "./contexts/UserDataContext";
+import { UserDataContext } from "./contexts/userContexts/UserDataContext";
 import QuestContainer from "./quests/QuestContainer";
 import Profile from "./Profile";
 import News from "./News";

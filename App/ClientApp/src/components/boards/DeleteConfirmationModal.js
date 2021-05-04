@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useState } from 'react';
 import Modal from 'react-awesome-modal';
-import { DeleteBoardContext } from "../contexts/DeleteBoardContext";
-import { UserDataContext } from "../contexts/UserDataContext";
+import { DeleteBoardContext } from "../contexts/boardContexts/DeleteBoardContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
 import DeleteIcon from '../../images/delete.png';
 

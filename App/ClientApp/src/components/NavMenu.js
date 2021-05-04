@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { LoginStateContext } from "./contexts/LoginStateContext";
-import { RegisterStateContext } from "./contexts/RegisterStateContext";
-import { CSRFTokenContext } from "./contexts/CSRFTokenContext";
-import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
+import { LoginStateContext } from "./contexts/userContexts/LoginStateContext";
+import { RegisterStateContext } from "./contexts/userContexts/RegisterStateContext";
+import { CSRFTokenContext } from "./contexts/userContexts/CSRFTokenContext";
+import { LoggedInUserContext } from "./contexts/userContexts/LoggedInUserContext";
 import Register from "./userManagement/Register";
 import Login from "./userManagement/Login";
 import { Home } from "./Home";

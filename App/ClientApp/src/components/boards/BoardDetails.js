@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
-import { BoardStateContext } from "../contexts/BoardStateContext";
-import { CreateColumnContext } from "../contexts/CreateColumnContext";
+import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
+import { CreateColumnContext } from "../contexts/columnContexts/CreateColumnContext";
 import { DragDropContext } from 'react-beautiful-dnd';
 import BoardModal from './BoardModalComponents/BoardModal';
 import Columns from '../columns/Columns';

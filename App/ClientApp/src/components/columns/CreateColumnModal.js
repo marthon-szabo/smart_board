@@ -1,7 +1,7 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
-import { CreateColumnContext } from "../contexts/CreateColumnContext";
-import { BoardStateContext } from "../contexts/BoardStateContext";
+import { CreateColumnContext } from "../contexts/columnContexts/CreateColumnContext";
+import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
 
 function CreateColumnModal() {
 
