@@ -106,6 +106,36 @@ body {
     height: 120px;
 }
 
+.odd-button {
+    background-color: #66c7b9;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+    text-align: center;
+    width: 100px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.odd-button:hover {
+    background-color: #726aa7;
+}
+
+.even-button {
+    background-color: #726aa7;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+    text-align: center;
+    width: 100px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.even-button:hover {
+    background-color: #66c7b9;
+}
+
 .flippable-card {
     flex: initial;
     position: relative;
