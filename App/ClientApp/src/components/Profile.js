@@ -12,20 +12,24 @@ function Profile() {
     const doneQuests = userData.doneQuests ? userData.doneQuests : 0;
     const badges = userData.badges ? userData.badges : 0;
     return (
-        <div>
+        <div className="profile-container">
             <div className="profile-header">
                 <h1> Profile </h1>
             </div>
-            <img className="profile-picture" src={UnloadedPicture} alt="Question mark for unloaded profile"></img>
-            <div className="profile-content">
-            <p><strong>Your username:</strong> {username}</p>
-            <p><strong>Your email:</strong> {email}</p>
-            <p><strong>Number of taken quests:</strong> {takenQuests} </p>
-            <p><strong>Number of done quests:</strong> {doneQuests} </p>
-                <p><strong>Number of your badges:</strong> {badges} </p>
+            <div className="profile-box">
+                <div className="profile-data">
+                <img className="profile-picture" src={UnloadedPicture} alt="Question mark for unloaded profile"></img>
+                <div className="profile-content">
+                    <p><strong>Your username:</strong> {username}</p>
+                    <p><strong>Your email:</strong> {email}</p>
+                    <p><strong>Number of taken quests:</strong> {takenQuests} </p>
+                    <p><strong>Number of done quests:</strong> {doneQuests} </p>
+                    <p><strong>Number of your badges:</strong> {badges} </p>
+                    </div>
                 </div>
+            </div>
         </div>
-        )
+    )
 }
 
 export default Profile;
