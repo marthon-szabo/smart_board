@@ -17,6 +17,7 @@ import { TaskDetailsProvider } from "./components/contexts/TaskDetailsContext";
 
 import './static/scss/custom.scss';
 import './static/scss/App.scss';
+import ChatClient from './components/chat/ChatClient';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -40,6 +41,7 @@ export default class App extends Component {
       <Layout>
       
       </Layout>
+     
       </TaskDetailsProvider>
       </ColumnsProvider>
       </CreateTaskProvider>
