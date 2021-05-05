@@ -1,5 +1,6 @@
 using System;
 using App.Models.Entities;
+using App.Services.Hubs;
 using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,17 @@ namespace App
             services.AddScoped<IUsersBoardsRepository, SQLUsersBoardsRepository>();
             services.AddScoped<IColumnRepository, SQLColumnRepository>();
             services.AddScoped<ITaskRepository, SQLTaskRepository>();
+            services.AddSignalR();
+            
+            services.AddCors(options => 
+            {
+                options.AddPolicy("ClientPermission", policy => {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("https://localhost:5001")
+                        .AllowCredentials();
+                });
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -66,6 +78,7 @@ namespace App
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            app.UseCors("ClientPermission");
             app.UseRouting();
 
             app.UseSession();
@@ -75,6 +88,7 @@ namespace App
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/hubs/chat");
             });
 
             app.UseSpa(spa =>
