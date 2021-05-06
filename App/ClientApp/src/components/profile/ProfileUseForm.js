@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect, useContext } from 'react';
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
-const ProfileUseForm = (callback, validate) => {
+const ProfileUseForm = (validate, setChangePassword, setSuccessfulChange) => {
     const [values, setValues] = useState({
         oldPassword: '',
         newPassword: '',
@@ -32,7 +32,8 @@ const ProfileUseForm = (callback, validate) => {
 
     const handleResponse = (response) => {
         if (response.status === 200) {
-            alert("successful");
+            setChangePassword(false);
+            setSuccessfulChange(true);
         } else if (response.status === 417) {
             setErrors({ oldPassword: "Password is not correct" });
         }
