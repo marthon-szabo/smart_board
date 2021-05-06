@@ -95,7 +95,32 @@ namespace App.Controllers
             
         }
 
-        
+        [HttpPost("user/change-password")]
+        [RequireHttps]
+        public ActionResult ChangePassword ()
+        {
+            Stream stream = Request.Body;
+
+            ChangePasswordVM changeable = this.ReadRequestBody<ChangePasswordVM>(stream);
+
+            User user = _UserRepo.GetUserByUsername(changeable.Username);
+
+            bool isSame = PasswordOperator.ValidateMe(user.Password, changeable.NewPassword);
+
+            if (isSame)
+            {
+                return StatusCode(417);
+            }
+            else
+            {
+                string hashedPassword = PasswordOperator.HashMe(changeable.NewPassword);
+                user.Password = hashedPassword;
+                _UserRepo.UpdateEntityById(user);
+                return Ok();
+            }
+            
+        }
+
         private UserProfileVM GetProfile(User user)
         {
             return new UserProfileVM
