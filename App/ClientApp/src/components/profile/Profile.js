@@ -7,10 +7,11 @@ import validate from "./ValidatePasswordInformation";
 
 import "./Profile.scss";
 
-function Profile({ submitForm }) {
+function Profile() {
     const [userData, setUserData] = useContext(UserDataContext);
 
     const [changePassword, setChangePassword] = useState(false);
+    const [succesfulChange, setSuccessfulChange] = useState(false);
 
     const username = userData.username;
     const email = userData.email;
@@ -19,11 +20,14 @@ function Profile({ submitForm }) {
     const badges = userData.badges ? userData.badges : 0;
 
     const { handleChange, values, handleSubmit, errors } = useForm(
-        submitForm,
-        validate);
+        validate,
+        setChangePassword,
+        setSuccessfulChange
+    );
 
     const showPasswordChanger = () => {
         setChangePassword(true);
+        setSuccessfulChange(false);
     }
 
 
@@ -91,6 +95,11 @@ function Profile({ submitForm }) {
                             Change
                     </button>
                     </form>
+                </div>
+            }
+            {succesfulChange === true &&
+                <div className="successful-change-box">
+                    <p>Password has been changed successfully!</p>
                 </div>
             }
 
