@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useState } from 'react';
-import { UserDataContext } from "./contexts/userContexts/UserDataContext";
-import UnloadedPicture from "../images/unloaded_profile_picture.png";
-import EditPicture from "../images/pencil.png";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
+import UnloadedPicture from "../../images/unloaded_profile_picture.png";
+import EditPicture from "../../images/pencil.png";
 
 import "./Profile.scss";
 
@@ -18,6 +18,10 @@ function Profile() {
 
     const showPasswordChanger = () => {
         setChangePassword(true);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
     }
 
     return (
@@ -43,7 +47,7 @@ function Profile() {
             {changePassword === true && 
                 <div className="password-changer-box">
                     <p className="change-title"><strong>Change password</strong></p>
-                    <form>
+                <form onSubmit={(e) => handleSubmit(e)}>
                         <div className="form-group">
                             <label>Old password:</label>
                             <input
