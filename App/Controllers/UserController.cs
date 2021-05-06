@@ -106,8 +106,9 @@ namespace App.Controllers
             User user = _UserRepo.GetUserByUsername(changeable.Username);
 
             bool isSame = PasswordOperator.ValidateMe(user.Password, changeable.NewPassword);
+            bool isValid = PasswordOperator.ValidateMe(user.Password, changeable.OldPassword);
 
-            if (isSame)
+            if (isSame || !isValid)
             {
                 return StatusCode(417);
             }
