@@ -1,4 +1,5 @@
-﻿import { useState } from 'react';
+﻿import { useState, useEffect, useContext } from 'react';
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
 const ProfileUseForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -7,6 +8,7 @@ const ProfileUseForm = (callback, validate) => {
         confirmedPassword: ''
     });
 
+    const [userData, setUserData] = useContext(UserDataContext);
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -21,10 +23,37 @@ const ProfileUseForm = (callback, validate) => {
         console.log(values);
     };
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validate(values));
+
+        setIsSubmitting(true);
     };
+
+    const handleResponse = (response) => {
+        if (response.status === 200) {
+            alert("successful");
+        } else if (response.status === 417) {
+            setErrors({ oldPassword: "Password is not correct" });
+        }
+    }
+
+    useEffect(
+        () => {
+            if (Object.keys(errors).length === 0 && isSubmitting) {
+                const data = JSON.stringify({
+                    username: userData.username,
+                    oldPassword: values.oldPassword,
+                    newPassword: values.newPassword
+                });
+                fetch('/user/change-password', {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                    .then(response => handleResponse(response));
+            }
+        });
 
     return { handleChange, values, handleSubmit, errors };
 }
