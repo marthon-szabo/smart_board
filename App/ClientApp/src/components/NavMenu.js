@@ -29,36 +29,36 @@ function NavMenu() {
         document.querySelector(".container").classList.add("blurred-box");
     }
 
-        return (
-            <>
-                {
-                    loggedInUser === true &&
-                    <LandingPage />
-                }
-                {
-                    loggedInUser === false &&
-                    <div>
-                        <div className="container">
-                            <div className="container-fluid main">
-                                <div className="text-center main-text">
-                                    <div className="c2a-btn footer-c2a-btn">
-                                        <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
-                                            <a type="button" className="btn btn-default btn-lg" href="#" onClick={() => openRegistrationWindow()}>Sign up</a>
-                                            <span className="btn-circle btn-or">or</span>
-                                            <a type="button" className="btn btn-default btn-lg" href="#" onClick={() => openLoginWindow()}>Sign in</a>
-                                        </div>
+    return (
+        <>
+            {
+                loggedInUser === true &&
+                <LandingPage />
+            }
+            {
+                loggedInUser === false &&
+                <div>
+                    <div className="container">
+                        <div className="container-fluid main">
+                            <div className="text-center main-text">
+                                <div className="c2a-btn footer-c2a-btn">
+                                    <div className="btn-group btn-group-lg" role="group" aria-label="Call to action">
+                                        <a type="button" className="btn btn-default btn-lg" href="#" onClick={() => openRegistrationWindow()}>Sign up</a>
+                                        <span className="btn-circle btn-or">or</span>
+                                        <a type="button" className="btn btn-default btn-lg" href="#" onClick={() => openLoginWindow()}>Sign in</a>
                                     </div>
                                 </div>
                             </div>
-                            <Home />
                         </div>
-                    
+                        <Home />
+                    </div>
+
                     <Register />
-                        <Login />
-                        </div>
-                }
-                    </>
-    );  
+                    <Login />
+                </div>
+            }
+        </>
+    );
 }
 
 export default NavMenu;
