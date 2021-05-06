@@ -31,7 +31,6 @@ const UserLoginForm = (callback, validate) => {
     };
 
     const checkLogin = (data, button, box, buttonText) => {
-        console.log(data)
         const userDataFromResponse = {
             username: data.username,
             email: data.email,
