@@ -65,7 +65,8 @@ function Profile() {
                                 value={values.oldPassword}
                                 onChange={handleChange}
                             />
-                            {errors.oldPassword && <p>{errors.oldPassword}</p>}
+                        {errors.oldPassword &&
+                            <p className="password-error">{errors.oldPassword}</p>}
                         </div>
                         <div className="form-group">
                             <label>New password:</label>
@@ -77,7 +78,8 @@ function Profile() {
                                 value={values.newPassword}
                                 onChange={handleChange}
                             />
-                            {errors.newPassword && <p>{errors.newPassword}</p>}
+                        {errors.newPassword &&
+                            <p className="password-error">{errors.newPassword}</p>}
                         </div>
                         <div className="form-group">
                             <label>New password again:</label>
@@ -89,7 +91,8 @@ function Profile() {
                                 value={values.confirmedPassword}
                                 onChange={handleChange}
                             />
-                            {errors.confirmedPassword && <p>{errors.confirmedPassword}</p>}
+                        {errors.confirmedPassword &&
+                            <p className="password-error">{errors.confirmedPassword}</p>}
                         </div>
                         <button id="change-btn" type="submit" className="btn btn-primary btn-block profile-button">
                             Change
