@@ -2,10 +2,12 @@
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import UnloadedPicture from "../../images/unloaded_profile_picture.png";
 import EditPicture from "../../images/pencil.png";
+import useForm from "./ProfileUseForm";
+import validate from "./ValidatePasswordInformation";
 
 import "./Profile.scss";
 
-function Profile() {
+function Profile({ submitForm }) {
     const [userData, setUserData] = useContext(UserDataContext);
 
     const [changePassword, setChangePassword] = useState(false);
@@ -16,17 +18,18 @@ function Profile() {
     const doneQuests = userData.doneQuests ? userData.doneQuests : 0;
     const badges = userData.badges ? userData.badges : 0;
 
+    const { handleChange, values, handleSubmit, errors } = useForm(
+        submitForm,
+        validate);
+
     const showPasswordChanger = () => {
         setChangePassword(true);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
 
     return (
         <div className="profile-container">
-            
+
             <div className="profile-header">
                 <h1> Profile </h1>
             </div>
@@ -39,49 +42,58 @@ function Profile() {
                     <p><strong>Number of taken quests:</strong> {takenQuests} </p>
                     <p><strong>Number of done quests:</strong> {doneQuests} </p>
                     <p><strong>Number of your badges:</strong> {badges} </p>
-                    {changePassword === false && 
+                    {changePassword === false &&
                         <button className="password-changer-button" onClick={showPasswordChanger}>Change password</button>
                     }
                 </div>
             </div>
-            {changePassword === true && 
+            {changePassword === true &&
                 <div className="password-changer-box">
                     <p className="change-title"><strong>Change password</strong></p>
-                <form onSubmit={(e) => handleSubmit(e)}>
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <div className="form-group">
                             <label>Old password:</label>
                             <input
                                 type="password"
                                 className="form-control profile-password"
-                                name="old-password"
+                                name="oldPassword"
                                 placeholder="Enter old password"
+                                value={values.oldPassword}
+                                onChange={handleChange}
                             />
+                            {errors.oldPassword && <p>{errors.oldPassword}</p>}
                         </div>
                         <div className="form-group">
                             <label>New password:</label>
                             <input
                                 type="password"
                                 className="form-control profile-password"
-                                name="new-password"
+                                name="newPassword"
                                 placeholder="Enter new password"
+                                value={values.newPassword}
+                                onChange={handleChange}
                             />
+                            {errors.newPassword && <p>{errors.newPassword}</p>}
                         </div>
                         <div className="form-group">
                             <label>New password again:</label>
                             <input
                                 type="password"
                                 className="form-control profile-password"
-                                name="confirm-password"
+                                name="confirmedPassword"
                                 placeholder="Enter new password again"
+                                value={values.confirmedPassword}
+                                onChange={handleChange}
                             />
+                            {errors.confirmedPassword && <p>{errors.confirmedPassword}</p>}
                         </div>
                         <button id="change-btn" type="submit" className="btn btn-primary btn-block profile-button">
                             Change
                     </button>
                     </form>
                 </div>
-}
-            
+            }
+
         </div>
     )
 }
