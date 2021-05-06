@@ -14,8 +14,6 @@ const ProfileUseForm = (validate, setChangePassword, setSuccessfulChange) => {
 
     const handleChange = e => {
         const { name, value } = e.target;
-        console.log(name);
-        console.log(value);
         setValues({
             ...values,
             [name]: value
@@ -31,6 +29,7 @@ const ProfileUseForm = (validate, setChangePassword, setSuccessfulChange) => {
     };
 
     const handleResponse = (response) => {
+        console.log(response.status);
         if (response.status === 200) {
             setChangePassword(false);
             setSuccessfulChange(true);
