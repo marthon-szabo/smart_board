@@ -32,7 +32,13 @@ function Profile() {
     }
 
     const openChangeData = () => {
-        setChangeProfileData(true)
+        setChangeProfileData(true);
+        setChangePassword(false);
+    }
+
+    const cancelChange = (e) => {
+        e.preventDefault();
+        setChangeProfileData(false);
     }
 
 
@@ -75,8 +81,11 @@ function Profile() {
                             placeholder="Enter new email"
                         />
                     </div>
-                    <button id="change-btn" type="submit" className="btn btn-primary btn-block profile-button">
+                    <button id="change-btn-profile" type="submit" className="btn btn-primary btn-block profile-button confirm-button">
                         Change
+                    </button>
+                    <button id="change-btn-profile" className="btn btn-primary btn-block profile-button" onClick={(e) => cancelChange(e)}>
+                        Cancel
                     </button>
                     </form>
                 }
@@ -124,7 +133,7 @@ function Profile() {
                         {errors.confirmedPassword &&
                             <p className="password-error">{errors.confirmedPassword}</p>}
                         </div>
-                        <button id="change-btn" type="submit" className="btn btn-primary btn-block profile-button">
+                        <button id="change-btn-pwd" type="submit" className="btn btn-primary btn-block profile-button">
                             Change
                     </button>
                     </form>
