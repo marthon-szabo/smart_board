@@ -2,8 +2,8 @@
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import UnloadedPicture from "../../images/unloaded_profile_picture.png";
 import EditPicture from "../../images/pencil.png";
-import useForm from "./ProfilePasswordUseForm";
-import validate from "./ValidatePasswordInformation";
+import PasswordUseForm from "./ProfilePasswordUseForm";
+import validatePassword from "./ValidatePasswordInformation";
 
 import "./Profile.scss";
 
@@ -20,8 +20,8 @@ function Profile() {
     const doneQuests = userData.doneQuests ? userData.doneQuests : 0;
     const badges = userData.badges ? userData.badges : 0;
 
-    const { handleChange, values, handleSubmit, errors } = useForm(
-        validate,
+    const { handleChange, values, handleSubmit, errors } = PasswordUseForm(
+        validatePassword,
         setChangePassword,
         setSuccessfulChange
     );
