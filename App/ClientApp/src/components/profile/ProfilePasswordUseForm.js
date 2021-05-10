@@ -18,7 +18,6 @@ const ProfileUseForm = (validate, setChangePassword, setSuccessfulChange) => {
             ...values,
             [name]: value
         });
-        console.log(values);
     };
 
     const handleSubmit = (e) => {
