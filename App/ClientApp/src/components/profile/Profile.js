@@ -2,7 +2,7 @@
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import UnloadedPicture from "../../images/unloaded_profile_picture.png";
 import EditPicture from "../../images/pencil.png";
-import useForm from "./ProfileUseForm";
+import useForm from "./ProfilePasswordUseForm";
 import validate from "./ValidatePasswordInformation";
 
 import "./Profile.scss";
