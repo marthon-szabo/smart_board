@@ -73,7 +73,6 @@ function TaskDetailsModal() {
     }
 
     const changeDeadline = (event) => {
-        console.log("adjeffed0");
         setChanged(true);
             const newData = {
                 id: taskDetails.id,
