@@ -32,7 +32,7 @@ function Profile() {
     }
 
     const openChangeData = () => {
-        setChangeProfileData(true);
+        setChangeProfileData(true)
     }
 
 
@@ -58,7 +58,27 @@ function Profile() {
                     </div>
                 }
                 {changeProfileData === true &&
-                    <p>Change profile data will come here </p>
+                    <form>
+                    <div className="form-group">
+                        <label>New username:</label>
+                        <input
+                            type="text"
+                            className="form-control profile-username"
+                            name="newUsername"
+                            placeholder="Enter new username"
+                        />
+                        <label>New email:</label>
+                        <input
+                            type="text"
+                            className="form-control profile-email"
+                            name="newEmail"
+                            placeholder="Enter new email"
+                        />
+                    </div>
+                    <button id="change-btn" type="submit" className="btn btn-primary btn-block profile-button">
+                        Change
+                    </button>
+                    </form>
                 }
             </div>
             {changePassword === true &&
