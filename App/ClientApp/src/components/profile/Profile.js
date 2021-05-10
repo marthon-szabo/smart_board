@@ -11,6 +11,7 @@ function Profile() {
     const [userData, setUserData] = useContext(UserDataContext);
 
     const [changePassword, setChangePassword] = useState(false);
+    const [changeProfileData, setChangeProfileData] = useState(false);
     const [succesfulChange, setSuccessfulChange] = useState(false);
 
     const username = userData.username;
@@ -30,6 +31,10 @@ function Profile() {
         setSuccessfulChange(false);
     }
 
+    const openChangeData = () => {
+        setChangeProfileData(true);
+    }
+
 
     return (
         <div className="profile-container">
@@ -39,17 +44,22 @@ function Profile() {
             </div>
             <div className="profile-box">
                 <img className="profile-picture" src={UnloadedPicture} alt="Question mark for unloaded profile"></img>
-                <div className="profile-content">
-                    <img className="edit-picture" src={EditPicture} alt="pencil for editing"></img>
-                    <p><strong>Your username:</strong> {username}</p>
-                    <p><strong>Your email:</strong> {email}</p>
-                    <p><strong>Number of taken quests:</strong> {takenQuests} </p>
-                    <p><strong>Number of done quests:</strong> {doneQuests} </p>
-                    <p><strong>Number of your badges:</strong> {badges} </p>
-                    {changePassword === false &&
-                        <button className="password-changer-button" onClick={showPasswordChanger}>Change password</button>
-                    }
-                </div>
+                {changeProfileData === false &&
+                    <div className="profile-content">
+                    <img className="edit-picture" src={EditPicture} alt="pencil for editing" onClick={openChangeData}></img>
+                        <p><strong>Your username:</strong> {username}</p>
+                        <p><strong>Your email:</strong> {email}</p>
+                        <p><strong>Number of taken quests:</strong> {takenQuests} </p>
+                        <p><strong>Number of done quests:</strong> {doneQuests} </p>
+                        <p><strong>Number of your badges:</strong> {badges} </p>
+                        {changePassword === false &&
+                            <button className="password-changer-button" onClick={showPasswordChanger}>Change password</button>
+                        }
+                    </div>
+                }
+                {changeProfileData === true &&
+                    <p>Change profile data will come here </p>
+                }
             </div>
             {changePassword === true &&
                 <div className="password-changer-box">
