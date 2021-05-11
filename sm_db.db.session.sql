@@ -48,18 +48,25 @@ CREATE TABLE Tasks (
     -- FOREIGN KEY(subtask_id) REFERENCES Tasks(task_id)
 );
 
-DROP TABLE IF EXISTS Messages;
-CREATE TABLE Messages (
+DROP TABLE IF EXISTS Chat_messages;
+CREATE TABLE Chat_messages (
     message_id CHAR PRIMARY KEY,
+    sender_id CHAR NOT NULL,
+    board_id CHAR NOT NULL,
     content CHAR NOT NULL,
-    message_date SMALLDATETIME
+    message_date SMALLDATETIME,
+    FOREIGN KEY(sender_id) REFERENCES users(user_id),
+    FOREIGN KEY(board_id) REFERENCES Boards(board_id)
 );
 
-DROP TABLE IF EXISTS Users_Messages;
-CREATE TABLE Users_Messages (
-    users_messages_id CHAR PRIMARY KEY,
-    message_id CHAR NOT NULL,
+DROP TABLE IF EXISTS Chat_groups;
+CREATE TABLE Chat_groups (
+    chat_groups_id CHAR PRIMARY KEY,
     user_id CHAR NOT NULL,
-    FOREIGN KEY(message_id) REFERENCES Messages(message_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
+    board_id CHAR NOT NULL,
+    chat_message_id CHAR,
+    group_name CHAR,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    FOREIGN KEY(board_id) REFERENCES Boards(board_id),
+    FOREIGN KEY(chat_message_id) REFERENCES Chat_messages(message_id)
 );
