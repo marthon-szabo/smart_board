@@ -7,6 +7,10 @@ using App.Services.Repositories.Interfaces;
 using App.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using App.Services.Factories.Interfaces;
+using App.Services.Hubs.Interfaces;
+using Microsoft.AspNetCore.SignalR;
+using App.Services.Hubs;
 
 namespace App.Controllers
 {
@@ -17,30 +21,37 @@ namespace App.Controllers
         private readonly IUserRepository _userRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
         protected readonly IColumnRepository _columnRepo;
+        private readonly IChatGroupRepo _chatGroupRepo;
+        private readonly IChatGroupFactory _chatGroupFactory;
 
         public BoardController(IBoardRepository boardRepo,
                                 IUserRepository userRepo,
                                 IUsersBoardsRepository userBoardsRepo,
-                                IColumnRepository columnRepo)
+                                IColumnRepository columnRepo,
+                                IChatGroupRepo chatGroupRepo,
+                                IChatGroupFactory chatGroupFactory)
         {
             _boardRepo = boardRepo;
             _userRepo = userRepo;
             _usersBoardsRepo = userBoardsRepo;
             _columnRepo = columnRepo;
+            _chatGroupRepo = chatGroupRepo;
+            _chatGroupFactory = chatGroupFactory;
         }
 
-        [HttpGet("boards/{userName}")]
-        public IEnumerable<Board> GetAllBoards(string userName)
+        [HttpGet("boards/{userId}")]
+        public IEnumerable<Board> GetAllBoards(string userId)
         {
-            return _boardRepo.GetAllBoardsByUsername(userName);
+            return _boardRepo.GetAllBoardsByUserId(userId);
         }
 
         [HttpPost("boards/create-board")]
-        public IEnumerable<Board> CreateNewBoard()
+        public IEnumerable<Board> CreateNewBoard(IChatClient chatClient)
         {
             Stream stream = Request.Body;
 
             NewBoardVM newBoardVM = this.ReadRequestBody<NewBoardVM>(stream);
+            ChatGroup newGroup = _chatGroupFactory.Create(newBoardVM.BoardId, newBoardVM.UserId);
 
             string id = IdGenerator.GenerateId();
 
@@ -49,11 +60,14 @@ namespace App.Controllers
                 BoardId = id,
                 BoardName = newBoardVM.BoardName
             };
+            newGroup.BoardId = id;
 
+            chatClient.JoinGroup(newGroup.Id);
             _boardRepo.CreateEntity(newBoard);
-            SaveBoardToConnectionTable(newBoard, newBoardVM.UserName);
+            _chatGroupRepo.CreateEntity(newGroup);
+            SaveBoardToConnectionTable(newBoard, newBoardVM.UserId);
 
-            return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
+            return _boardRepo.GetAllBoardsByUserId(newBoardVM.UserId);
         }
 
         [HttpPost("boards/delete-board")]
@@ -63,15 +77,19 @@ namespace App.Controllers
 
             NewBoardVM newBoardVM = this.ReadRequestBody<NewBoardVM>(stream);
 
-            Board boardToDelete = _boardRepo.GetBoardByBoardName(newBoardVM.BoardName);
+            Board boardToDelete = _boardRepo.GetEntityById(newBoardVM.BoardId);
+            ChatGroup chatGroup = _chatGroupRepo.GetAllEntities()
+                .Select(cG => cG)
+                .Where(cG => cG.BoardId.Equals(boardToDelete.BoardId))
+                .ToArray()[0];
 
             UsersBoards usersBoardsToDelete = _usersBoardsRepo.GetUsersBoardsByBoardId(boardToDelete.BoardId);
             _usersBoardsRepo.DeleteEntityById(usersBoardsToDelete.UsersBoardsId);
-
+            _chatGroupRepo.DeleteEntityById(chatGroup.Id);
             
             _boardRepo.DeleteEntityById(boardToDelete.BoardId);
 
-            return _boardRepo.GetAllBoardsByUsername(newBoardVM.UserName);
+            return _boardRepo.GetAllBoardsByUserId(newBoardVM.UserId);
         }
 
         [HttpPost("boards/columns")]
@@ -121,9 +139,9 @@ namespace App.Controllers
             return _columnRepo.GetColumnsByBoardId(boardid);
         }
 
-        private void SaveBoardToConnectionTable(Board newBoard, string userName)
+        private void SaveBoardToConnectionTable(Board newBoard, string userId)
         {
-            User currentUser = _userRepo.GetUserByUsername(userName);
+            User currentUser = _userRepo.GetEntityById(userId);
             string id = IdGenerator.GenerateId();
             UsersBoards usersBoards = new UsersBoards
             {
