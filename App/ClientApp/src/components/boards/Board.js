@@ -23,7 +23,6 @@ function Board(props) {
         setBoardState(props.board);
         document.querySelector(".container").classList.add("blurred-box");
         loadColumns();
-        console.log(columns);
     }
 
     const deleteBoard = () => {
