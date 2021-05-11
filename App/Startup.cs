@@ -1,6 +1,9 @@
 using System;
 using App.Models.Entities;
+using App.Services.Factories;
+using App.Services.Factories.Interfaces;
 using App.Services.Hubs;
+using App.Services.Hubs.Interfaces;
 using App.Services.Repositories;
 using App.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +44,9 @@ namespace App
             services.AddScoped<IUsersBoardsRepository, SQLUsersBoardsRepository>();
             services.AddScoped<IColumnRepository, SQLColumnRepository>();
             services.AddScoped<ITaskRepository, SQLTaskRepository>();
+            services.AddScoped<IChatMessageRepo, SQLChatMessageRepo>();
+            services.AddScoped<IChatGroupRepo, SQLChatGroupRepo>();
+            services.AddScoped<IChatGroupFactory, ChatGroupFactory>();
             services.AddSignalR();
             
             services.AddCors(options => 
