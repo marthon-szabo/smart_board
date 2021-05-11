@@ -6,7 +6,7 @@ import { UserDataContext } from "../contexts/UserDataContext";
 function CreateBoardModal() {
     const [createBoardState, setCreateBoardState] = useContext(CreateBoardContext);
     const [userData, setUserData] = useContext(UserDataContext);
-    const username = userData.username;
+    const userId = userData.userId;
 
     const closeModalWindow = () => {
         setCreateBoardState(false);
@@ -16,10 +16,9 @@ function CreateBoardModal() {
     const handleSubmit = e => {
         e.preventDefault();
         const name = document.getElementById("board-name").value;
-        console.log(name)
         const data = JSON.stringify({
-            UserName: username,
-            BoardName: name
+            UserId: userId,
+            BoardName: name,
         })
         fetch('boards/create-board', {
             method: 'POST',
