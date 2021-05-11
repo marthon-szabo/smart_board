@@ -33,14 +33,15 @@ const UserLoginForm = (callback, validate) => {
     const checkLogin = (data, button, box, buttonText) => {
         console.log(data)
         const userDataFromResponse = {
-            username: data.username,
+            userId: data.userId,
+            userName: data.userName,
             email: data.email,
             doneQuests: data.doneQuests,
             takenQuests: data.takenQuests,
             badges: data.badges
 
         }
-        if(data.username != null) {
+        if(data.userName != null) {
             enableLogin(button);
             setUserDataState(userDataFromResponse);
             setTimeout(() => {
