@@ -25,5 +25,18 @@ namespace App.Services.Repositories
             }
             return null;
         }
+
+        public IEnumerable<UsersBoards> GetUsersBoardsByUserId(string userId)
+        {
+            IEnumerable<UsersBoards> usersBoards = this.GetAllEntities();
+
+            foreach (UsersBoards usersBoard in usersBoards)
+            {
+                if (usersBoard.UserId.Equals(userId))
+                {
+                    yield return usersBoard;
+                }
+            }
+        }
     }
 }
