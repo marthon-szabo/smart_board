@@ -8,9 +8,9 @@ function showElements(board) {
 
 function Boards() {
     const [userData, setUserData] = useContext(UserDataContext);
-    const username = userData.username;
+    const userId = userData.userId;
     const [boards, setBoards] = useState([]);
-    fetch("boards/" + username)
+    fetch("boards/" + userId)
         .then(res => res.json())
         .then(data => setBoards(data));
 
