@@ -7,21 +7,22 @@ namespace App.Models.Entities
     [Table("Chat_messages")]
     public class ChatMessage
     {
-        // [Column("message_id")]
-        // [Required]
-        // public string Id { get; set; }
+        [Column("message_id")]
+        [Required]
+        public string Id { get; set; }
 
-        // [Column("content")]
-        // [Required]
-        // public string Content { get; set; }
-        
-        // [Column("message_date")]
-        // public DateTime Date { get; set; }
+        [Column("sender_id")]
+        public string SenderId { get; set; }
 
-        public string User { get; set; }
-        public string Message { get; set; }
+        [Column("board_id")]
+        [Required]
+        public string BoardId { get; set; }
+
+        [Column("content")]
+        [Required]
+        public string Content { get; set; }
         
-        
-        
+        [Column("message_date")]
+        public DateTime Date { get; set; }
     }
 }
