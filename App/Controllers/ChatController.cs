@@ -16,19 +16,17 @@ namespace App.Controllers
     public class ChatController : Controller
     {
         private readonly IHubContext<ChatHub, IChatClient> _chatHub;
-        private readonly IChatService _chatService;
         private readonly IChatMessageRepo _chatMessageRepo;
         private readonly IChatGroupRepo _chatGroupRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
 
         public ChatController(IHubContext<ChatHub, IChatClient> chatHub, IChatMessageRepo chatMessageRepo,
-            IChatGroupRepo chatGroupRepo, IUsersBoardsRepository usersBoardsRepo, IChatService chatService)
+            IChatGroupRepo chatGroupRepo, IUsersBoardsRepository usersBoardsRepo)
         {
             _chatHub = chatHub;
             _chatMessageRepo = chatMessageRepo;
             _chatGroupRepo = chatGroupRepo;
             _usersBoardsRepo = usersBoardsRepo;
-            _chatService = chatService;
         }
 
         [HttpGet("boards/chat/{boardId}/{userId}")]
