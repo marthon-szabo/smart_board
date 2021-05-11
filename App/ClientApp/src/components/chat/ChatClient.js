@@ -3,15 +3,26 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 
 import ChatWindow from './ChatWindow';
 import ChatInput from './ChatInput';
+import ChatIcon from '../../images/chat_bubble.png';
 
-const ChatClient = () => {
+const ChatClient = (props) => {
     const [ connection, setConnection ] = useState(null);
     const [ chat, setChat ] = useState([]);
     const latestChat = useRef(null);
+    const isOpen = false;
+    const chatMessage = {
+        id: "sent",
+        boardId: props.boardId,
+        senderId: props.userId,
+        content: "message",
+        date: "getCurrentTime()"
+    };
+
 
     latestChat.current = chat;
 
     useEffect(() => {
+        
         const newConnection = new HubConnectionBuilder()
             .withUrl('https://localhost:5001/hubs/chat')
             .withAutomaticReconnect()
@@ -37,19 +48,52 @@ const ChatClient = () => {
         }
     }, [connection]);
 
+    const getMessages = () => {
+        
+        fetch(`https://localhost:5001/boards/chat/${props.boardId}/${props.userId}`)
+            .then(data => data.json())
+            .then(res => console.log(res));
+        
+    }
+
+    const getCurrentTime = () => {
+        const currentDate = new Date();
+        const month = currentDate.getMonth();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
+        
+        const time = 
+            `${currentDate.getFullYear()}-${formatTime(month)}-` +
+            `${currentDate.getDate()}T${currentDate.getHours()}:` +
+            `${formatTime(minutes)}:${formatTime(seconds)}Z`;
+
+        return time;
+    }
+
+    const formatTime = (time) => {
+        const formattedTime = (time.toString().length == 1) ? `0${time}` : time;
+
+        return formattedTime;
+    }
+
     const sendMessage = async (user, message) => {
-        console.log("user: " + user)
-        const chatMessage = {
-            user: user,
-            message: message
-        };
+        chatMessage.content = message;
+        chatMessage.date = getCurrentTime();
+        console.log(`chatmessage: `);
+        console.log(chatMessage);
 
         if (connection.connectionStarted) {
             try {
-                await connection.send('SendMessage', chatMessage);
+                await  fetch('https://localhost:5001/boards/chat', { 
+                    method: 'POST', 
+                    body: JSON.stringify(chatMessage),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
             }
             catch(e) {
-                console.log(e);
+                console.log('Sending message failed.', e);
             }
         }
         else {
@@ -59,6 +103,7 @@ const ChatClient = () => {
 
     return (
         <div>
+            <img src={ChatIcon} onClick={getMessages}/>
             <ChatInput sendMessage={sendMessage} />
             <hr />
             <ChatWindow chat={chat}/>
