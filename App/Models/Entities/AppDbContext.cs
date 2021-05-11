@@ -15,6 +15,8 @@ namespace App.Models.Entities
         public DbSet<UsersBoards> UsersBoards { get; set; }
         public DbSet<Column> Columns { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<ChatGroup> ChatGroups { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
