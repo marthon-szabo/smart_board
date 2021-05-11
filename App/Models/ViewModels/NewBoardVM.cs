@@ -2,9 +2,14 @@
 {
     public class NewBoardVM
     {
-        public string BoardName { get; set; }
 
-        public string UserName { get; set; }
+        public string UserId { get; set; }
+        public string BoardId { get; set; }
+        public string BoardName { get; set; }
+        
+        
+        
+        
 
     }
 }
