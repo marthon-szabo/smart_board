@@ -74,7 +74,7 @@ namespace App.Controllers
 
         [HttpPost("user/login")]
         [RequireHttps]
-        public UserProfileVM Login()
+        public User Login()
         {
             Stream stream = Request.Body;
 
@@ -84,13 +84,13 @@ namespace App.Controllers
 
             if(existingUser == null || !PasswordOperator.ValidateMe(existingUser.Password, loginVM.Password))
             {
-                return new UserProfileVM();
+                return new User();
             }
             else
             {
                 HttpContext.Session.SetString("sessionId", IdGenerator.GenerateId());
                 
-                return this.GetProfile(existingUser);
+                return existingUser;
             }
             
         }
@@ -100,7 +100,7 @@ namespace App.Controllers
         {
             return new UserProfileVM
             {
-                Username = user.UserName,
+                UserName = user.UserName,
                 Email = user.Email,
                 Badges = user.Badges,
                 TakenQuests = user.TakenQuests,
