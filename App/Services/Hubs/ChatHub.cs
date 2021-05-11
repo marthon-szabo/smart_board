@@ -10,5 +10,25 @@ namespace App.Services.Hubs
         {
             await Clients.All.ReceiveMessage(message);
         }
+
+        public override System.Threading.Tasks.Task OnConnectedAsync()
+        {
+            return base.OnConnectedAsync();
+        }
+
+        public System.Threading.Tasks.Task JoinGroup(string group)
+        {
+            return Groups.AddToGroupAsync(Context.ConnectionId, group);
+        }
+
+        public System.Threading.Tasks.Task SendMessageToGroup(string groupName, ChatMessage message)
+        {
+            return Clients.Group(groupName).SendAsync("RecieveMessage", message);
+        }
+
+        public string GetConnectionId()
+        {
+            return Context.ConnectionId;
+        }
     }
 }
