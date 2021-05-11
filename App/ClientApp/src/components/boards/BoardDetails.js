@@ -2,11 +2,13 @@
 import { BoardStateContext } from "../contexts/BoardStateContext";
 import { CreateColumnContext } from "../contexts/CreateColumnContext";
 import { DragDropContext } from 'react-beautiful-dnd';
+import { UserDataContext } from "../contexts/UserDataContext";
 import BoardModal from './BoardModalComponents/BoardModal';
 import Columns from '../columns/Columns';
 
 import "../../static/scss/TableStyle.scss";
 import PlusIcon from "../../images/plus-green.png";
+import ChatClient from '../chat/ChatClient';
 
 const taskNames = [{
     id: "fdrg",
@@ -27,6 +29,7 @@ const taskNames = [{
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
     const [openColumnState, setOpenColumnState] = useContext(CreateColumnContext);
+    const [userDataState, setUserDataState] = useContext(UserDataContext);
     const [taskId, setTaskId] = useState(null);
 
     const closeModalWindow = () => {
@@ -61,6 +64,7 @@ function BoardDetails() {
 
     return (
         <section>
+            <div></div>
             <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="670" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div className="container">
                     <div className="board-title-header">
@@ -73,6 +77,7 @@ function BoardDetails() {
                         </div>
                     </DragDropContext>
                 </div>
+                <ChatClient boardId={boardState.boardId} userId={userDataState.userId}/>
             </BoardModal>
         </section >
     )
