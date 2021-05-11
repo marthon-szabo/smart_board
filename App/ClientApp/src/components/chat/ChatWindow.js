@@ -6,8 +6,8 @@ const ChatWindow = (props) => {
     const chat = props.chat
         .map(m => <Message 
             key={Date.now() * Math.random()}
-            user={m.user}
-            message={m.message}/>);
+            user={m.senderId}
+            message={m.content}/>);
 
     return(
         <div>
