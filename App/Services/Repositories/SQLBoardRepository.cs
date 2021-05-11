@@ -18,10 +18,9 @@ namespace App.Services.Repositories
             _UserRepo = userRepo;
         }
 
-        public IEnumerable<Board> GetAllBoardsByUsername(string username)
+        public IEnumerable<Board> GetAllBoardsByUserId(string userId)
         {
-            string id = _UserRepo.GetUserByUsername(username).UserId;
-            IEnumerable<string> boardIds = _UsersBoardsRepo.GetAllEntities().Where(uB => uB.UserId.Equals(id)).Select(uB => uB.BoardId);
+            IEnumerable<string> boardIds = _UsersBoardsRepo.GetAllEntities().Where(uB => uB.UserId.Equals(userId)).Select(uB => uB.BoardId);
             
 
             return this.GetAllEntities().Where(b => boardIds.Contains(b.BoardId)).Select(b => b);
