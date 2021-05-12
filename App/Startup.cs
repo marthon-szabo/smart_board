@@ -47,6 +47,7 @@ namespace App
             services.AddScoped<IChatMessageRepo, SQLChatMessageRepo>();
             services.AddScoped<IChatGroupRepo, SQLChatGroupRepo>();
             services.AddScoped<IChatGroupFactory, ChatGroupFactory>();
+            services.AddScoped<IChatMessageVMFactory, ChatMessageVMFactory>();
             services.AddSignalR();
             
             services.AddCors(options => 
