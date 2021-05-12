@@ -46,7 +46,7 @@ namespace App.Controllers
         }
 
         [HttpPost("boards/create-board")]
-        public IEnumerable<Board> CreateNewBoard(IChatClient chatClient)
+        public IEnumerable<Board> CreateNewBoard()
         {
             Stream stream = Request.Body;
 
@@ -62,7 +62,6 @@ namespace App.Controllers
             };
             newGroup.BoardId = id;
 
-            chatClient.JoinGroup(newGroup.Id);
             _boardRepo.CreateEntity(newBoard);
             _chatGroupRepo.CreateEntity(newGroup);
             SaveBoardToConnectionTable(newBoard, newBoardVM.UserId);
@@ -131,6 +130,17 @@ namespace App.Controllers
             _columnRepo.UpdateEntityById(_columnRepo.CreatColumnByColumnVM(columnVM));
 
             return _columnRepo.GetAllEntities();
+        }
+
+        [HttpGet("boards/chat-group/{boardId}")]
+        public ChatGroup GetChatGroup(string boardId)
+        {
+            ChatGroup chatGroup = _chatGroupRepo.GetAllEntities()
+                .Select(chatGroup => chatGroup)
+                .Where(chatGroup => chatGroup.BoardId.Equals(boardId))
+                .ToArray()[0];
+
+            return chatGroup;
         }
 
         [HttpGet("boards/columns/{boardid}")]
