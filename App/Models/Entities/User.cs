@@ -30,5 +30,10 @@ namespace App.Models.Entities
 
         [Column("badges", TypeName = "char")]
         public string Badges { get; set; }
+
+        [Column("profile_picture", TypeName = "char")]
+        public string ProfilePicture { get; set; }
+        
+        
     }
 }

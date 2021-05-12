@@ -6,7 +6,8 @@ CREATE TABLE users (
     done_quests char,
     taken_quests char,
     password char(250),
-    email char(250)
+    email char(250),
+    profile_picture char
 );
 
 DROP TABLE IF EXISTS Boards;
