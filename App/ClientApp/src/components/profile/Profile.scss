@@ -1,0 +1,119 @@
+﻿.profile-header {
+    text-align: center;
+    border-bottom: 3px solid;
+    margin-bottom: 40px;
+}
+
+.profile-box {
+    width: 620px;
+    height: 300px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #96dcd2;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid;
+}
+
+.profile-picture {
+    display: inline-block;
+    float: left;
+    border: solid;
+    height: 250px;
+    margin: 5px;
+}
+
+.profile-content {
+    text-align: justify;
+}
+
+.password-changer-box {
+    width: 320px;
+    height: 400px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-top: 30px;
+    background-color: #ea697a;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid;
+}
+
+.profile-password{
+    width: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile-username {
+    width: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile-email {
+    width: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile-button {
+    width: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.change-title {
+    font-size: 1.5rem;
+}
+
+.edit-picture {
+    width: 30px;
+    float: right;
+}
+
+.password-changer-button {
+    background-color: #ea697a;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+    text-align: center;
+    width: 100px;
+    text-decoration: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.successful-change-box {
+    width: 320px;
+    height: 100px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-top: 30px;
+    background-color: #ea697a;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid;
+}
+
+.password-error {
+    color: blue !important;
+}
+
+.confirm-button {
+    background-color: #ea697a !important;
+    border-color: #ea697a !important;
+}
