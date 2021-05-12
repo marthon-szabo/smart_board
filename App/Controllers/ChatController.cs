@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using App.Models.Entities;
+using App.Models.ViewModels;
+using App.Services.Factories.Interfaces;
 using App.Services.Hubs;
 using App.Services.Hubs.Interfaces;
 using App.Services.Repositories.Interfaces;
@@ -19,18 +21,20 @@ namespace App.Controllers
         private readonly IChatMessageRepo _chatMessageRepo;
         private readonly IChatGroupRepo _chatGroupRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
+        private readonly IChatMessageVMFactory _chatMessageVMFactory;
 
         public ChatController(IHubContext<ChatHub, IChatClient> chatHub, IChatMessageRepo chatMessageRepo,
-            IChatGroupRepo chatGroupRepo, IUsersBoardsRepository usersBoardsRepo)
+            IChatGroupRepo chatGroupRepo, IUsersBoardsRepository usersBoardsRepo, IChatMessageVMFactory chatMessageVMFactory)
         {
             _chatHub = chatHub;
             _chatMessageRepo = chatMessageRepo;
             _chatGroupRepo = chatGroupRepo;
             _usersBoardsRepo = usersBoardsRepo;
+            _chatMessageVMFactory = chatMessageVMFactory;
         }
 
         [HttpGet("boards/chat/{boardId}/{userId}")]
-        public IEnumerable<ChatMessage> GetAllMessages(string boardId, string userId)
+        public IEnumerable<ChatMessageVM> GetAllMessages(string boardId, string userId)
         {
             if(this.EvaluateUser(boardId, userId))
             {
@@ -40,10 +44,11 @@ namespace App.Controllers
                     .Where(message => message.BoardId.Equals(boardId))
                     .ToArray();
 
-                return chatMessages;
+                foreach(ChatMessage chatMessage in chatMessages)
+                {
+                    yield return _chatMessageVMFactory.CreateByChatMessage(chatMessage);
+                }
             }
-
-            return new ChatMessage[0];
         }
 
         [HttpPost("boards/chat")]
@@ -54,6 +59,17 @@ namespace App.Controllers
             _chatMessageRepo.CreateEntity(chatMessage);
 
             await _chatHub.Clients.All.ReceiveMessage(chatMessage);
+        }
+
+        [HttpGet("boards/chat/chat-group/{boardId}")]
+        public ChatGroup GetChatGroup(string boardId)
+        {
+            ChatGroup chatGroup = _chatGroupRepo.GetAllEntities()
+                .Select(chatGroup => chatGroup)
+                .Where(chatGroup => chatGroup.BoardId.Equals(boardId))
+                .ToArray()[0];
+            
+            return chatGroup;
         }
 
         private T ReadRequestBody<T>(Stream stream)
