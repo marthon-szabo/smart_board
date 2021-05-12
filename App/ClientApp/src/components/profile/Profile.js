@@ -2,8 +2,10 @@
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import UnloadedPicture from "../../images/unloaded_profile_picture.png";
 import EditPicture from "../../images/pencil.png";
-import PasswordUseForm from "./ProfilePasswordUseForm";
+import PasswordUseForm from "./ProfilePasswordUseForm"
+import DataUseForm from "./ProfileDataUseForm"
 import validatePassword from "./ValidatePasswordInformation";
+import validateUserInformation from "./ValidateUserInformation";
 
 import "./Profile.scss";
 
@@ -25,6 +27,11 @@ function Profile() {
         setChangePassword,
         setSuccessfulChange
     );
+
+    const { handleChangeData, valuesData, handleSubmitData, errorsData } = DataUseForm(
+        validateUserInformation
+    );
+
 
     const showPasswordChanger = () => {
         setChangePassword(true);
@@ -64,7 +71,7 @@ function Profile() {
                     </div>
                 }
                 {changeProfileData === true &&
-                    <form>
+                    <form onSubmit={(e) => handleSubmitData(e)}>
                     <div className="form-group">
                         <label>New username:</label>
                         <input
@@ -72,14 +79,24 @@ function Profile() {
                             className="form-control profile-username"
                             name="newUsername"
                             placeholder="Enter new username"
+                            value={valuesData.newUsername}
+                            onChange={handleChangeData}
                         />
+                        {errorsData.newUsername &&
+                            <p className="password-error">{errorsData.newUsername}</p>}
+                    </div>
+                    <div className="form-group">
                         <label>New email:</label>
                         <input
                             type="text"
                             className="form-control profile-email"
                             name="newEmail"
                             placeholder="Enter new email"
+                            value={valuesData.newEmail}
+                            onChange={handleChangeData}
                         />
+                        {errorsData.newEmail &&
+                            <p className="password-error">{errorsData.newEmail}</p>}
                     </div>
                     <button id="change-btn-profile" type="submit" className="btn btn-primary btn-block profile-button confirm-button">
                         Change
