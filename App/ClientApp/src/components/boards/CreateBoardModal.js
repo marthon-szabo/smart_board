@@ -2,11 +2,14 @@
 import Modal from 'react-awesome-modal';
 import { CreateBoardContext } from "../contexts/CreateBoardContext";
 import { UserDataContext } from "../contexts/UserDataContext";
+import ChatHelper from '../../Utilities/ChatHelper';
+import ChatClient from '../chat/ChatClient';
 
 function CreateBoardModal() {
     const [createBoardState, setCreateBoardState] = useContext(CreateBoardContext);
     const [userData, setUserData] = useContext(UserDataContext);
     const userId = userData.userId;
+    const chatHelper = new ChatHelper();
 
     const closeModalWindow = () => {
         setCreateBoardState(false);
@@ -20,13 +23,15 @@ function CreateBoardModal() {
             UserId: userId,
             BoardName: name,
         })
+        console.log(ChatHelper.connection)
         fetch('boards/create-board', {
             method: 'POST',
             body: data,
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => chatHelper.createChatGroup(data))
+            // .then(data => );
         closeModalWindow();
     }
 

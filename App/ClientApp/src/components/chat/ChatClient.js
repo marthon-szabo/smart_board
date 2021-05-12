@@ -3,6 +3,7 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 
 import ChatWindow from './ChatWindow';
 import ChatIcon from '../../images/chat_bubble.png';
+import ChatHelper from '../../Utilities/ChatHelper';
 
 const ChatClient = (props) => {
     const [ connection, setConnection ] = useState(null);
@@ -10,6 +11,7 @@ const ChatClient = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const latestChat = useRef(null);
     const chatWindow = useRef();
+    const chatHelper = new ChatHelper();
 
     const chatMessage = {
         id: "sent",
@@ -24,10 +26,7 @@ const ChatClient = (props) => {
 
     
     useEffect(() => {
-        const newConnection = new HubConnectionBuilder()
-            .withUrl('https://localhost:5001/hubs/chat')
-            .withAutomaticReconnect()
-            .build();
+        const newConnection = ChatHelper.connection;
 
         setConnection(newConnection);
     }, []);
