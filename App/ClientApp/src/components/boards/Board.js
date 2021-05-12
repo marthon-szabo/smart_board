@@ -21,13 +21,21 @@ function Board(props) {
 
     const openModalBoard = () => {
         setBoardState(props.board);
+        
         document.querySelector(".container").classList.add("blurred-box");
         loadColumns();
     }
 
     const deleteBoard = () => {
+        
         document.querySelector(".container").classList.add("blurred-box");
-        setDeleteBoardState(props.board.boardName);
+
+        const boardData = {
+            boardName: props.board.boardName,
+            boardId: props.board.boardId
+        }
+
+        setDeleteBoardState(boardData);
     }
 
     const loadColumns = () => {

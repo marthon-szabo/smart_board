@@ -2,6 +2,8 @@
 import Modal from 'react-awesome-modal';
 import { DeleteBoardContext } from "../contexts/DeleteBoardContext";
 import { UserDataContext } from "../contexts/UserDataContext";
+import { BoardStateContext } from "../contexts/BoardStateContext";
+
 
 import DeleteIcon from '../../images/delete.png';
 
@@ -11,6 +13,8 @@ function DeleteConfirmationModal() {
     const [errorState, setErrorState] = useState(null);
     const [deleteBoardState, setDeleteBoardState] = useContext(DeleteBoardContext);
     const [userData, setUserData] = useContext(UserDataContext);
+    const [boardState, setBoardState] = useContext(BoardStateContext);
+
     const username = userData.username;
 
     const IconStyle = {
@@ -27,13 +31,14 @@ function DeleteConfirmationModal() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const name = document.getElementById("board-name-to-delete").value;
-        console.log(name);
-
-        if (name === deleteBoardState) {
+        
+        if (name === deleteBoardState.boardName) {
             const data = JSON.stringify({
                 UserName: username,
-                BoardName: deleteBoardState
+                BoardName: deleteBoardState.BoardName,
+                BoardId: deleteBoardState.boardId
             })
+            
             fetch('boards/delete-board', {
                 method: 'POST',
                 body: data,
