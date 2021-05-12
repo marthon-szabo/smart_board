@@ -10,7 +10,7 @@
 
     if (!values.newEmail) {
         errors.newEmail = 'Email required';
-    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(values.newEmail)) {
         errors.newEmail = 'Email address is invalid';
     } else if (values.newEmail === email) {
         errors.newEmail = "New email can't be the old one";
