@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 import ChatWindow from './ChatWindow';
-import ChatInput from './ChatInput';
 import ChatIcon from '../../images/chat_bubble.png';
 
 const ChatClient = (props) => {
     const [ connection, setConnection ] = useState(null);
     const [ chat, setChat ] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
     const latestChat = useRef(null);
-    const isOpen = false;
+    const chatWindow = useRef();
+
     const chatMessage = {
         id: "sent",
         boardId: props.boardId,
@@ -21,8 +22,8 @@ const ChatClient = (props) => {
 
     latestChat.current = chat;
 
+    
     useEffect(() => {
-        
         const newConnection = new HubConnectionBuilder()
             .withUrl('https://localhost:5001/hubs/chat')
             .withAutomaticReconnect()
@@ -49,7 +50,8 @@ const ChatClient = (props) => {
     }, [connection]);
 
     const getMessages = () => {
-        
+        setIsOpen(!isOpen);
+
         fetch(`https://localhost:5001/boards/chat/${props.boardId}/${props.userId}`)
             .then(data => data.json())
             .then(res => console.log(res));
@@ -76,12 +78,10 @@ const ChatClient = (props) => {
         return formattedTime;
     }
 
-    const sendMessage = async (user, message) => {
+    const sendMessage = async (message) => {
         chatMessage.content = message;
         chatMessage.date = getCurrentTime();
-        console.log(`chatmessage: `);
-        console.log(chatMessage);
-
+        
         if (connection.connectionStarted) {
             try {
                 await  fetch('https://localhost:5001/boards/chat', { 
@@ -104,9 +104,10 @@ const ChatClient = (props) => {
     return (
         <div>
             <img src={ChatIcon} onClick={getMessages}/>
-            <ChatInput sendMessage={sendMessage} />
             <hr />
-            <ChatWindow chat={chat}/>
+            
+            <ChatWindow chat={chat} sendMessage={sendMessage} isHidden={isOpen} />
+            
         </div>
     );
 };
