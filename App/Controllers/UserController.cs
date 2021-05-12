@@ -122,7 +122,24 @@ namespace App.Controllers
             
         }
 
-        private UserProfileVM GetProfile(User user)
+        [HttpPost("user/change-userdata")]
+        [RequireHttps]
+        public UserProfileVM ChangeUserData()
+        {
+            Stream stream = Request.Body;
+
+            ChangeUserDataVM newData = this.ReadRequestBody<ChangeUserDataVM>(stream);
+
+            User user = _UserRepo.GetUserByUsername(newData.Username);
+
+            user.UserName = newData.NewUsername;
+            user.Email = newData.NewEmail;
+            _UserRepo.UpdateEntityById(user);
+
+            return this.GetProfile(user);
+        }
+
+            private UserProfileVM GetProfile(User user)
         {
             return new UserProfileVM
             {
