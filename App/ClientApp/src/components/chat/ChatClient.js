@@ -8,7 +8,8 @@ import ChatHelper from '../../Utilities/ChatHelper';
 const ChatClient = (props) => {
     const [ connection, setConnection ] = useState(null);
     const [ chat, setChat ] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+
     const latestChat = useRef(null);
     const chatWindow = useRef();
     const chatHelper = new ChatHelper();
@@ -53,7 +54,7 @@ const ChatClient = (props) => {
 
         fetch(`https://localhost:5001/boards/chat/${props.boardId}/${props.userId}`)
             .then(data => data.json())
-            .then(res => console.log(res));
+            .then(res => setChat(res));
         
     }
 
