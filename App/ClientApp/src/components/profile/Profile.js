@@ -29,7 +29,8 @@ function Profile() {
     );
 
     const { handleChangeData, valuesData, handleSubmitData, errorsData } = DataUseForm(
-        validateUserInformation
+        validateUserInformation,
+        setChangeProfileData
     );
 
 
