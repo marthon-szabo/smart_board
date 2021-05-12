@@ -1,7 +1,7 @@
 ﻿import { useState, useContext, useEffect } from 'react';
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
-const ProfileDataUseForm = (validate) => {
+const ProfileDataUseForm = (validate, setProfileChangeData) => {
     const [valuesData, setValuesData] = useState({
         newUsername: '',
         newEmail: ''
@@ -28,6 +28,7 @@ const ProfileDataUseForm = (validate) => {
 
     const saveNewData = (newData) => {
         setUserData(newData);
+        setProfileChangeData(false);
     }
 
     useEffect(
