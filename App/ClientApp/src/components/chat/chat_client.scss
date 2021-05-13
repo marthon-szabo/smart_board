@@ -1,0 +1,13 @@
+.chat-client {
+    position:absolute;
+    right: 2rem;
+    bottom: 0;
+
+    &__chat-icon {
+        width: 6em;
+    }
+
+    &__profile-picture {
+        width: 2em;
+    }
+}
