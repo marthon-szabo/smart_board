@@ -33,7 +33,6 @@ function Profile() {
         setChangeProfileData
     );
 
-
     const showPasswordChanger = () => {
         setChangePassword(true);
         setSuccessfulChange(false);
@@ -49,10 +48,8 @@ function Profile() {
         setChangeProfileData(false);
     }
 
-
     return (
         <div className="profile-container">
-
             <div className="profile-header">
                 <h1> Profile </h1>
             </div>
