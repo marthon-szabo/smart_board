@@ -57,7 +57,7 @@ function Profile() {
                 <img className="profile-picture" src={UnloadedPicture} alt="Question mark for unloaded profile"></img>
                 {changeProfileData === false &&
                     <div className="profile-content">
-                    <img className="edit-picture" src={EditPicture} alt="pencil for editing" onClick={openChangeData}></img>
+                        <img className="edit-picture" src={EditPicture} alt="pencil for editing" onClick={openChangeData}></img>
                         <p><strong>Your username:</strong> {username}</p>
                         <p><strong>Your email:</strong> {email}</p>
                         <p><strong>Number of taken quests:</strong> {takenQuests} </p>
@@ -69,40 +69,42 @@ function Profile() {
                     </div>
                 }
                 {changeProfileData === true &&
-                    <form onSubmit={(e) => handleSubmitData(e)}>
-                    <div className="form-group">
-                        <label>New username:</label>
-                        <input
-                            type="text"
-                            className="form-control profile-username"
-                            name="newUsername"
-                            placeholder="Enter new username"
-                            value={valuesData.newUsername}
-                            onChange={handleChangeData}
-                        />
-                        {errorsData.newUsername &&
-                            <p className="password-error">{errorsData.newUsername}</p>}
-                    </div>
-                    <div className="form-group">
-                        <label>New email:</label>
-                        <input
-                            type="text"
-                            className="form-control profile-email"
-                            name="newEmail"
-                            placeholder="Enter new email"
-                            value={valuesData.newEmail}
-                            onChange={handleChangeData}
-                        />
-                        {errorsData.newEmail &&
-                            <p className="password-error">{errorsData.newEmail}</p>}
-                    </div>
-                    <button id="change-btn-profile" type="submit" className="btn btn-primary btn-block profile-button confirm-button">
-                        Change
+                    <div className="changing-form">
+                        <form onSubmit={(e) => handleSubmitData(e)}>
+                            <div className="form-group">
+                                <label>New username:</label>
+                                <input
+                                    type="text"
+                                    className="form-control profile-username"
+                                    name="newUsername"
+                                    placeholder="Enter new username"
+                                    value={valuesData.newUsername}
+                                    onChange={handleChangeData}
+                                />
+                                {errorsData.newUsername &&
+                                    <p className="password-error">{errorsData.newUsername}</p>}
+                            </div>
+                            <div className="form-group">
+                                <label>New email:</label>
+                                <input
+                                    type="text"
+                                    className="form-control profile-email"
+                                    name="newEmail"
+                                    placeholder="Enter new email"
+                                    value={valuesData.newEmail}
+                                    onChange={handleChangeData}
+                                />
+                                {errorsData.newEmail &&
+                                    <p className="password-error">{errorsData.newEmail}</p>}
+                            </div>
+                            <button id="change-btn-profile" type="submit" className="btn btn-primary btn-block profile-button confirm-button">
+                                Change
                     </button>
-                    <button id="change-btn-profile" className="btn btn-primary btn-block profile-button" onClick={(e) => cancelChange(e)}>
-                        Cancel
+                            <button id="change-btn-profile" className="btn btn-primary btn-block profile-button" onClick={(e) => cancelChange(e)}>
+                                Cancel
                     </button>
-                    </form>
+                        </form>
+                    </div>
                 }
             </div>
             {changePassword === true &&
@@ -119,8 +121,8 @@ function Profile() {
                                 value={values.oldPassword}
                                 onChange={handleChange}
                             />
-                        {errors.oldPassword &&
-                            <p className="password-error">{errors.oldPassword}</p>}
+                            {errors.oldPassword &&
+                                <p className="password-error">{errors.oldPassword}</p>}
                         </div>
                         <div className="form-group">
                             <label>New password:</label>
@@ -132,8 +134,8 @@ function Profile() {
                                 value={values.newPassword}
                                 onChange={handleChange}
                             />
-                        {errors.newPassword &&
-                            <p className="password-error">{errors.newPassword}</p>}
+                            {errors.newPassword &&
+                                <p className="password-error">{errors.newPassword}</p>}
                         </div>
                         <div className="form-group">
                             <label>New password again:</label>
@@ -145,8 +147,8 @@ function Profile() {
                                 value={values.confirmedPassword}
                                 onChange={handleChange}
                             />
-                        {errors.confirmedPassword &&
-                            <p className="password-error">{errors.confirmedPassword}</p>}
+                            {errors.confirmedPassword &&
+                                <p className="password-error">{errors.confirmedPassword}</p>}
                         </div>
                         <button id="change-btn-pwd" type="submit" className="btn btn-primary btn-block profile-button">
                             Change
