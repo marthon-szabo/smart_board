@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const ChatInput = (props) => {
-    const [user, setUser] = useState('');
     const [message, setMessage] = useState('');
 
     const onSubmit = (e) => {
@@ -14,10 +13,6 @@ const ChatInput = (props) => {
         else {
             alert('Please insert a message.');
         }
-    }
-
-    const onUserUpdate = (e) => {
-        setUser(e.target.value);
     }
 
     const onMessageUpdate = (e) => {
