@@ -43,11 +43,8 @@ export default class App extends Component {
       <Layout>
       
       </Layout>
-<<<<<<< HEAD
-     
-=======
+
       </AvailableQuestDetailProvider>
->>>>>>> 77963b36b2407e60cd5dfebe646f062c68f1f740
       </TaskDetailsProvider>
       </ColumnsProvider>
       </CreateTaskProvider>

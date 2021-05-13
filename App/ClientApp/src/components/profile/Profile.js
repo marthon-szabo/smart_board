@@ -16,7 +16,7 @@ function Profile() {
     const [changeProfileData, setChangeProfileData] = useState(false);
     const [succesfulChange, setSuccessfulChange] = useState(false);
 
-    const username = userData.username;
+    const username = userData.userName;
     const email = userData.email;
     const takenQuests = userData.takenQuests ? userData.takenQuests : 0;
     const doneQuests = userData.doneQuests ? userData.doneQuests : 0;

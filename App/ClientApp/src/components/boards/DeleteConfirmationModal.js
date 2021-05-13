@@ -1,13 +1,11 @@
 ﻿import React, { useContext, useState } from 'react';
 import Modal from 'react-awesome-modal';
-import { DeleteBoardContext } from "../contexts/DeleteBoardContext";
-import { UserDataContext } from "../contexts/UserDataContext";
-import { BoardStateContext } from "../contexts/BoardStateContext";
+import { DeleteBoardContext } from "../contexts/boardContexts/DeleteBoardContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
+import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
 
 
 import DeleteIcon from '../../images/delete.png';
-import { DeleteBoardContext } from "../contexts/boardContexts/DeleteBoardContext";
-import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
 function DeleteConfirmationModal() {
 
@@ -16,7 +14,7 @@ function DeleteConfirmationModal() {
     const [userData, setUserData] = useContext(UserDataContext);
     const [boardState, setBoardState] = useContext(BoardStateContext);
 
-    const username = userData.username;
+    const username = userData.userName;
 
     const IconStyle = {
         display: "block",

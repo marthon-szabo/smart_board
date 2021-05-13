@@ -2,7 +2,7 @@
 import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
 import { CreateColumnContext } from "../contexts/columnContexts/CreateColumnContext";
 import { DragDropContext } from 'react-beautiful-dnd';
-import { UserDataContext } from "../contexts/UserDataContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import BoardModal from './BoardModalComponents/BoardModal';
 import Columns from '../columns/Columns';
 

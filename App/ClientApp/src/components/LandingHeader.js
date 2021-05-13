@@ -33,7 +33,7 @@ const IconStyle = {
 
 function LandingHeader() {
     const [userData, setUserData] = useContext(UserDataContext);
-    const username = userData.username;
+    const username = userData.userName;
     return (
         <Router>
         <div className="main-header">

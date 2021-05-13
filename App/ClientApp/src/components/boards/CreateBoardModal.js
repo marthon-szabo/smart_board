@@ -1,11 +1,9 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
-import { CreateBoardContext } from "../contexts/CreateBoardContext";
-import { UserDataContext } from "../contexts/UserDataContext";
-import ChatHelper from '../../Utilities/ChatHelper';
-import ChatClient from '../chat/ChatClient';
 import { CreateBoardContext } from "../contexts/boardContexts/CreateBoardContext";
 import { UserDataContext } from "../contexts/userContexts/UserDataContext";
+import ChatHelper from '../../Utilities/ChatHelper';
+import ChatClient from '../chat/ChatClient';
 
 
 function CreateBoardModal() {

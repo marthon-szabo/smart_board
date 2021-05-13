@@ -41,7 +41,7 @@ const ProfileUseForm = (validate, setChangePassword, setSuccessfulChange) => {
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
-                    username: userData.username,
+                    username: userData.userName,
                     oldPassword: values.oldPassword,
                     newPassword: values.newPassword
                 });

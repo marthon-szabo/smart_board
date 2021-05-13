@@ -35,7 +35,7 @@ const ProfileDataUseForm = (validate, setProfileChangeData) => {
         () => {
             if (Object.keys(errorsData).length === 0 && isSubmitting) {
                 const data = JSON.stringify({
-                    username: userData.username,
+                    username: userData.userName,
                     newUsername: valuesData.newUsername,
                     newEmail: valuesData.newEmail
                 });
