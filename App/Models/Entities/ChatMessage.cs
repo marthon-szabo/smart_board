@@ -17,6 +17,10 @@ namespace App.Models.Entities
         [Column("board_id")]
         [Required]
         public string BoardId { get; set; }
+        
+        [Column("sender_name")]
+        [Required]
+        public string SenderName { get; set; }
 
         [Column("content")]
         [Required]
