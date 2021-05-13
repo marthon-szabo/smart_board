@@ -25,9 +25,11 @@ function AvailableDetailModal() {
     }
 
     return (
-        <Modal className="available-quest-modal" visible={openState.length == 0 ? false : true} width="400" height="450" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
+        <Modal className="available-quest-modal" visible={openState.length == 0 ? false : true} width="400" height="470" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
             <div style={{ padding: "0px 25px" }}>
-                <p className="quest-name">{openState.questName}</p>
+                <div className="quest-name-container">
+                    <p className="quest-name">{openState.questName}</p>
+                </div>
                 <div className="image-container">
                     <img className="quest-badge" src={openState.picturePath} alt="quest logo"></img>
                 </div>
