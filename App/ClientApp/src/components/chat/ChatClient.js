@@ -102,8 +102,8 @@ const ChatClient = (props) => {
     }
 
     return (
-        <div>
-            <img src={ChatIcon} onClick={getMessages}/>
+        <div className="chat-client">
+            <img className="chat-client__chat-icon" src={ChatIcon} onClick={getMessages}/>
             <hr />
             
             <ChatWindow chat={chat} sendMessage={sendMessage} isHidden={isOpen} />
