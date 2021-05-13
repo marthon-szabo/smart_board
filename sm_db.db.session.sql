@@ -55,6 +55,7 @@ CREATE TABLE Chat_messages (
     sender_id CHAR NOT NULL,
     board_id CHAR NOT NULL,
     content CHAR NOT NULL,
+    sender_name CHAR NOT NULL,
     message_date SMALLDATETIME,
     FOREIGN KEY(sender_id) REFERENCES users(user_id),
     FOREIGN KEY(board_id) REFERENCES Boards(board_id)
