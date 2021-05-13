@@ -6,7 +6,7 @@
 
 .profile-box {
     width: 620px;
-    height: 300px;
+    min-height: 300px;
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -31,7 +31,7 @@
 
 .password-changer-box {
     width: 320px;
-    height: 400px;
+    min-height: 400px;
     display: block;
     margin-right: auto;
     margin-left: auto;
