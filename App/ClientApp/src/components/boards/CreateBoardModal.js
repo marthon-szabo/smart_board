@@ -4,6 +4,9 @@ import { CreateBoardContext } from "../contexts/CreateBoardContext";
 import { UserDataContext } from "../contexts/UserDataContext";
 import ChatHelper from '../../Utilities/ChatHelper';
 import ChatClient from '../chat/ChatClient';
+import { CreateBoardContext } from "../contexts/boardContexts/CreateBoardContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
+
 
 function CreateBoardModal() {
     const [createBoardState, setCreateBoardState] = useContext(CreateBoardContext);

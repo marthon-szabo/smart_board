@@ -2,7 +2,7 @@
 import Modal from 'react-awesome-modal';
 import Switch from "react-switch";
 import Calendar from 'react-calendar';
-import { TaskDetailsContext } from "../contexts/TaskDetailsContext";
+import { TaskDetailsContext } from "../contexts/taskContexts/TaskDetailsContext";
 
 import "./TaskDetailsModal.scss";
 import 'react-calendar/dist/Calendar.css';
@@ -73,7 +73,6 @@ function TaskDetailsModal() {
     }
 
     const changeDeadline = (event) => {
-        console.log("adjeffed0");
         setChanged(true);
             const newData = {
                 id: taskDetails.id,

@@ -1,7 +1,7 @@
 ﻿import React, { useContext } from 'react';
-import { BoardStateContext } from "../contexts/BoardStateContext";
-import { DeleteBoardContext } from "../contexts/DeleteBoardContext";
-import { ColumnsContext } from "../contexts/ColumnsContext";
+import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
+import { DeleteBoardContext } from "../contexts/boardContexts/DeleteBoardContext";
+import { ColumnsContext } from "../contexts/columnContexts/ColumnsContext";
 
 import BoardsIcon from '../../images/boards.png';
 import './BoardCard.scss';

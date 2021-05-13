@@ -1,5 +1,5 @@
-import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
-import { UserDataContext } from "../contexts/UserDataContext";
+import { LoggedInUserContext } from "../contexts/userContexts/LoggedInUserContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import { addSpinner } from '../../Utilities/Spinner'; 
 import { enableLogin, disableLogin } from "../../Utilities/UserInteracrtionChecker";
 import { useState, useEffect, useContext } from 'react';
@@ -31,7 +31,6 @@ const UserLoginForm = (callback, validate) => {
     };
 
     const checkLogin = (data, button, box, buttonText) => {
-        console.log(data)
         const userDataFromResponse = {
             userId: data.userId,
             userName: data.userName,

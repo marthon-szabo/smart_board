@@ -6,7 +6,8 @@ import { BoardStateContext } from "../contexts/BoardStateContext";
 
 
 import DeleteIcon from '../../images/delete.png';
-
+import { DeleteBoardContext } from "../contexts/boardContexts/DeleteBoardContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
 function DeleteConfirmationModal() {
 
@@ -31,14 +32,14 @@ function DeleteConfirmationModal() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const name = document.getElementById("board-name-to-delete").value;
-        
+
         if (name === deleteBoardState.boardName) {
             const data = JSON.stringify({
                 UserName: username,
                 BoardName: deleteBoardState.BoardName,
                 BoardId: deleteBoardState.boardId
             })
-            
+
             fetch('boards/delete-board', {
                 method: 'POST',
                 body: data,

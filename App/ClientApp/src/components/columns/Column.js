@@ -1,10 +1,9 @@
 ﻿import React, { useContext } from 'react';
 import Tasks from "../tasks/Tasks";
 import { Droppable } from 'react-beautiful-dnd';
-import { CreateTaskContext } from "../contexts/CreateTaskContext";
-import { DeleteColumnConfirmationContext } from "../contexts/DeleteColumnConfirmationContext";
-import { BoardStateContext } from "../contexts/BoardStateContext";
-import { ColumnsContext } from "../contexts/ColumnsContext";
+import { CreateTaskContext } from "../contexts/taskContexts/CreateTaskContext";
+import { DeleteColumnConfirmationContext } from "../contexts/columnContexts/DeleteColumnConfirmationContext";
+import { BoardStateContext } from "../contexts/boardContexts/BoardStateContext";
 
 import "../../static/scss/TableStyle.scss";
 

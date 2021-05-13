@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 import Modal from 'react-awesome-modal';
-import { DeleteTaskConfirmationContext } from "../contexts/DeleteTaskConfirmationContext";
+import { DeleteTaskConfirmationContext } from "../contexts/taskContexts/DeleteTaskConfirmationContext";
 
 import DeleteIcon from '../../images/delete.png';
 
@@ -49,7 +49,7 @@ function DeleteTaskConfirmationModal() {
                     <p>Task name: <strong>{openState.taskName}</strong> </p>
                     <p>Column name: <strong>{openState.columnName}</strong> </p>
                     <button style={DeleteStyle} id="delete-btn" onClick={deleteTask} type="submit" className="btn btn-primary btn-block">Yes</button>
-                    <button id="cancel-btn" type="submit" className="btn btn-primary btn-block">Cancel</button>
+                    <button id="cancel-btn" type="submit" className="btn btn-primary btn-block" onClick={closeModalWindow}>Cancel</button>
                 </div>
             </Modal>
         </section>

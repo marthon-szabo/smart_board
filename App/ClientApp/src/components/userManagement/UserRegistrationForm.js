@@ -1,8 +1,8 @@
 ﻿import { useState, useEffect, useContext } from 'react';
-import { UserDataContext } from "../contexts/UserDataContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 import { addSpinner, removeSpinner } from '../../Utilities/Spinner'; 
 import { enableLogin, disableLogin } from "../../Utilities/UserInteracrtionChecker";
-import { LoggedInUserContext } from '../contexts/LoggedInUserContext';
+import { LoggedInUserContext } from '../contexts/userContexts/LoggedInUserContext';
 
 const UseRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({

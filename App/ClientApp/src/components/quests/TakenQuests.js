@@ -1,8 +1,14 @@
 ﻿import React from 'react';
 
 function TakenQuests() {
+
+    const centerStyle = {
+        textAlign: "center",
+        fontSize: "1.5rem"
+    };
+
     return (
-        <p>Taken quests will come here</p>
+        <p style={centerStyle}><strong>Taken quests will come here</strong></p>
     )
 }
 

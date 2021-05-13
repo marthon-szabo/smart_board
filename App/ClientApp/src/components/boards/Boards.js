@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useState } from 'react';
 import Board from "./Board";
-import { UserDataContext } from "../contexts/UserDataContext";
+import { UserDataContext } from "../contexts/userContexts/UserDataContext";
 
 function showElements(board) {
     return (<Board board={board}/>)
