@@ -41,6 +41,7 @@ function BoardDetails() {
         <section>
             <BoardModal className="create-modal" visible={boardState.length == 0 ? false : true} width="800" height="670" effect="fadeInDown" onClickAway={() => closeModalWindow()}>
                 <div className="container">
+                    <button className="add-user-button">Add user</button>
                     <div className="board-title-header">
                         <h1> { boardState.boardName } </h1>
                     </div>
