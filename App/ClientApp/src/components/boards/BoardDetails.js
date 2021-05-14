@@ -8,22 +8,6 @@ import Columns from '../columns/Columns';
 import "../../static/scss/TableStyle.scss";
 import PlusIcon from "../../images/plus-green.png";
 
-const taskNames = [{
-    id: "fdrg",
-    taskName: "First task",
-    columnId: "asd"
-},
-{
-    id: "aaa",
-    taskName: "Second task",
-    columnId: "asd"
-},
-{
-    id: "1111",
-    taskName: "Third task",
-    columnId: "321"
-}]
-
 function BoardDetails() {
     const [boardState, setBoardState] = useContext(BoardStateContext);
     const [openColumnState, setOpenColumnState] = useContext(CreateColumnContext);
@@ -46,12 +30,6 @@ function BoardDetails() {
             console.log(source);
             console.log(destination);
             console.log(taskId);
-            for (let i = 0; i < taskNames.length; i++) {
-                console.log(taskNames[i].id);
-                if (taskNames[i].id === taskId) {
-                    taskNames[i].columnId = destination.droppableId;
-                }
-            }
         }
     }
 
