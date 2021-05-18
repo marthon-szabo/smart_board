@@ -25,6 +25,11 @@ namespace App.Models.Entities
         [Column("content")]
         [Required]
         public string Content { get; set; }
+
+        [Column("profile_picture")]
+        public string ProfilePicture { get; set; }
+        
+        
         
         [Column("message_date")]
         public DateTime Date { get; set; }
