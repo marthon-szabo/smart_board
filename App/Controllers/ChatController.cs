@@ -22,15 +22,18 @@ namespace App.Controllers
         private readonly IChatGroupRepo _chatGroupRepo;
         private readonly IUsersBoardsRepository _usersBoardsRepo;
         private readonly IChatMessageVMFactory _chatMessageVMFactory;
+        private readonly IUserRepository _usersRepo;
 
         public ChatController(IHubContext<ChatHub, IChatClient> chatHub, IChatMessageRepo chatMessageRepo,
-            IChatGroupRepo chatGroupRepo, IUsersBoardsRepository usersBoardsRepo, IChatMessageVMFactory chatMessageVMFactory)
+            IChatGroupRepo chatGroupRepo, IUsersBoardsRepository usersBoardsRepo, IChatMessageVMFactory chatMessageVMFactory,
+            IUserRepository usersRepo)
         {
             _chatHub = chatHub;
             _chatMessageRepo = chatMessageRepo;
             _chatGroupRepo = chatGroupRepo;
             _usersBoardsRepo = usersBoardsRepo;
             _chatMessageVMFactory = chatMessageVMFactory;
+            _usersRepo = usersRepo;
         }
 
         [HttpGet("boards/chat/{boardId}/{userId}")]
@@ -55,7 +58,11 @@ namespace App.Controllers
         public async System.Threading.Tasks.Task PostMessage()
         {
             ChatMessage chatMessage = this.ReadRequestBody<ChatMessage>(Request.Body);
+            string userName = _usersRepo.GetEntityById(chatMessage.SenderId).UserName;
+            
             chatMessage.Id = IdGenerator.GenerateId();
+            chatMessage.SenderName = userName;
+
             _chatMessageRepo.CreateEntity(chatMessage);
 
             await _chatHub.Clients.All.ReceiveMessage(chatMessage);
