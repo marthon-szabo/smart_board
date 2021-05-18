@@ -39,7 +39,7 @@ namespace Tests.ControllerTests
             UserProfileVM result = base._controller.Register();
 
             // Assert
-            Assert.AreEqual(expectation, result.Username);
+            Assert.AreEqual(expectation, result.UserName);
         }
 
         [TestCase("Albert Einstein", "456")]
