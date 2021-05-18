@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using App.Models.Entities;
 using App.Models.ViewModels;
@@ -120,6 +121,21 @@ namespace App.Controllers
                 return Ok();
             }
             
+        }
+
+        [HttpGet("user/available-users")]
+        [RequireHttps]
+        public List<string> GetAddableUsers()
+        {
+            IEnumerable<User> users = _UserRepo.GetAllEntities();
+
+            List<string> usernames = new List<string>();
+
+            foreach (var user in users)
+            {
+                usernames.Add(user.UserName);
+            }
+            return usernames;
         }
 
         [HttpPost("user/change-userdata")]
