@@ -4,7 +4,7 @@ import Message from './Message';
 import ChatInput from './ChatInput';
 
 const ChatWindow = (props) => {
-
+    console.log("props: ", props)
     const chat = props.chat
         .map(m => <Message 
             key={Date.now() * Math.random()}

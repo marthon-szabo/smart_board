@@ -58,10 +58,11 @@ namespace App.Controllers
         public async System.Threading.Tasks.Task PostMessage()
         {
             ChatMessage chatMessage = this.ReadRequestBody<ChatMessage>(Request.Body);
-            string userName = _usersRepo.GetEntityById(chatMessage.SenderId).UserName;
+            User user = _usersRepo.GetEntityById(chatMessage.SenderId);
             
             chatMessage.Id = IdGenerator.GenerateId();
-            chatMessage.SenderName = userName;
+            chatMessage.SenderName = user.UserName;
+            chatMessage.ProfilePicture = user.ProfilePicture;
 
             _chatMessageRepo.CreateEntity(chatMessage);
 
