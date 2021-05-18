@@ -17,11 +17,13 @@ namespace App.Services.Factories
         public ChatMessageVM CreateByChatMessage(ChatMessage chatMessage)
         {
             string userId = chatMessage.SenderId;
+            string userName = _userRepo.GetEntityById(chatMessage.SenderId).UserName;
 
             ChatMessageVM newChatMessageVM = new ChatMessageVM
             {
                 MessageId = chatMessage.Id,
                 SenderId = userId,
+                UserName = userName,
                 Content = chatMessage.Content,
                 Date = chatMessage.Date,
                 ProfilePicture = this.GetProfilePicture(userId)
