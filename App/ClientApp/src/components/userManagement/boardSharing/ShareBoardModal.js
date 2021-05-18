@@ -1,10 +1,13 @@
 ﻿import React, { useContext, useState } from 'react';
 import Modal from 'react-awesome-modal';
 import { AddUserToBoardContext } from "../../contexts/userContexts/AddUserToBoardContext";
+import { BoardStateContext } from "../../contexts/boardContexts/BoardStateContext";
+import Boards from '../../boards/Boards';
 
 function ShareBoardModal() {
 
     const [shareBoardState, setShareBoardState] = useContext(AddUserToBoardContext);
+    const [boardState, setBoardState] = useContext(BoardStateContext);
     const [selectedUser, setSelectedUser] = useState("");
 
     const closeShareWindow = () => {
@@ -21,7 +24,18 @@ function ShareBoardModal() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const data = JSON.stringify({
+            BoardName: boardState.boardName,
+            newUser: selectedUser
+        })
+        fetch('boards/add-board', {
+            method: 'POST',
+            body: data,
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => console.log(res.status));
         console.log(selectedUser);
+        console.log(boardState);
     }
 
     return (
