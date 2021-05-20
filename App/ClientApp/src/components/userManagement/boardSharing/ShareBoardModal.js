@@ -2,7 +2,8 @@
 import Modal from 'react-awesome-modal';
 import { AddUserToBoardContext } from "../../contexts/userContexts/AddUserToBoardContext";
 import { BoardStateContext } from "../../contexts/boardContexts/BoardStateContext";
-import Boards from '../../boards/Boards';
+
+import "./ShareBoardModal.scss";
 
 function ShareBoardModal() {
 
@@ -43,7 +44,7 @@ function ShareBoardModal() {
             <Modal className="share-board-modal" visible={shareBoardState.length == 0 ? false : true} width="400" height="350" effect="fadeInDown" onClickAway={() => closeShareWindow()}>
                 <p>Select a user to add as a contributor to this board:</p>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <select onChange={(e) => saveChange(e)}>
+                    <select className="select-user" onChange={(e) => saveChange(e)}>
                         {shareBoardState.map(showUsers)}
                     </select>
                     <button id="send-new-user-btn" type="submit" className="btn btn-primary btn-block">
