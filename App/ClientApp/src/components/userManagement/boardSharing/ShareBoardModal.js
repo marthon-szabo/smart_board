@@ -20,14 +20,17 @@ function ShareBoardModal() {
     }
 
     const saveChange = (e) => {
+        console.log(selectedUser);
         setSelectedUser(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newUser = (selectedUser === "") ? shareBoardState[0] : selectedUser;
+        console.log(newUser);
         const data = JSON.stringify({
             BoardName: boardState.boardName,
-            newUser: selectedUser
+            NewUser: newUser
         })
         fetch('boards/add-board', {
             method: 'POST',
