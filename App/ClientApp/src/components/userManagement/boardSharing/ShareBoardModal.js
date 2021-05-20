@@ -2,7 +2,8 @@
 import Modal from 'react-awesome-modal';
 import { AddUserToBoardContext } from "../../contexts/userContexts/AddUserToBoardContext";
 import { BoardStateContext } from "../../contexts/boardContexts/BoardStateContext";
-import Boards from '../../boards/Boards';
+
+import "./ShareBoardModal.scss";
 
 function ShareBoardModal() {
 
@@ -24,9 +25,10 @@ function ShareBoardModal() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newUser = (selectedUser === "") ? shareBoardState[0] : selectedUser;
         const data = JSON.stringify({
             BoardName: boardState.boardName,
-            newUser: selectedUser
+            NewUser: newUser
         })
         fetch('boards/add-board', {
             method: 'POST',
@@ -34,8 +36,6 @@ function ShareBoardModal() {
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => console.log(res.status));
-        console.log(selectedUser);
-        console.log(boardState);
     }
 
     return (
@@ -43,7 +43,7 @@ function ShareBoardModal() {
             <Modal className="share-board-modal" visible={shareBoardState.length == 0 ? false : true} width="400" height="350" effect="fadeInDown" onClickAway={() => closeShareWindow()}>
                 <p>Select a user to add as a contributor to this board:</p>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <select onChange={(e) => saveChange(e)}>
+                    <select className="select-user" onChange={(e) => saveChange(e)}>
                         {shareBoardState.map(showUsers)}
                     </select>
                     <button id="send-new-user-btn" type="submit" className="btn btn-primary btn-block">

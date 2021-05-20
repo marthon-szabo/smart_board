@@ -7,16 +7,19 @@ using App.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace App.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserRepository _UserRepo;
+        private readonly IUsersBoardsRepository _ConnectionRepo;
 
-        public UserController(IUserRepository repo)
+        public UserController(IUserRepository repo, IUsersBoardsRepository connectionRepo)
         {
             _UserRepo = repo;
+            _ConnectionRepo = connectionRepo;
         }
 
         [HttpPost("user/register")]
@@ -123,19 +126,35 @@ namespace App.Controllers
             
         }
 
-        [HttpGet("user/available-users")]
+        [HttpGet("user/available-users/{userId}")]
         [RequireHttps]
-        public List<string> GetAddableUsers()
+        public List<string> GetAddableUsers(string userId)
         {
             IEnumerable<User> users = _UserRepo.GetAllEntities();
 
-            List<string> usernames = new List<string>();
+            IEnumerable<UsersBoards> connections = _ConnectionRepo.GetAllEntities();
 
-            foreach (var user in users)
+            var connectionsWithCurrentTable = connections.Where(connection => connection.BoardId.Equals(userId));
+
+            List<string> userIds = new List<string>();
+            
+            foreach (var connection in connectionsWithCurrentTable)
             {
-                usernames.Add(user.UserName);
+                userIds.Add(connection.UserId);
             }
-            return usernames;
+
+            var usersAlreadyAdded = users.Where(user => userIds.Contains(user.UserId));
+            
+            var resultUsers = users.Except(usersAlreadyAdded);
+
+            List<string> result = new List<string>();
+
+            foreach (var resultUser in resultUsers)
+            {
+                result.Add(resultUser.UserName);
+            }
+
+            return result;
         }
 
 
