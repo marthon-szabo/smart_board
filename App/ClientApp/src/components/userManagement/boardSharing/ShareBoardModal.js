@@ -20,14 +20,12 @@ function ShareBoardModal() {
     }
 
     const saveChange = (e) => {
-        console.log(selectedUser);
         setSelectedUser(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const newUser = (selectedUser === "") ? shareBoardState[0] : selectedUser;
-        console.log(newUser);
         const data = JSON.stringify({
             BoardName: boardState.boardName,
             NewUser: newUser
@@ -38,8 +36,6 @@ function ShareBoardModal() {
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => console.log(res.status));
-        console.log(selectedUser);
-        console.log(boardState);
     }
 
     return (
