@@ -9,7 +9,7 @@ const ChatWindow = (props) => {
         .map(m => <Message 
             key={Date.now() * Math.random()}
             profilePicture={m.profilePicture}
-            name={m.userName}
+            name={m.senderName}
             message={m.content}/>);
 
     return(
