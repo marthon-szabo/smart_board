@@ -13,10 +13,12 @@ namespace App.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _UserRepo;
+        private readonly IUsersBoardsRepository _ConnectionRepo;
 
-        public UserController(IUserRepository repo)
+        public UserController(IUserRepository repo, IUsersBoardsRepository connectionRepo)
         {
             _UserRepo = repo;
+            _ConnectionRepo = connectionRepo;
         }
 
         [HttpPost("user/register")]
