@@ -23,7 +23,7 @@ namespace App.Services.Factories
             {
                 MessageId = chatMessage.Id,
                 SenderId = userId,
-                UserName = userName,
+                SenderName = userName,
                 Content = chatMessage.Content,
                 Date = chatMessage.Date,
                 ProfilePicture = this.GetProfilePicture(userId)
