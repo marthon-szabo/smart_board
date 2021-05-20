@@ -39,7 +39,8 @@ function BoardDetails() {
     }
 
     const openAddUserModal = () => {
-        fetch("user/available-users")
+        const boardId = boardState.boardId;
+        fetch("user/available-users/" + boardId)
             .then(res => res.json())
             .then(data => setAddUserState(data));
     }
