@@ -35,7 +35,16 @@ function ShareBoardModal() {
             body: data,
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(res => console.log(res.status));
+            .then(res => console.log(res.status))
+            .then(loadChangedData());
+    }
+
+    const loadChangedData = () => {
+        const boardId = boardState.boardId;
+        fetch("user/available-users/" + boardId)
+            .then(res => res.json())
+            .then(data => setShareBoardState(data))
+            .then(alert("Board shared successfully!"));
     }
 
     return (
