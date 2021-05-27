@@ -45,7 +45,11 @@ export default class App extends Component {
       <Layout>
       
       </Layout>
+<<<<<<< HEAD
+
+=======
       </AddUserToBoardProvider>
+>>>>>>> 34df394dcaf10d194c8097af72d047d2b4685f44
       </AvailableQuestDetailProvider>
       </TaskDetailsProvider>
       </ColumnsProvider>

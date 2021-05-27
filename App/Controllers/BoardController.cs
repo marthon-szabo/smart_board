@@ -150,6 +150,22 @@ namespace App.Controllers
         }
 
         private void SaveBoardToConnectionTable(Board newBoard, string userId)
+        [HttpPost("boards/add-board")]
+        [RequireHttps]
+        public ActionResult AddExistingBoardToUser()
+        {
+            Stream stream = Request.Body;
+
+            ExtendBoardVM newData = this.ReadRequestBody<ExtendBoardVM>(stream);
+
+            Board board = _boardRepo.GetBoardByBoardName(newData.BoardName);
+
+            SaveBoardToConnectionTable(board, newData.NewUser);
+
+            return Ok();
+        }
+
+        private void SaveBoardToConnectionTable(Board newBoard, string userName)
         {
             User currentUser = _userRepo.GetEntityById(userId);
             string id = IdGenerator.GenerateId();

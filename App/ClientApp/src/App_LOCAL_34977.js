@@ -5,7 +5,6 @@ import { RegisterStateProvider } from "./components/contexts/userContexts/Regist
 import { CSRFTokenContextProvider } from "./components/contexts/userContexts/CSRFTokenContext";
 import { LoggedInUserProvider } from "./components/contexts/userContexts/LoggedInUserContext";
 import { UserDataProvider } from "./components/contexts/userContexts/UserDataContext";
-import { AddUserToBoardProvider } from "./components/contexts/userContexts/AddUserToBoardContext";
 import { CreateBoardProvider } from "./components/contexts/boardContexts/CreateBoardContext";
 import { CreateColumnProvider } from "./components/contexts/columnContexts/CreateColumnContext";
 import { CreateTaskProvider } from "./components/contexts/taskContexts/CreateTaskContext";
@@ -41,11 +40,10 @@ export default class App extends Component {
       <ColumnsProvider>
       <TaskDetailsProvider>
       <AvailableQuestDetailProvider>
-      <AddUserToBoardProvider>
       <Layout>
       
       </Layout>
-      </AddUserToBoardProvider>
+
       </AvailableQuestDetailProvider>
       </TaskDetailsProvider>
       </ColumnsProvider>

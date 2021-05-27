@@ -9,6 +9,7 @@ import DeleteColumnConfirmationModal from "./columns/DeleteColumnConfirmationMod
 import DeleteTaskConfirmationModal from "./tasks/DeleteTaskConfirmationModal";
 import TaskDetailsModal from "./tasks/TaskDetailsModal";
 import AvailableDetailModal from "./quests/AvailableDetailModal";
+import ShareBoardModal from "./userManagement/boardSharing/ShareBoardModal";
 
 import './NavMenu.scss';
 
@@ -27,6 +28,7 @@ function LandingPage() {
             <CreateTaskModal />
             <TaskDetailsModal />
             <AvailableDetailModal />
+            <ShareBoardModal />
         </div>
     )
 }

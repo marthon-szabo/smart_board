@@ -5,7 +5,6 @@ import { RegisterStateProvider } from "./components/contexts/userContexts/Regist
 import { CSRFTokenContextProvider } from "./components/contexts/userContexts/CSRFTokenContext";
 import { LoggedInUserProvider } from "./components/contexts/userContexts/LoggedInUserContext";
 import { UserDataProvider } from "./components/contexts/userContexts/UserDataContext";
-import { AddUserToBoardProvider } from "./components/contexts/userContexts/AddUserToBoardContext";
 import { CreateBoardProvider } from "./components/contexts/boardContexts/CreateBoardContext";
 import { CreateColumnProvider } from "./components/contexts/columnContexts/CreateColumnContext";
 import { CreateTaskProvider } from "./components/contexts/taskContexts/CreateTaskContext";
@@ -19,7 +18,6 @@ import { AvailableQuestDetailProvider } from "./components/contexts/questContext
 
 import './static/scss/custom.scss';
 import './static/scss/App.scss';
-import ChatClient from './components/chat/ChatClient';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -41,11 +39,9 @@ export default class App extends Component {
       <ColumnsProvider>
       <TaskDetailsProvider>
       <AvailableQuestDetailProvider>
-      <AddUserToBoardProvider>
       <Layout>
       
       </Layout>
-      </AddUserToBoardProvider>
       </AvailableQuestDetailProvider>
       </TaskDetailsProvider>
       </ColumnsProvider>

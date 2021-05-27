@@ -69,3 +69,20 @@
     border-bottom: 3px solid;
     margin-bottom: 20px;
 }
+
+.add-user-button {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: #726aa7;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 3px !important;
+    border-color: black !important;
+}
+
+.add-user-button:hover {
+    background-color: #66c7b9;
+}
