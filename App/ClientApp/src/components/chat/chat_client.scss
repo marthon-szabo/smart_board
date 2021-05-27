@@ -3,6 +3,16 @@
     right: 2rem;
     bottom: 0;
 
+    &__window {
+        background-color: antiquewhite;
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        
+    }
+
+    &__message {
+    }
+
     &__chat-icon {
         width: 6em;
     }

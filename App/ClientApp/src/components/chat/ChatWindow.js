@@ -13,7 +13,9 @@ const ChatWindow = (props) => {
             message={m.content}/>);
 
     return(
+        
         <div hidden={props.isHidden}>
+            <div className="chat-client__window"></div>
             {chat}
             <ChatInput sendMessage={props.sendMessage} />
         </div>
